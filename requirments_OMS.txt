@@ -1,0 +1,16 @@
+speed issue in forms: saftystock,endstock ,user administration,dispatch frequency.
+
+disconnect from AD.
+
+selection sales,logistics,IT,CS. check spelling and sort them according group .
+
+register button not work when select all users.
+
+end stock issue data 9 june issue.
+
+
+forecast/rsf data only for june .error is being shown.
+
+dispatch hiereachy.
+
+ 

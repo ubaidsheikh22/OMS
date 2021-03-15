@@ -1,0 +1,39 @@
+setup form
+
+add user assign rights then user can login
+role Creation mentioned below
+(Approval roles 
+role previllages)
+Substitute previlages for employee Leave 
+dispatch frequency 
+safty stock
+
+
+related to bapi
+Master 
+Run bapi of material master then it shows data 
+Run bapi of customer master then it shows data 
+Run bapi of End stock then it shows data 
+Run bapi of material master then it shows data  of current month
+Run bapi of material master then it shows data 
+
+
+Transaction forms
+Generate order
+When click View Order then in it will add data to a table from multiple tables and show data in grid on that page and highlight the data which is old .
+
+after clicking view order then we can generate orders in generate order.
+
+and can see generated orders in View generated Orders in Review Order Forms.
+
+
+
+
+
+
+
+
+
+
+
+
