@@ -120,7 +120,7 @@ function getRegions() {
 
 function getRegionHandler(response) {
     outputArray = [];
-    var s = '';//<option value="-1">Region</option>';
+    var s = '<option value="-2">National</option>';//<option value="-1">Region</option>';
     for (var i = 0; i < response.length; i++) {
 
         if ((jQuery.inArray(response[i], outputArray)) == -1) {
