@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "FrequencyOrder";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+<script src="~/scripts/jquery-3.4.1.min.js"></script>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>*@
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/OrderFrequency.js"></script>
+
+<section class="content">
+    <div class="container-fluid">
+        @*Form Starts*@
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        @*<div id='opwp_woo_tickets'>Mon <input type='checkbox' class='maxtickets_enable_cb'><div class='max_tickets'><input type='text'  style='width:35px'></div>Teus<input type='checkbox' class='maxtickets_enable_cb'><div class='max_tickets'><input type='text' name=''></div></div>*@
+                            @*DETAILS
+                            <div id='opwp_woo_tickets'>
+                        Mon <input type='checkbox' class='maxtickets_enable_cb'/></div>
+                            <div class='max_tickets'>
+                        <input type='text' name='qty' class='max_tickets'/></div>*@
+                        
+
+                    </div>@*<input type="checkbox" name="rememberme" id="select_all" />*@
+                <div class="body">
+                    <div class="table-responsive social_media_table">
+
+                        <table id="CustomerList" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+
+                            <thead class="thead-dark">
+
+
+                                <tr>
+                                    <th>Select All<input type="checkbox" name="chk" id="select_all" class='checkbox'></th>
+                                    <th>Customer Code</th>
+                                    <th>Customer Name</th>
+                                    <th>Postal Address</th>
+                                    <th>Region</th>
+                                    <th>City</th>
+                                    <th>Customer Category</th>
+                                    <th>Cell No</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnRec" value="Save Record" />
+                    <input type="button" class="btn btn-primary m-t-15 waves-effect" id="redirect" value="Dashboard" />
+
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>  
+
+@*<script src="~/scripts/jquery-1.10.2.js"></script>
+    <script>
+        //{
+        //    var url = "";
+        //    $("#largeModal").modal();
+        //}
+    </script>*@
+
+<script src="~/scripts/navigationBarScroll.js"></script>

@@ -1,0 +1,364 @@
+﻿@{
+    ViewBag.Title = "User Master";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+<style>
+    .card .body {
+        font-size: 11px;
+        color: black;
+        padding: 20px;
+    }
+
+    .dataTables_wrapper .dataTables_filter input {
+        margin-left: 0.5em;
+        border: 1px solid;
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="~/scripts/jquery.js"></script>
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/Register.js"></script>
+<script src="~/scripts/jquery.multiselect.js"></script>
+<link href="~/Content/jquery.multiselect.css" rel="stylesheet" />
+<section class="content">
+    <div class="container-fluid">
+
+        @*Form Starts*@
+        <div class="row clearfix">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            <u>User Master</u>
+                        </h2>
+
+                    </div>
+                    <div class="body">
+                        <form id="formID">
+
+                            <label>Select User Role</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="RoleId" name="RoleId" data-placeholder="Select">
+                                    <option id="DropDwn"></option>
+                                    <option id="DropDwn">Disable</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpRegions" name="drpRegions" data-placeholder="Select">
+                                    <option id="drpRegions"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpArea" name="drpArea" data-placeholder="Select">
+                                    <option id="drpArea"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpTerritory" name="drpTerritory" data-placeholder="Select">
+                                    <option id="drpTerritory"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpTown" name="drpTown" data-placeholder="Select">
+                                    <option id="drpTown"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="txtDistributorID" name="Distributor_ID" data-placeholder="Select">
+                                    <option id="DropDwn"></option>
+                                    @*<option id="DropDwn">Disable</option>*@
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="SelectSalesOrg" name="SelectSalesOrg" data-placeholder="Select">
+                                    <option id="DropDwnSalesOrg"></option>
+                                    @*<option id="DropDwn">Disable</option>*@
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="SelectDivision" name="SelectDivision" data-placeholder="Select">
+                                    <option id="DropDwnDivision"></option>
+                                    @*<option id="DropDwn">Disable</option>*@
+
+                                </select>
+                            </div>
+                            @*<label for="password">User Name</label>*@
+                            @*<div class="form-group">
+                                    <select class="form-control show-tick ms select2" id="SelectDropUserName" name="SelectDropUserName" data-placeholder="Select">
+                                        <option id="DropUserName"></option>
+                                    </select>
+                                </div>*@
+                            <label for="email_address">First Name</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="txtUserFirstName" name="UserFirstName" class="form-control" placeholder="Enter First Name">
+                                </div>
+                            </div>
+                            <label for="password">Last Name</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="txtUserLastName" name="UserLastName" class="form-control" placeholder="Enter Last Details">
+                                </div>
+                            </div>
+                            <label for="password">User Name</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="txtUserName" name="UserName" data-placeholder="Select">
+                                    <option id="DropUserName"></option>
+                                </select>
+                                @*<div class="form-line">
+                                        <input type="text" id="txtUserName" name="UserName" class="form-control" placeholder="Enter User Name">
+                                    </div>*@
+                            </div>
+                            <label for="password">User Password</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="password" id="txtPass" name="Pass" class="form-control" placeholder="Enter Password">
+                                </div>
+                            </div>
+                            <label for="email_address">Region Code</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="txtRegionCode" name="txtRegionCode" class="form-control" placeholder="Enter Region Code" disabled="disabled">
+                                </div>
+                            </div>
+                            <label for="email_address">Town Code</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="txtTownCode" name="txtTownCode" class="form-control" placeholder="Enter Town Code" disabled="disabled">
+                                </div>
+                            </div>
+                            <label for="email_address">Area Code</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="txtAreaCode" name="txtAreaCode" class="form-control" placeholder="Enter Area Code" disabled="disabled">
+                                </div>
+                            </div>
+                            <label for="email_address">Territory Code</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="txtTerritoryCode" name="txtTerritoryCode" class="form-control" placeholder="Enter Territory Code" disabled="disabled">
+                                </div>
+                            </div>
+                            <label>Select Desigantion</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" name="Designation_ID" id="txtDesignationID" data-placeholder="Select">
+                                    <option id="DropDwn"></option>
+                                    <option id="DropDwn">Disable</option>
+                                </select>
+                            </div>
+
+                            <br>
+                            <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnReg" value="Register user" />
+                        </form>
+                        <div class="row">
+
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div id="successAlert" class="alert alert-success collapse" role="alert">
+                                    New User Sucessfully Registered
+                                </div>
+                                <div id="warningAlert" class="alert alert-danger collapse" role="alert">
+                                    User Already Exists
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            @*Form Ends
+
+                @*DataTable Starts*@
+
+
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            <u>User Details</u>
+                        </h2>
+                        <center>
+                            <div id="divLoader" style="display:none;">
+                                <img src="~/assets/images/4V0b.gif" alt="Loader" height="100px" width="100px" />
+                            </div>
+                        </center>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10"></div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <a href=""><input type="button" class="form-control" value="UnFilter All" id="Refresh" /></a>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive social_media_table">
+                            <table id="RegisterLists" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <thead class="thead-dark">
+                                    <tr style="color:brown">
+                                        <th>Login ID</th>
+                                        <th>Name</th>
+                                        <th>user lastname</th>
+                                        <th>User Name</th>
+                                        @*<th>pass</th>*@
+                                        <th>Designation ID</th>
+                                        <th>Role Desc</th>
+                                        <th>Distributor_ID</th>
+
+                                        <th>Region</th>
+                                        <th>Territory</th>
+                                        <th>Town</th>
+                                        <th>Area</th>
+
+
+                                        @*<th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>*@
+                                        @*<th>User ID</th>*@
+                                        @*<th>User Role</th>
+                                            <th>Distributor ID</th>
+                                            <th>Distributor Name</th>*@
+                                        <th>Action</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Login ID</th>
+                                        <th>Name</th>
+                                        <th></th>
+                                        <th>User Name</th>
+                                        @*<th>pass</th>*@
+                                        <th>Designation ID</th>
+                                        <th>Role Desc</th>
+                                        <th>Distributor_ID</th>
+
+                                        <th>Region</th>
+                                        <th>Territory</th>
+                                        <th>Town</th>
+                                        <th></th>
+
+
+                                        @*<th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>*@
+                                        @*<th>User ID</th>*@
+                                        @*<th>User Role</th>
+                                            <th>Distributor ID</th>
+                                            <th>Distributor Name</th>*@
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*DataTable Ends*@
+
+
+
+
+</section>
+<div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="largeModalLabel"></h4>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <label>Edit Register User</label>
+                    <div class="form-group">
+                        <div class="form-line">
+                            <input type="hidden" id="txtLogin_IDUpdate" name="Login_ID" class="form-control">
+                            <input type="hidden" id="UserIDUpdate" name="User_ID" class="form-control">
+
+                            <div class="form-group">
+                                <label>Select User Role</label>
+                                <select class="form-control show-tick ms select2" id="txtRoleIDUpdate" name="RoleId" data-placeholder="Select">
+                                    <option id="txtRoleIDUpdate"></option>
+                                </select>
+                            </div>
+                            @*<div class="form-group">
+                                    <label>Select Distributor</label>
+                                    <select class="form-control show-tick ms select2" id="txtDistributorIDUpdate" name="Distributor_ID" data-placeholder="Select">
+                                        <option id="txtDistributorIDUpdate"></option>
+                                    </select>
+                                </div>*@
+                            <div class="form-group">
+                                <label for="email_address">First Name</label>
+                                <input type="text" id="txtUserFirstNameup" name="UserFirstName" class="form-control" placeholder="Enter Firsty Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email_address">Last Name</label>
+                                <input type="text" id="txtUserLastNameup" name="UserLastName" class="form-control" placeholder="Enter Last Details">
+                            </div>
+                            <div class="form-group">
+                                <label for="email_address">User Name</label>
+                                <input type="text" id="txtUserNameup" name="UserName" class="form-control" placeholder="Enter User Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email_address">User Password</label>
+                                <input type="text" id="txtPassup" name="Pass" class="form-control" placeholder="Enter Password">
+                            </div>
+                            <div class="form-group">
+                                <label for="email_address">Region Code</label>
+                                <input type="text" id="txtRegionCode1" name="RegionCode" class="form-control" placeholder="" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="email_address">Town Code</label>
+                                <input type="text" id="txtTownCode1" name="TownCode" class="form-control" placeholder="" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="email_address">Area Code</label>
+                                <input type="text" id="txtAreaCode1" name="AreaCode" class="form-control" placeholder="" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="email_address">Territory Code</label>
+                                <input type="text" id="txtTerritoryCode1" name="TerritoryCode" class="form-control" placeholder="" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="email_address">Select Designation</label>
+                                <select class="form-control show-tick ms select2" id="txtDesignationIDedit" name="Designation_ID" data-placeholder="Select">
+                                    <option id="txtDesignationIDedit"></option>
+                                </select>
+                            </div>
+                            <div>
+                                <div id="successAlert" class="alert alert-success collapse" role="alert">
+                                    Details Updated successfully.
+                                </div>
+                                <div id="warningAlert" class="alert alert-secondary collapse" role="alert">
+                                    Details already exists.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" id="bttnUpdateRegister" class="btn btn-primary m-t-6 waves-effect" value="Update" />
+                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div id="UpdatesuccessAlert" class="alert alert-success collapse" role="alert">
+                                Updated Sucessfully
+                            </div>
+                            <div id="UpdatewarningAlert" class="alert alert-danger collapse" role="alert">
+                                Not Update
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="~/scripts/navigationBarScroll.js"></script>
+
+

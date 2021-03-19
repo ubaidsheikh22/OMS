@@ -1,0 +1,511 @@
+﻿@{
+    ViewBag.Title = "GenerateOrder";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+
+
+<script src="~/scripts/new-jquery-1.12.4.js"></script>
+<script src="~/scripts/jquery.multiselect.js"></script>
+<link href="~/Content/new-jquery.dataTables.min.css" rel="stylesheet" />
+<script src="~/scripts/new-jquery.dataTables.min.js"></script>
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/GenerateOrder.js"></script>
+<link href="~/Content/jquery.multiselect.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    var ddlData = @(Html.Raw(ViewBag.JSONData));
+    var AllData= @(Html.Raw(ViewBag.AllData));
+</script>
+<style>
+    /*.card .body {
+        font-size: 11px;
+        color: black;
+        padding: 20px;
+    }*/
+    .dataTables_wrapper .dataTables_filter input {
+        margin-left: 0.5em;
+        border: 1px solid;
+    }
+    /*.card .header {
+        color: #555;
+        padding: 60px;
+        position: relative;
+        border-bottom: 1px solid rgba(204, 204, 204, 0.35);
+        margin-top: -30px;
+    }*/
+    .select2-results .select2-highlighted {
+        background: rgba(204, 204, 204, 0.35) !important;
+        color: #fff;
+    }
+
+    .card {
+        background: #fff;
+        min-height: 50px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        position: relative;
+        margin-bottom: 30px;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        -ms-border-radius: 2px;
+        border-radius: 2px;
+        margin-top: -25px;
+    }
+
+    #cardd2 {
+        height: 164px;
+        background: #fff;
+        min-height: 50px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        position: relative;
+        margin-bottom: 30px;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        -ms-border-radius: 2px;
+        border-radius: 2px;
+        margin-top: 20px;
+    }
+
+    .card .body .col-xs-4, .card .body .col-sm-4, .card .body .col-md-4, .card .body .col-lg-4 {
+        margin-bottom: -32px;
+    }
+    /*.card .header {
+    color: #555;
+    padding: 20px;
+    position: relative;
+    border-bottom: 1px solid rgba(204, 204, 204, 0.35);
+    /*margin-top: -25px;*/
+    }
+
+    table.dataTable.dt-checkboxes-select tbody tr,
+    table.dataTable thead th.dt-checkboxes-select-all,
+    table.dataTable tbody td.dt-checkboxes-cell {
+        cursor: pointer;
+    }
+
+    table.dataTable thead th.dt-checkboxes-select-all,
+    table.dataTable tbody td.dt-checkboxes-cell {
+        text-align: center;
+    }
+
+    div.dataTables_wrapper span.select-info,
+    div.dataTables_wrapper span.select-item {
+        margin-left: 0.5em;
+    }
+
+    @@media screen and (max-width: 640px) {
+        div.dataTables_wrapper span.select-info,
+        div.dataTables_wrapper span.select-item {
+            margin-left: 0;
+            display: block;
+        }
+    }
+</style>
+<script type="text/javascript" src="~/scripts/datatables.checkboxes.min.js"></script>
+
+
+<div id="orderSpinner" style="display: none;width: 100%;height: 100%;position: absolute;z-index: 100000;opacity: 0.5;background-color: black;">
+    <img src="~/assets/images/4V0b.gif" alt="Loader" height="100px" width="100px" style="align-self: center;height: 100px;width: 100px;margin-left: 46%;margin-top: 15%;" />
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+
+        @*Form Starts*@
+        <ul class="nav nav-tabs">
+            <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnGenerateOrder" value="Process Orders" />
+            <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnConfirmOrder" value="Confirm Orders" />
+            @*<input type="button" class="btn btn-primary m-t-15 waves-effect" id="redirect" value="Dashboard" />*@
+
+        </ul>
+        @*<ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#customer">Customer</a></li>
+            @*<li><a data-toggle="tab" href="#SKU">SKU</a></li>*@
+        @*</ul>*@
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card" id="cardd2">
+                <div class="body">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+
+                                <select class="form-control show-tick" id="drpCustomerName" name="drpCustomerName" data-placeholder="Select Customer" multiple="multiple"></select>
+                                @*<select name="drpCustomerName" id="drpCustomerName" class="form-control show-tick" multiple="multiple"></select>*@
+                                @*<select class="form-control show-tick" id="drpCustomerName" name="drpCustomerName" data-placeholder="Select"></select>*@
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                <select class="form-control show-tick" id="drpSalesOrg" name="drpSalesOrg" data-placeholder="Select Sales Organization" multiple="multiple"></select>
+                                @*<select class="form-control show-tick" id="drpCustomer" name="drpCustomer" data-placeholder="Select Customer" multiple="multiple"></select>*@
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                <select class="form-control show-tick" id="drpDiv" name="drpDiv" data-placeholder="Select Division" multiple="multiple"></select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                <select class="form-control show-tick" id="drpRegion" name="drpRegion" data-placeholder="Select Region" multiple="multiple"></select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                <select class="form-control show-tick" id="drpArea" name="drpArea" data-placeholder="Select Area" multiple="multiple"></select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                <select class="form-control show-tick" id="drpTerritory" name="drpTerritory" data-placeholder="Select Territory" multiple="multiple"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                <select class="form-control show-tick" id="drpTown" name="drpTown" data-placeholder="Select Town" multiple="multiple"></select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                <select class="form-control show-tick" id="drpPlant" name="drpPlant" data-placeholder="Select Plant" multiple="multiple"></select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="tab-content">
+
+
+
+
+
+
+
+            <div id="customer" class="tab-pane fade in active">
+                <div class="tab-content">
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+
+
+
+
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <div class="form-group">
+                        </div>
+                    </div>
+
+
+                    @*<div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2><strong>Order Details</strong></h2>
+                                    <br />
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <select class="form-control show-tick ms select2" id="txtRoleIDUpdate" name="RoleId" data-placeholder="Select">
+                                            <option>Select Region</option>
+                                            <option>National</option>
+                                            <option>Region 1</option>
+                                            <option>Region 2</option>
+                                            <option>Region 3</option>
+                                            <option>Region 4</option>
+                                            <option>Region 5</option>
+                                            <option>Region 6</option>
+                                            <option>Region8  </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <input type="text" id="txtUserFirstName" name="UserFirstName" class="form-control" placeholder="Search Customer">
+                                    </div>
+                                </div>
+                                <div class="body">
+                                    <div class="table-responsive social_media_table">
+                                        <table class="table table-hover" id="listMonday">
+                                           </table>
+                                    </div>
+                                     </div>
+                            </div>
+                        </div>*@
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div>
+
+                            <div id="successAlert" class="alert alert-success collapse" role="alert">
+                                Order confirmed successfully.
+                            </div>
+                            <div id="warningAlert" class="alert alert-warning collapse" role="alert">
+                                Order can't be confirmed.
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <center>
+                                <div id="divLoader" style="display:none;">
+                                    <img src="~/assets/images/4V0b.gif" alt="Loader" height="100px" width="100px" />
+                                </div>
+                            </center>
+                            <div class="body">
+
+                                <div class="table-responsive social_media_table" style="max-height: 500px">
+                                    <table class="table table-hover" id="OrderList">
+                                        <thead>
+                                            <tr>
+                                                <th> </th>
+                                                <th>CALDAY</th>
+                                                <th>Order Refrence</th>
+                                                <th>SalesOrganization</th>
+                                                <th>Customer</th>
+                                                <th>Customer Name</th>
+                                                <th>Region</th>
+                                                <th>Area</th>
+                                                <th>Territory</th>
+                                                <th>Town</th>
+                                                <th>Material</th>
+                                                <th>Material Description</th>
+                                                <th>Total Quantity</th>
+                                                <th>Unit Price</th>
+                                                <th>Total Price</th>
+                                                <th>Week</th>
+                                                <th>division</th>
+                                                <th>Material Group</th>
+                                                <th>Material Group Description</th>
+
+                                                <th>Distributor Stock</th>
+                                                <th>Safety Stock</th>
+                                                <th>Salesforcast</th>
+                                                <th>SKU Mapping</th>
+                                                <th>MaxDay</th>
+                                                <th>DistChan</th>
+                                                <th>View</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+
+                                    </table>
+                                </div>
+
+                                @*<input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnRole" value="Regenerate Order" />*@
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+
+
+            </div>
+
+
+
+            @*<div id="SKU" class="tab-pane fade">
+                <div class="tab-content">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2><strong>Order Details</strong></h2>
+                                <br />
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <select class="form-control show-tick ms select2" id="drpRegion" name="Region" data-placeholder="Select">
+                                        <option>Select Region</option>
+                                        <option value="">National</option>
+                                        <option value="01">Region 1</option>
+                                        <option value="02">Region 2</option>
+                                        <option value="03">Region 3</option>
+                                        <option value="04">Region 4</option>
+                                        <option value="05">Region 5</option>
+                                        <option value="06">Region 6</option>
+                                        <option value="07">Region 7</option>
+                                    </select>
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="body">
+                                <div class="table-responsive social_media_table">
+                                    <table class="table table-hover" id="listSKU">
+                                        <thead>
+                                            <tr>
+                                                <th>Customer</th>
+                                                <th>Order Ref</th>
+                                                <th>CAL Day</th>
+                                                <th>Comp Code</th>
+                                                <th>Sales Org</th>
+                                                <th>Distr CHAN</th>
+                                                <th>Division</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                @*<input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnRole" value="Regenerate Order" />*@
+            @*</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>**@
+
+
+
+
+
+        </div>
+    </div>
+    </div>
+
+
+
+</section>
+
+<div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="largeModalLabel">View Of Customer Summary</h4>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <div class="table-responsive social_media_table">
+                        <table class="table table-hover" id="ViewList">
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Sales Org</th>
+                                    <th>Division</th>
+                                    <th>Brand</th>
+                                    <th>Brand QTY (MCs)</th>
+                                    <th>Order Value</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listt">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                            <tfoot id="listtfoot">
+
+                            </tfoot>
+
+                        </table>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="largeModal1" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="height: 750px; overflow:scroll;">
+            <div class="modal-header">
+                <h4 class="modal-title" id="largeModalLabel">Dispatch Frequency</h4>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <div class="table-responsive social_media_table">
+                        <table class="table table-bordered" id="list">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th style="width:400px">Order Number</th>
+                                    <th>CALDAY</th>
+                                    <th>Material</th>
+                                    <th>Description</th>
+                                    <th>Suggested Quantity</th>
+                                    <th>Monday</th>
+                                    <th>Tuesday</th>
+                                    <th>Wednesday</th>
+                                    <th>Thursday</th>
+                                    <th>Friday</th>
+                                    <th>Saturday</th>
+                                    <th>Sunday</th>
+                                    <th>Unit Price</th>
+                                    <th>Total Value</th>
+                                    @*<th></th>*@
+                                    @*<th></th>*@
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th><b><span id="total_sum_Order"></span></b></th>
+                                    <th></th>
+                                    <th></th>
+                                    @*<th></th>*@
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th><b><span id="total_sum_value"></span></b></th>
+                                    <th></th>
+                                    @*<th></th>*@
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/scripts/navigationBarScroll.js"></script>

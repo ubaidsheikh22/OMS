@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "CustomerWeekendDetail";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+
+<script src="~/scripts/jquery-3.4.1.min.js"></script>
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/weeklyOrder.js"></script>
+
+<section class="content">
+    <div class="container-fluid">
+
+        @*Form Starts*@
+        <div class="row clearfix">
+
+
+
+            <div class="tab-content">
+                <input type="button" class="btn btn-primary m-t-15 waves-effect" id="redirect" value="Dashboard" />
+
+                <div id="monday" class="tab-pane fade in active">
+
+
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+
+                            <div class="header">
+                                <h2><strong><u>Order Details</u></strong></h2>
+                                <br />
+                            </div>
+
+                            <div class="body">
+                                <div class="table-responsive social_media_table">
+                                    <table class="table table-hover" id="listMonday">
+                                        <thead>
+                                            <tr>
+                                                <th>Days</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr role="row" class="odd">
+
+                                                <td>Monday</td>
+                                                <td><input type="button" class="btn btn-info m-t-15 waves-effect" id="bttnRole" value="Deliverd" /></td>
+                                                <td><a href="/CustomerOrderDetail/SingleCustomerDetail"><input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnRole" value="Details" /></a></td>
+                                            </tr>
+                                            <tr role="row" class="odd">
+                                                <td>Tuesday</td>
+                                                <td><input type="button" class="btn btn-danger m-t-15 waves-effect" id="bttnRole" value="Pending" /></td>
+                                                <td><a href="/CustomerOrderDetail/SingleCustomerDetail"><input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnRole" value="Details" /></a></td>
+                                            </tr>
+                                            <tr role="row" class="odd">
+                                                <td>Thursday</td>
+                                                <td><input type="button" class="btn btn-danger m-t-15 waves-effect" value="Pending" /></td>
+                                                <td><a href="/CustomerOrderDetail/SingleCustomerDetail"><input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnRole" value="Details" /></a></td>
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+</section>
+
+

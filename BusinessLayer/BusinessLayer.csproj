@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3F84E96E-2485-4E78-8F56-5FBE0B7C9549}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessLayer</RootNamespace>
+    <AssemblyName>BusinessLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Models\AuditingLogModel.cs" />
+    <Compile Include="Models\Billing.cs" />
+    <Compile Include="Models\claimCommentsModel.cs" />
+    <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Models\customerOrderAcceptanceModel.cs" />
+    <Compile Include="Models\Customer_FrequencyModel.cs" />
+    <Compile Include="Models\DashboardModel.cs" />
+    <Compile Include="Models\DesignationModel.cs" />
+    <Compile Include="Models\distributorFrequencyModel.cs" />
+    <Compile Include="Models\DistributorModel.cs" />
+    <Compile Include="Models\endSTockModel.cs" />
+    <Compile Include="Models\generateOrderModal.cs" />
+    <Compile Include="Models\materialMasterModel.cs" />
+    <Compile Include="Models\OrderFrequencyModel.cs" />
+    <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\MaterialModel.cs" />
+    <Compile Include="Models\OrderStatus.cs" />
+    <Compile Include="Models\packageFrequencyModel.cs" />
+    <Compile Include="Models\PackageModel.cs" />
+    <Compile Include="Models\pendingQuantities.cs" />
+    <Compile Include="Models\Registraion_LoginVM.cs" />
+    <Compile Include="Models\RoleModel.cs" />
+    <Compile Include="Models\SafetyStockModel.cs" />
+    <Compile Include="Models\SaleOrderLogModel.cs" />
+    <Compile Include="Models\salesForcastModel.cs" />
+    <Compile Include="Models\secondarySalesModel.cs" />
+    <Compile Include="Models\specialOrderModel.cs" />
+    <Compile Include="Models\Special_Orders_Approval.cs" />
+    <Compile Include="Models\SubstituteModel.cs" />
+    <Compile Include="Models\UpdatePassword.cs" />
+    <Compile Include="Models\user.cs" />
+    <Compile Include="Models\UserMenuModel.cs" />
+    <Compile Include="Models\weeklyOrderModel.cs" />
+    <Compile Include="Models\WeeklyUpliftsModel.cs" />
+    <Compile Include="Models\WeekWiseOrder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\bindProductBusiness.cs" />
+    <Compile Include="Repository\ClaimApprovalBusiness.cs" />
+    <Compile Include="Repository\ClaimPortalBusiness.cs" />
+    <Compile Include="Repository\Connection.cs" />
+    <Compile Include="Repository\CustomerBusiness.cs" />
+    <Compile Include="Repository\CustomerOrderAcceptanceBusiness.cs" />
+    <Compile Include="Repository\CustomerSpecialOrdersBuesiness.cs" />
+    <Compile Include="Repository\Customer_FrequencyBusiness.cs" />
+    <Compile Include="Repository\DashboardBusiness.cs" />
+    <Compile Include="Repository\DesginationBusiness.cs" />
+    <Compile Include="Repository\DistributorFrequency.cs" />
+    <Compile Include="Repository\emailSender.cs" />
+    <Compile Include="Repository\endSTockBusiness.cs" />
+    <Compile Include="Repository\generateOrder.cs" />
+    <Compile Include="Repository\LoginBusiness.cs" />
+    <Compile Include="Repository\ManualBusiness.cs" />
+    <Compile Include="Repository\materialMasterBusiness.cs" />
+    <Compile Include="Repository\OrderFrequencyBusiness.cs" />
+    <Compile Include="Repository\OrderStatusBusiness.cs" />
+    <Compile Include="Repository\PackageBusiness.cs" />
+    <Compile Include="Repository\packageFrequencyBusiness.cs" />
+    <Compile Include="Repository\RegisterBusiness.cs" />
+    <Compile Include="Repository\RoleBusiness.cs" />
+    <Compile Include="Repository\SafetyStockBusiness.cs" />
+    <Compile Include="Repository\SaleOrderLogBusiness.cs" />
+    <Compile Include="Repository\salesForcastBusiness.cs" />
+    <Compile Include="Repository\secondarySaleBusiness.cs" />
+    <Compile Include="Repository\SpecialOrderApprovalBusiness.cs" />
+    <Compile Include="Repository\UpdatePasswordBusiness.cs" />
+    <Compile Include="Repository\viewAcceptedOrderBusiness.cs" />
+    <Compile Include="Repository\viewReceivedStockBusiness.cs" />
+    <Compile Include="Repository\ViewReportsBusiness.cs" />
+    <Compile Include="Repository\weeklyOrderBusiness.cs" />
+    <Compile Include="Repository\weeklyUpliftBusiness.cs" />
+    <Compile Include="Repository\weekWiseBusiness.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Scripts\jquery-3.4.1.min.map" />
+    <None Include="Scripts\jquery-3.4.1.slim.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

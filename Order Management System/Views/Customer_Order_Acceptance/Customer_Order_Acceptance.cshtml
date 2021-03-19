@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Customer_Order_Acceptance";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+
+<script src="~/scripts/jquery-3.4.1.min.js"></script>
+<script src="~/scripts/jquery.js"></script>
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/CustomerOrderAcceptance.js"></script>
+
+<section class="content">
+    <div class="container-fluid">
+
+        @*Form Starts*@
+
+        <div class="row clearfix">
+            <div class="tab-content">
+                <div id="monday" class="tab-pane fade in active">
+                     <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                       
+                            <div class="body">
+                                <center>
+                                    <div id="divLoader" style="display:none;">
+                                        <img src="~/assets/images/4V0b.gif" alt="Loader" height="100px" width="100px" />
+                                    </div>
+                                </center>
+                                <div class="table-responsive social_media_table" style="max-height: 500px;">
+                                    <table class="table table-bordered" id="list">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                                                <h3>Month</h3>
+                                                <label id="lb"></label>
+                                            </div>
+
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                                <h3>Week</h3>
+                                                <label id="lb2"></label>
+                                            </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            </div>
+                                        </div>
+
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th style="width:400px">Order Number</th>
+                                                <th>CALDAY</th>
+                                                <th>Material</th>
+                                                <th>Description</th>
+                                                <th>Weekly Quantity</th>
+                                                <th>Plus/Minus</th>
+                                                <th>Firm Order</th>
+                                                <th>Monday</th>
+                                                <th>Monday Value</th>
+                                                <th>Tuesday</th>
+                                                <th>Tuesday Value</th>
+                                                <th>Wednesday</th>
+                                                <th>Wednesday Value</th>
+                                                <th>Thursday</th>
+                                                <th>Thursday Value</th>
+                                                <th>Friday</th>
+                                                <th>Friday Value</th>
+                                                <th>Saturday</th>
+                                                <th>Saturday Value</th>
+                                                <th>Sunday</th>
+                                                <th>Sunday Value</th>
+                                                <th>Unit Price</th>
+                                                <th>Total Value</th>
+                                                <th>SalesOrganization</th>
+                                                <th>DistributionChannel</th>
+                                                <th>Division</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th><b><span id="total_sum_value"></span></b></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnInsertOrder" value="Accept Order" />
+                                @*<input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnRejectOrder" value="Reject Order" />*@
+                                <input type="button" class="btn btn-primary m-t-15 waves-effect" id="redirect" value="Dashboard" />
+
+                            </div>
+
+                        </div>
+                        <div>
+                            <div id="successAlert" class="alert alert-success collapse" role="alert">
+                                Your order has been confirmed.
+                            </div>
+                            <div id="warningAlert" class="alert alert-warning collapse" role="alert">
+                                Order Already generated
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

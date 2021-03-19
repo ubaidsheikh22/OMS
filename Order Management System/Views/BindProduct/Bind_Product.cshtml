@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewBag.Title = "Bind_Product";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+
+
+<script src="~/scripts/jquery-3.4.1.min.js"></script>
+<script src="~/scripts/jquery.js"></script>
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/bindProduct.js"></script>
+
+
+<section class="content">
+    <div class="container-fluid">
+
+        @*Form Starts*@
+        <div class="row clearfix">
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            <u>Bind Product</u>
+                        </h2>
+
+                    </div>
+                    <div class="body">
+                        <form>
+                            <label>Select Product 1</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="ProductID1" name="ProductID1" data-placeholder="Select Product">
+                                    @* <option id="DropDwn">30000627	 </option>*@
+                                </select>
+                            </div>
+                            <label>Select Product 2</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="ProductID2" name="ProductID2" data-placeholder="Select Product">
+
+                                    @*<option id="DropDwn">3000068	</option>*@
+                                </select>
+                            </div>
+                            <br>
+                            <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnProduct" value="Bind" />
+                            <input type="button" class="btn btn-primary m-t-15 waves-effect" id="redirect" value="Dashboard" />
+                        </form>
+                    </div>
+
+                </div>
+                <div>
+                    <div id="successAlert" class="alert alert-success collapse" role="alert">
+                        Product Binded Successfully.
+                    </div>
+                    <div id="warningAlert" class="alert alert-secondary collapse" role="alert">
+                        Product already Binded.
+                    </div>
+                </div>
+            </div>
+
+
+            @*Form Ends*@
+
+            @*DataTable Starts*@
+
+
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            DETAILS
+                        </h2>
+
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive social_media_table">
+                            <table id="List" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Product 1 Code</th>
+                                        <th>Product 1 Description</th>
+                                        <th>Product 2 Code</th>
+                                        <th>Product 2 Description</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <button type="button" class="btn btn-default waves-effect m-r-20" onclick="Update" data-toggle="modal" data-target="#largeModal">MODAL - LARGE SIZE</button>
+        </div>*@
+
+    @*DataTable Ends*@
+
+    <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="largeModalLabel">Modal title</h4>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <label>ROLE DESCRIPTION</label>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input type="hidden" id="txtRoleIDUpdate" name="Role_ID" class="form-control">
+                                <input type="text" id="txtRoleDecsUpdate" name="Rele_Desc" class="form-control">
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <div id="successAlertup" class="alert alert-success collapse" role="alert">
+                                Details Updated successfully.
+                            </div>
+                            <div id="warningAlertup" class="alert alert-success collapse" role="alert">
+                                Details already exists.
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <input type="button" id="bttnUpdateRole" class="btn btn-primary m-t-6 waves-effect" value="SAVE CHANGES" />
+                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="~/scripts/navigationBarScroll.js"></script>

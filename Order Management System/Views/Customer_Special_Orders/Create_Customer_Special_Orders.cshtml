@@ -1,0 +1,196 @@
+﻿@{
+    ViewBag.Title = "Create_Customer_Special_Orders";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script src="~/scripts/jquery.multiselect.js"></script>
+<link href="~/Content/jquery.multiselect.css" rel="stylesheet" />
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/Create_Customer_Special_Orders.js"></script>
+<style>
+    th#total {
+        float: right;
+    }
+</style>
+<section class="content">
+    <div class="container-fluid">
+
+        @*Form Starts*@
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#placeOrder">Place Order</a></li>
+            <li><a data-toggle="tab" href="#ViewOrder">View Order</a></li>
+        </ul>
+
+        <div class="row clearfix">
+
+
+
+            <div class="tab-content">
+
+                <div id="placeOrder" class="tab-pane fade in active">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+
+                            <div class="header">
+                                <h2><strong><U>Special Order</U></strong></h2>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-offset-1 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <div class="form-group">
+                                        <select class="form-control show-tick" id="drpmaterial" name="drpmaterial" data-placeholder="Select Material" multiple="multiple"></select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <div class="form-group">
+                                        <select class="form-control show-tick" id="drpsalesOrg" name="drpsalesOrg" data-placeholder="Select Sales Org" multiple="multiple"></select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <div class="form-group">
+                                        <select class="form-control show-tick" id="drpDivision" name="drpDivision" data-placeholder="Select Customer" multiple="multiple"></select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <div class="form-group">
+                                        <input type="button" class="btn btn-primary waves-effect" id="btnGetMaterials" value="Get Materials" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <center>
+                                        <div id="divLoader" style="display:none;">
+                                            <img src="~/assets/images/4V0b.gif" alt="Loader" height="100" width="100" />
+                                        </div>
+                                    </center>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div id="OperationDone" class="alert alert-success collapse" role="alert">
+                                        Special Order Placed...
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div id="OperationFailed" class="alert alert-warning collapse" role="alert">
+                                        No changes found!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive social_media_table">
+                                        <div class="body" style="height: 500px; overflow:scroll;">
+                                            <table id="GetAllMaterialRecords" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th>Material</th>
+                                                        <th>Description</th>
+                                                        <th>Proposed Order</th>
+                                                        <th>Firm Order</th>
+                                                        <th>Unit Price</th>
+                                                        <th>Quantity</th>
+                                                        <th>Total Value</th>
+                                                        <th>Sales Organization</th>
+                                                        <th>Division</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th><b><span id="total_sum_value"></span></b></th>
+                                                        <th><b><span id="total_Unit_value"></span></b></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+
+                                        </div>
+                                        <input type="button" class="btn btn-primary waves-effect" id="bttnSubmit" value="Submit" />
+                                        <input type="button" class="btn btn-primary waves-effect" id="redirect" value="Dashboard" />
+                                        <br /><br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="ViewOrder" class="tab-pane fade">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+
+                            <div class="header">
+                                <h2><strong>View Order</strong></h2>
+                                <center>
+                                    <div id="divLoader" style="display:none;">
+                                        <img src="~/assets/images/4V0b.gif" alt="Loader" height="100px" width="100px" />
+                                    </div>
+                                </center>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-offset-2 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <input type="date" id="StartDate" class="form-control">
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <input type="date" id="EndDate" class="form-control">
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <input type="button" class="btn btn-primary waves-effect" id="btnGetOrderReferences" value="Search Order References" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class=" col-lg-offset-2 col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+                                    <select class="form-control show-tick ms select2" id="drpRefrenceCode" data-placeholder="Select">
+                                        <option id="drpRefrenceCode">Select a Reference Number | By Using Date Filter</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="body">
+                                <div class="table-responsive social_media_table">
+                                    <table class="table table-hover" id="listStatus">
+                                        <thead>
+                                            <tr>
+                                                <th>Material ID</th>
+                                                <th>Material Description</th>
+                                                <th></th>
+                                                <th>Quantity</th>
+                                                <th>Unit Price</th>
+                                                <th>Value</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th style="text-align: right"></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th style="text-align: right"></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,632 @@
+﻿@{
+    string Screens = null;
+    string[] menuIDs = null;
+    try
+    {
+        if (Session["user"] == null || Session["Screens"] == null)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                if (Session["user"] == null || Session["Screens"] == null)
+                {
+                    Response.Redirect("~/Login/Error");
+                }
+            }
+        }
+        else
+        {
+            Screens = Session["Screens"].ToString().Trim();
+            Screens = Screens[0] == ',' ? Screens.Substring(1, Screens.Length - 1) : Screens;
+            Screens = Screens[Screens.Length - 1] == ',' ? Screens.Substring(0, Screens.Length - 1) : Screens;
+
+            menuIDs = Screens.Split(',');
+        }
+    }
+    catch
+    {
+        Response.Redirect("~/Login/Error");
+    }
+}
+
+<script src="~/scripts/jquery.min.js"></script>
+
+<aside id="leftsidebar" class="sidebar">
+    <!--id="leftsidebar"-->
+    <!-- User Info -->
+    <div class="user-info">
+
+        <div class="info-container">
+            <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">USERNAME</div>
+            <div class="email"><h4>@User.Identity.Name</h4> </div>
+        </div>
+    </div>
+    <!-- #User Info -->
+    <!-- Menu -->
+    <div class="menu">
+        <ul class="list">
+            <li class="active">
+                <a href="~/dashboard/dashboard">
+                    <i class="material-icons active">home</i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            @if (menuIDs != null && menuIDs.Length > 0)
+            {
+                if (menuIDs.Where(x => !string.IsNullOrEmpty(x) && int.Parse(x) >= 1 && int.Parse(x) <= 8).Count() > 0)
+                {
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle" id="im">
+                            <i class="material-icons">widgets</i>
+                            <span id="overlap">Setup Forms</span>
+                        </a>
+                        <ul class="ml-menu" id="setupforms">
+                            @if (menuIDs.Where(x => x == "1").Count() > 0)
+                            {
+                                <li id="designation">
+                                    <a href="~/designation/designation">
+                                        <i class="material-icons">layers</i>
+                                        <span>Approval Roles</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "2").Count() > 0)
+                            {
+                                <li id="Role">
+                                    <a href="~/Role/Role">
+                                        <i class="material-icons">layers</i>
+                                        <span>Role privileges</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "3").Count() > 0)
+                            {
+                                <li id="Substitute">
+                                    <a href="~/Role/Substitute">
+                                        <i class="material-icons">layers</i>
+                                        <span>Substitute privileges</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "4").Count() > 0)
+                            {
+                                <li id="package">
+                                    <a href="~/package/package">
+                                        <i class="material-icons">layers</i>
+                                        <span>Customer Category</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "5").Count() > 0)
+                            {
+                                <li id="Registration">
+                                    <a href="~/Login/Registration">
+                                        <i class="material-icons">layers</i>
+                                        <span>User Master</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "6").Count() > 0)
+                            {
+                                <li id="Registration">
+                                    <a href="~/Login/SetupUserMenu">
+                                        <i class="material-icons">layers</i>
+                                        <span>User Menu setup</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "7").Count() > 0)
+                            {
+                                <li id="packageFrequency">
+                                    <a href="~/packageFrequency/packageFrequency">
+                                        <i class="material-icons">layers</i>
+                                        <span>Dispatch Frequency</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "8").Count() > 0)
+                            {
+                                <li id="SafetyStock">
+                                    <a href="~/SafetyStock/SafetyStock">
+                                        <i class="material-icons">layers</i>
+                                        <span>Safety Stock</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+                if (menuIDs.Where(x => x == "9" || x == "10" || x == "11" || x == "12" || x == "13").Count() > 0)
+                {
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle" id="im1">
+                            <i class="material-icons">widgets</i>
+                            <span id="overlap">Master Data Form</span>
+                        </a>
+                        <ul class="ml-menu" id="setupforms">
+                            @if (menuIDs.Where(x => x == "9").Count() > 0)
+                            {
+                                <li id="materialMaster">
+                                    <a href="~/materialMaster/materialMaster">
+                                        <i class="material-icons">layers</i>
+                                        <span>Material Master</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "10").Count() > 0)
+                            {
+                                <li id="Customer">
+                                    <a href="~/Customer/Customer">
+                                        <i class="material-icons">layers</i>
+                                        <span>Customer Master</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "11").Count() > 0)
+                            {
+                                <li id="endstock">
+                                    <a href="~/endStock/endStock">
+                                        <i class="material-icons">layers</i>
+                                        <span>End Stock</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "12").Count() > 0)
+                            {
+                                <li id="salesForcast">
+                                    <a href="~/salesForcast/salesForcast">
+                                        <i class="material-icons">layers</i>
+                                        <span>Sales Forcast</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "13").Count() > 0)
+                            {
+                                <li id="secondarySales">
+                                    <a href="~/secondarySales/secondarySales">
+                                        <i class="material-icons">layers</i>
+                                        <span>Secondary Sales</span>
+                                    </a>
+                                </li>
+                            }
+
+                        </ul>
+                    </li>
+                }
+                if (menuIDs.Where(x => x == "14" || x == "15" || x == "16" || x == "17" || x == "18" || x == "19" || x == "20" || x == "21" || x == "22").Count() > 0)
+                {
+                    <li id="TransacionForms">
+                        <a href="javascript:void(0);" class="menu-toggle" id="im3">
+                            <i class="material-icons">widgets</i>
+                            <span id="overlap">Transaction Forms</span>
+                        </a>
+                        <ul class="ml-menu">
+                            @if (menuIDs.Where(x => x == "14").Count() > 0)
+                            {
+                                <li id="Generated_Order">
+                                    <a href="~/GenerateOrder/GenerateOrder">
+                                        <i class="material-icons">layers</i>
+                                        <span>Generate Order</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "15").Count() > 0)
+                            {
+                                <li id="weeklyUplift">
+                                    <a href="~/weeklyUplift/weeklyUplift">
+                                        <i class="material-icons">layers</i>
+                                        <span>Weekly Uplift</span>
+                                    </a>
+                                </li>
+                            }
+                            @*@if (menuIDs.Where(x => x == "16").Count() > 0)
+                        {
+                            <li id="Accepted_Order">
+                                <a href="~/Accepted_Order/Accepted_Order">
+                                    <i class="material-icons">layers</i>
+                                    <span>Review Weekly Orders</span>
+                                </a>
+                            </li>
+                        }*@
+                            @if (menuIDs.Where(x => x == "17").Count() > 0)
+                            {
+                                <li id="Special_Order">
+                                    <a href="~/SpecialOrdee/Special_Order">
+                                        <i class="material-icons">layers</i>
+                                        <span>Review Special Orders</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "18").Count() > 0)
+                            {
+                                <li id="ApprovalClaim">
+                                    <a href="~/ClaimApproval/ClaimApproval">
+                                        <i class="material-icons">layers</i>
+                                        <span>Claim Approval</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "19").Count() > 0)
+                            {
+                                <li id="Customer_Order_Acceptance">
+                                    <a href="~/Customer_Order_Acceptance/Customer_Order_Acceptance">
+                                        <i class="material-icons">layers</i>
+                                        <span>Review Weekly Orders</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "20").Count() > 0)
+                            {
+                                <li id="Create_Customer_Special_Orders">
+                                    <a href="~/Customer_Special_Orders/Create_Customer_Special_Orders">
+                                        <i class="material-icons">layers</i>
+                                        <span>Create Special Orders</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "21" || x == "32").Count() > 0)
+                            {
+                                <li id="Customer_Recieving">
+                                    <a href="~/Customer_SKU_weekly_order/Customer_SKUwise_weekly_order">
+                                        <i class="material-icons">layers</i>
+                                        <span>Customer Recieving  </span>
+                                    </a>
+                                </li>
+                                {
+                                    <li id="receivedOrders">
+                                        <a href="~/viewReceivedStock/viewReceivedStock">
+                                            <i class="material-icons">layers</i>
+                                            <span>View Received Stock</span>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                            @if (menuIDs.Where(x => x == "22").Count() > 0)
+                            {
+                                <li id="Bind_Product">
+                                    <a href="~/BindProduct/Bind_Product">
+                                        <i class="material-icons">layers</i>
+                                        <span>Bind Product</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+                if (menuIDs.Where(x => x == "23" || x == "24").Count() > 0)
+                {
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle" id="im2">
+                            <i class="material-icons">widgets</i>
+                            <span id="overlap">Review Order Forms</span>
+                        </a>
+                        <ul class="ml-menu" id="setupforms">
+                            @if (menuIDs.Where(x => x == "23").Count() > 0)
+                            {
+                                <li id="acceptedOrders">
+                                    <a href="~/viewAcceptedOrders/viewAcceptedOrders">
+                                        <i class="material-icons">layers</i>
+                                        <span>Accepted Orders</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "24").Count() > 0)
+                            {
+                                <li id="acceptedOrders">
+                                    <a href="~/ViewGeneratedOrder/Index">
+                                        <i class="material-icons">layers</i>
+                                        <span>View Generated Orders</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+                if (menuIDs.Where(x => x == "25" || x == "26" || x == "27").Count() > 0)
+                {
+                    <li id="claimForms">
+                        <a href="javascript:void(0);" class="menu-toggle" id="im2">
+                            <i class="material-icons">widgets</i>
+                            <span id="overlap">Claim Forms</span>
+                        </a>
+                        <ul class="ml-menu" id="Claimforms">
+                            @if (menuIDs.Where(x => x == "25").Count() > 0)
+                            {
+                                <li id="CreateClaim">
+                                    <a href="~/ClaimPortal/Claim">
+                                        <i class="material-icons">layers</i>
+                                        <span>Create Claim</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "26").Count() > 0)
+                            {
+                                <li id="AddClaim">
+                                    <a href="~/AddManualClaims/AddManualClaim">
+                                        <i class="material-icons">layers</i>
+                                        <span>Add Manual Claim</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "27").Count() > 0)
+                            {
+                                <li id="ViewClaims">
+                                    <a href="~/ClaimPortal/ViewAllClaims">
+                                        <i class="material-icons">layers</i>
+                                        <span>View Claims</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+                if (menuIDs.Where(x => x == "28" || x == "29" || x == "30" || x == "31").Count() > 0)
+                {
+                    <li id="ViewSummary">
+                        <a href="javascript:void(0);" class="menu-toggle" id="im2">
+                            <i class="material-icons">widgets</i>
+                            <span id="overlap">Summary</span>
+                        </a>
+                        <ul class="ml-menu" id="ViewSumaa">
+                            @if (menuIDs.Where(x => x == "28").Count() > 0)
+                            {
+                                <li id="CreateClaim">
+                                    <a href="~/ViewSummary/ChangeOrderSummary">
+                                        <i class="material-icons">layers</i>
+                                        <span>View Change Summary</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "29").Count() > 0)
+                            {
+                                <li id="AuditSummary">
+                                    <a href="~/ViewSummary/AuditSummary">
+                                        <i class="material-icons">layers</i>
+                                        <span>View Audit Summary</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "30").Count() > 0)
+                            {
+                                <li id="SaleOrderLog">
+                                    <a href="~/SaleOrderLog/SaleOrderLog">
+                                        <i class="material-icons">layers</i>
+                                        <span>Sale Order Log</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "31").Count() > 0)
+                            {
+                                <li id="SaleOrderLog">
+                                    <a href="~/OrderStatus/OrderStatus">
+                                        <i class="material-icons">layers</i>
+                                        <span>Order Status</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                            }
+
+                            
+
+
+                if (menuIDs.Where(x => x == "33" || x == "34" || x == "35" || x == "36" || x == "37" || x == "38" || x == "39" || x == "40" || x == "41" || x == "42" || x == "43" || x == "44" || x == "45" || x == "46").Count() > 0)
+                            {
+                    <li id="ViewReports">
+                        <a href="javascript:void(0);" class="menu-toggle" id="im2">
+                            <i class="material-icons">widgets</i>
+                            <span id="overlap">Reports</span>
+                        </a>
+                        <ul class="ml-menu" id="ViewReports">
+                            @if (menuIDs.Where(x => x == "45").Count() > 0)
+                            {
+                                <li id="SaleOrderLog">
+                                    <a href="~/ViewReports/CustomizeOrdersReport">
+                                        <i class="material-icons">layers</i>
+                                        <span>Customize Orders Report</span>
+                                    </a>
+                                </li>
+                            }
+
+                          @if(menuIDs.Where(x => x == "46").Count() > 0)
+                            {
+                                <li id = "SaleOrderLog">
+                                    <a href="~/ViewReports/CustomizeOrdersReportWithRSF">
+                                        <i class="material-icons">layers</i>
+                                        <span>Customize Orders Report With RSF</span>
+                                    </a>
+                                </li>
+                            }
+
+
+
+
+            @if (menuIDs.Where(x => x == "33").Count() > 0)
+                            {
+                                <li id="CreateClaim">
+                                    <a href="~/ViewReports/OMSGeneratedOrders">
+                                        <i class="material-icons">layers</i>
+                                        <span>OMS Suggested Orders</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "34").Count() > 0)
+                            {
+                                <li id="AuditSummary">
+                                    <a href="~/ViewReports/OMSConfirmedOrders">
+                                        <i class="material-icons">layers</i>
+                                        <span>OMS Confirmed Orders </span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "35").Count() > 0)
+                            {
+                                <li id="SaleOrderLog">
+                                    <a href="~/ViewReports/OMSUnConfirmedOrders">
+                                        <i class="material-icons">layers</i>
+                                        <span>OMS Unconfirmed Orders </span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "36").Count() > 0)
+                            {
+                                <li id="SaleOrderLog">
+                                    <a href="~/ViewReports/InTransitOrders">
+                                        <i class="material-icons">layers</i>
+                                        <span>OMS In-Transit Orders </span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "37").Count() > 0)
+                            {
+                                <li id="SaleOrderLog">
+                                    <a href="~/ViewReports/DaywiseShipment">
+                                        <i class="material-icons">layers</i>
+                                        <span>OMS Day wise Shipment Plan </span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "38").Count() > 0)
+                            {
+                                <li id="SaleOrderLog">
+                                    <a href="~/ViewReports/SpecialOrders">
+                                        <i class="material-icons">layers</i>
+                                        <span>OMS SPECIAL Order </span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "39").Count() > 0)
+                            {
+                                <li id="SaleOrderLog">
+                                    <a href="~/ViewReports/RSFAchievement">
+                                        <i class="material-icons">layers</i>
+                                        <span>OMS RSF Achievement </span>
+                                    </a>
+                                </li>
+                            }
+                            @if (menuIDs.Where(x => x == "40").Count() > 0)
+                            {
+                                <li id="SaleOrderLog">
+                                    <a href="~/ViewReports/RSFAchievementReferenceToFirmOrders">
+                                        <i class="material-icons">layers</i>
+                                        <span>OMS RSF Achievement (According Firm To Orders)</span>
+                                    </a>
+                                </li>
+                            }
+                            @*@if (menuIDs.Where(x => x == "41").Count() > 0)
+        {
+            <li id="SaleOrderLog">
+                <a href="~/ViewReports/UnservedOrders">
+                    <i class="material-icons">layers</i>
+                    <span>OMS Unserved Orders </span>
+                </a>
+            </li>
+        }*@
+                            @if (menuIDs.Where(x => x == "42").Count() > 0)
+                            {
+                                <li id="SaleOrderLog">
+                                    <a href="~/ViewReports/Toss">
+                                        <i class="material-icons">layers</i>
+                                        <span>TOSS</span>
+                                    </a>
+                                </li>
+                            }
+                            @*@if (menuIDs.Where(x => x == "43").Count() > 0)
+        {
+            <li id="SaleOrderLog">
+                <a href="~/ViewReports/WeekWiseAws">
+                    <i class="material-icons">layers</i>
+                    <span>Week wise AWS</span>
+                </a>
+            </li>
+        }
+        @if (menuIDs.Where(x => x == "44").Count() > 0)
+        {
+            <li id="SaleOrderLog">
+                <a href="~/ViewReports/BillingReport">
+                    <i class="material-icons">layers</i>
+                    <span>Order-to-Billing Report</span>
+                </a>
+            </li>
+        }*@
+                        </ul>
+                    </li>
+                }
+
+
+
+
+
+
+
+            }
+
+            @if (Session["roleid"].ToString() == "1" || Session["roleid"].ToString() == "3")
+            {
+                <li id="ChangePassword">
+                    <a href="~/UpdatePassword/UpdatePassword">
+                        <i class="material-icons">layers</i>
+                        <span>Change Password</span>
+                    </a>
+                </li>
+            }
+            <li>
+                <a href="~/Login/Logout">
+                    <i class="material-icons">layers</i>
+                    <span id="logout"> Logout </span>
+                </a>
+            </li>
+
+
+        </ul>
+    </div>
+    <!-- #Menu -->
+    <!-- Footer -->
+    <div class="legal">
+        <div class="copyright">
+            &copy; 2020 <a href="#">Interface Technology</a>.
+        </div>
+    </div>
+    <!-- #Footer -->
+</aside>
+<script src="~/scripts/jquery-3.4.1.js"></script>
+<script>
+
+    var sessionId = (sessionStorage.getItem('sessionn'));
+
+
+
+    var user = '@Session["user"].ToString()';
+
+    var role = '@Session["roleid"].ToString()';
+    $(".email").text(user);
+    var url = "~/Login";
+
+    $(document).ready(function () {
+            $('#logout').click(function () {
+                sessionStorage.removeItem("sessionn");
+                sessionStorage.removeItem("sessionName");
+                sessionStorage.getItem("sessionn") = null;
+                sessionStorage.getItem("sessionName") = null;
+                sessionStorage.clear();
+                Response.Redirect("~/Login");
+            });
+        });
+
+    function showMessage(msg, notitype, iconname) {
+        //notitype: info, success, warning, danger
+        $.notify({
+            icon: iconname,
+            message: msg
+        },
+            {
+                type: notitype,
+                timer: 3000,
+                placement: {
+                    from: 'bottom',
+                    align: 'right'
+                }
+            });
+    }
+</script>

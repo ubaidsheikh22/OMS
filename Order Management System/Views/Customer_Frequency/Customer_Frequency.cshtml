@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewBag.Title = "Customer_Frequency";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+<script src="~/scripts/jquery-3.4.1.min.js"></script>
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+@*<script src="//code.jquery.com/jquery-1.10.2.js"></script>*@
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/Customer_Frequency.js"></script>
+<style>
+input#select_all {
+    height: 21px;
+}
+
+ul#ui-id-1 {
+    margin-left: 210px;
+    margin-top: 507px;
+    width: 116.493px;
+    display: none;
+}
+ul#ui-id-2 {
+    margin-left: 365px;
+    margin-top: 507px;
+    width: 116.493px;
+    display: none;
+}
+
+    ul#ui-id-3 {
+        margin-left: 517px;
+        margin-top: 507px;
+        width: 116.493px;
+        display: none;
+    }
+</style>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4"></div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div id="successAlert" class="alert alert-success collapse" role="alert">
+                    New User Sucessfully Registered
+                </div>
+                <div id="warningAlert" class="alert alert-danger collapse" role="alert">
+                    Please type valid Fields
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4"></div>
+        </div>
+        @*Form Starts*@
+        <div class="row clearfix">
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            <U>Add Customer Frequency</U>
+                        </h2>
+
+                    </div>
+                    <div class="body">
+                        <form>
+                            <label>Select Package</label>
+                            <div class="form-group">
+                                @*<select class="form-control show-tick ms select2" name="Role_ID" id="txtRoleID" data-placeholder="Select">
+                <option id="DropDwn"></option>
+            </select>*@
+
+                                <select class="form-control show-tick ms select2" id="txtPackageID" name="Package_ID" data-placeholder="Select">
+                                    <option id="DropDwn"></option>
+                                    <option id="DropDwn">Disable</option>
+
+                                </select>
+                            </div>
+                            <label>Select Frequency</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms" id="RoleId" name="RoleId" data-placeholder="Select">
+                                    <option id="DropDwn" class="form-control"></option>
+                                    <option id="DropDwn">Disable</option>
+
+                                </select>
+                            </div>
+
+                            <div class="table-responsive social_media_table">
+                                <table id="CustomerList" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>SelectAll<input type="checkbox" id="select_all" class="filled-in form-control" /></th>
+                                            <th>Customer Code<input type="text" class="form-control" id="search-box1" /></th>
+                                            <th>Customer Name<input type="text" id="search-box2" class="form-control" /></th>
+                                            <th>Region<input type="text" id="search-box3" class="form-control" /></th>
+
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <br>
+                            <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnCus" value="Register user" />
+                            <input type="button" class="btn btn-primary m-t-15 waves-effect" id="redirect" value="Dashboard" />
+                        </form>
+                      </div>
+                </div>
+            </div>
+
+
+            @*Form Ends*@
+
+            @*DataTable Starts*@
+
+
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            Customer Frequency Details
+                        </h2>
+
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive social_media_table">
+                            <table id="RegisterLists" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Package</th>
+                                        <th>Frequency</th>
+                                        <th>Cus_#ID</th>
+                                        <th>Cus_Name</th>
+                                        <th>Region</th>
+                                        <th>Days</th>
+                                        <th>Super_User</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*DataTable Ends*@
+
+
+
+
+</section>
+

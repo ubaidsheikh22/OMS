@@ -1,0 +1,56 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Error Handler</title>
+</head>
+
+<body class="theme-red">
+
+    <section class="content">
+        <div class="container-fluid">
+
+            @*Form Starts*@
+
+            <div class="row clearfix">
+                <div class="tab-content">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="header">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <h1 style="text-align: center"><strong><u>Something went wrong</u></strong></h1>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="body">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                                            <input type="button" class="btn btn-warning" name="errDetails" id="errDetails" onclick="showDiv()" value="For More Details" />
+                                        </div>
+                                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                                        <div id="welcomeDiv" style="display:none;" class="answer_list"> WELCOME</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

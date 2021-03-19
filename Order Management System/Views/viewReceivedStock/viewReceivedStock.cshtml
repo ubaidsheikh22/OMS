@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "viewReceivedStock";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+
+<script src="~/scripts/jquery-3.4.1.min.js"></script>
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/viewReceivedStock.js"></script>
+<style type="text/css">
+    .grid {
+        border-spacing: 0px;
+        font-family: Arial;
+        font-size: 12px;
+    }
+
+        .grid th {
+            background-color: gray;
+            color: #ffffff;
+            padding: 2px 10px;
+        }
+
+        .grid tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+
+        .grid tr:nth-child(odd) {
+            background-color: #ccc;
+        }
+
+        .grid td {
+            padding: 2px 10px;
+        }
+</style>
+
+<section class="content">
+    <div class="container-fluid">
+
+        @*Form Starts*@
+
+        <div class="row clearfix">
+            <div class="tab-content">
+                <div id="monday" class="tab-pane fade in active">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="header">
+                                <div> <h2><strong><u>Received Stock</u></strong></h2></div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-offset-1 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <input type="date" id="StartDate" class="form-control">
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <input type="date" id="EndDate" class="form-control">
+                                </div>
+                                @*<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <select class="form-control show-tick ms select2" id="drpCustomer" name="Customer" data-placeholder="Select Customer"></select>
+                                </div>*@
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <input type="button" class="btn btn-primary waves-effect" id="btnGetOrders" value="Search Stock" />
+                                </div>
+                            </div>
+
+                            <div class="body">
+                                <center>
+                                    <div id="divLoader" style="display:none;">
+                                        <img src="~/assets/images/4V0b.gif" alt="Loader" height="100" width="100" />
+                                    </div>
+                                </center>
+
+                                <div class="table-responsive social_media_table">
+                                    <table class="table table-bordered" id="list">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>Receiving Date</th>
+                                                <th>Billing No</th>
+                                                <th>Reference</th>
+                                                <th>Material</th>
+                                                <th>Material Description</th>
+                                                @*<th>Unit Price</th>*@
+                                                @*<th>Recieved Day</th>*@
+                                                <th>Order Quantity</th>
+                                                <th>Received Quantity</th>
+                                                <th>Damaged Quantity</th>
+                                                <th>Expired Quantity</th>
+                                                <th>Short Quantity</th>
+                                                <th>Attachment</th>
+                                                <th>Receiving Comments</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,291 @@
+﻿@{
+    ViewBag.Title = "OMS Confirmed Order";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+
+
+<script src="~/scripts/new-jquery-1.12.4.js"></script>
+<script src="~/scripts/jquery.multiselect.js"></script>
+<link href="~/Content/new-jquery.dataTables.min.css" rel="stylesheet" />
+<script src="~/scripts/new-jquery.dataTables.min.js"></script>
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/ReportsMain.js"></script>
+<script src="~/JqueryFiles/OMSConfirmedOrder.js"></script>
+<link href="~/Content/jquery.multiselect.css" rel="stylesheet" />
+<script type="text/javascript" src="~/scripts/datatables.checkboxes.min.js"></script>
+
+<style>
+    /*.card .body {
+        font-size: 11px;
+        color: black;
+        padding: 20px;
+    }*/
+
+    .dataTables_wrapper .dataTables_filter input {
+        margin-left: 0.5em;
+        border: 1px solid;
+    }
+
+    /*.card .header {
+        color: #555;
+        padding: 60px;
+        position: relative;
+        border-bottom: 1px solid rgba(204, 204, 204, 0.35);
+        margin-top: -30px;
+    }*/
+
+    .select2-results .select2-highlighted {
+        background: rgba(204, 204, 204, 0.35) !important;
+        color: #fff;
+    }
+
+    .card {
+        background: #fff;
+        min-height: 50px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        position: relative;
+        margin-bottom: 30px;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        -ms-border-radius: 2px;
+        border-radius: 2px;
+        margin-top: -25px;
+    }
+
+    #cardd2 {
+        height: 164px;
+        background: #fff;
+        min-height: 50px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        position: relative;
+        margin-bottom: 30px;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        -ms-border-radius: 2px;
+        border-radius: 2px;
+        margin-top: 20px;
+    }
+
+    .card .body .col-xs-4, .card .body .col-sm-4, .card .body .col-md-4, .card .body .col-lg-4 {
+        margin-bottom: -32px;
+    }
+    /*.card .header {
+    color: #555;
+    padding: 20px;
+    position: relative;
+    border-bottom: 1px solid rgba(204, 204, 204, 0.35);
+    /*margin-top: -25px;*/
+    }
+
+    table.dataTable.dt-checkboxes-select tbody tr,
+    table.dataTable thead th.dt-checkboxes-select-all,
+    table.dataTable tbody td.dt-checkboxes-cell {
+        cursor: pointer;
+    }
+
+    table.dataTable thead th.dt-checkboxes-select-all,
+    table.dataTable tbody td.dt-checkboxes-cell {
+        text-align: center;
+    }
+
+    div.dataTables_wrapper span.select-info,
+    div.dataTables_wrapper span.select-item {
+        margin-left: 0.5em;
+    }
+
+    @@media screen and (max-width: 640px) {
+        div.dataTables_wrapper span.select-info,
+        div.dataTables_wrapper span.select-item {
+            margin-left: 0;
+            display: block;
+        }
+    }
+</style>
+
+
+<div id="orderSpinner" style="display: none;width: 100%;height: 100%;position: absolute;z-index: 100000;opacity: 0.5;background-color: black;">
+    <img src="~/assets/images/4V0b.gif" alt="Loader" height="100px" width="100px" style="align-self: center;height: 100px;width: 100px;margin-left: 46%;margin-top: 15%;" />
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="tab-content">
+                <div id="monday" class="tab-pane fade in active">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2><strong><u>Confirmed Order Report</u></strong></h2>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <select class="form-control show-tick ms select2" id="drpCustomer" data-placeholder="Select">
+                                        <option id="drpCustomer" value="-1">Select Customer</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <select class="form-control show-tick ms select2" id="drpRegion" data-placeholder="Select">
+                                        <option id="drpRegion" value="-1">Select Region</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <select class="form-control show-tick ms select2" id="drpBrand" data-placeholder="Select">
+                                        <option id="drpBrand" value="-1">Select Brand</option>
+                                    </select>
+                                </div>
+
+
+                                <div class=" col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <select class="form-control show-tick ms select2" id="drpSKU" data-placeholder="Select">
+                                        <option id="drpSKU" value="-1">Select SKU</option>
+                                    </select>
+                                </div>
+
+                                <div class=" col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
+                                    <select class="form-control show-tick ms select2" id="drpSalesOrg" data-placeholder="Select">
+                                        <option id="drpSalesOrg" value="-1">Select Sales Org</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <select class="form-control show-tick ms select2" id="drpArea" data-placeholder="Select">
+                                        <option id="drpArea" value="-1">Select Area</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <select class="form-control show-tick ms select2" id="drpTown" data-placeholder="Select">
+                                        <option id="drpTown" value="-1">Select Town</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <select class="form-control show-tick ms select2" id="drpTerritory" data-placeholder="Select">
+                                        <option id="drpTerritory" value="-1">Select Territory</option>
+                                    </select>
+                                </div>
+
+
+                                <div class=" col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <select class="form-control show-tick ms select2" id="drpPlant" data-placeholder="Select">
+                                        <option id="drpPlant" value="-1">Select Plant</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <select class="form-control show-tick ms select2" id="drpMatGrp1" data-placeholder="Select">
+                                        <option id="drpMatGrp1" value="-1">Select Material Group1</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+
+
+                            <br />
+
+                            <div class="row">
+
+
+                                <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <select class="form-control show-tick ms select2" id="drpMatGrp2" data-placeholder="Select">
+                                        <option id="drpMatGrp2" value="-1">Select Material Group2</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <select class="form-control show-tick ms select2" id="drpMatGrp3" data-placeholder="Select">
+                                        <option id="drpMatGrp3" value="-1">Select Material Group3</option>
+                                    </select>
+                                </div>
+
+
+                                <div class=" col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <select class="form-control show-tick ms select2" id="drpMatGrp4" data-placeholder="Select">
+                                        <option id="drpMatGrp4" value="-1">Select Material Group4</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+
+                                    <label>Start Date</label>
+                                    <input class="form-control datepicker" id="StartDate" name="StartDate" type="date" value="">
+
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+
+                                    <label>End Date</label>
+                                    <input class="form-control datepicker" id="EndDate" name="EndDate" type="date" value="">
+
+                                </div>
+
+
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+
+
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+
+
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+
+
+                                </div>
+                                <div class="col-lg-offset-1 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <input type="button" class="btn btn-primary waves-effect" style="width:50%;" id="btnRetrieve" value="Retrieve" />
+                                </div>
+                            </div>
+
+
+                                <div class="body">
+                                    <div class="table-responsive social_media_table">
+                                        <table class="table table-hover" id="ConfirmedOrderTable">
+                                            <thead>
+                                                <tr>
+                                                   <th>Order_Ref</th>
+                                                    <th>Customer</th>
+                                                    <th>Name</th>
+                                                    <th>Material</th>
+                                                    <th>Description</th>
+                                                    <th>Material Group 1</th>
+                                                    <th>Material Group 2</th>
+                                                    <th>Material Group 3</th>
+                                                    <th>Material Group 4</th>
+                                                    <th>SalesOrg</th>
+                                                    <th>Area</th>
+                                                    <th>Region</th>
+                                                    <th>Territory</th>
+                                                    <th>Distribution</th>
+                                                   @* <th>SKUMapping</th>*@
+                                                    <th>Quantity</th>
+                                                    <th>UnitPrice</th>
+
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/scripts/navigationBarScroll.js"></script>
+@*<script>
+    $("input.datepicker").datepicker();
+    $("#StartDate").datepicker({ dateFormat: "dd-mm-yy" });
+    $("#EndDate").datepicker({ dateFormat: "dd-mm-yy" });
+ </script>*@

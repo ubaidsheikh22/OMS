@@ -1,0 +1,221 @@
+﻿
+@{
+    ViewBag.Title = "GenerateOrder";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<section class="content">
+    <div class="container-fluid">
+
+        @*Form Starts*@
+         <ul class="nav nav-tabs">
+             <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnRole" value="Generate Order" />
+
+        </ul>
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#SKU">SKU</a></li>
+            <li><a data-toggle="tab" href="#customer">Customer</a></li>
+        </ul>
+
+
+        <div class="tab-content">
+            <div id="SKU" class="tab-pane fade in active">
+                <div class="tab-content">
+
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+
+                            <div class="header">
+                                <h2><strong>Order generation</strong></h2>
+                                <br />
+
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="txtdesignationDesc" class="form-control" placeholder="Search SKU Code">
+                                    </div>
+                                </div>
+                                @*<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+
+                                        <select class="form-control show-tick ms select2" id="txtRoleIDUpdate" name="RoleId" data-placeholder="Select">
+                                            <option>Select Customer</option>
+                                            <option>Ali Ghaffari</option>
+                                        </select>
+
+
+                                    </div>*@
+                            </div>
+
+                            <div class="body">
+                                <div class="table-responsive social_media_table">
+                                    <table class="table table-hover" id="listMonday">
+                                        <thead>
+                                            <tr>
+                                                <th>SKU Code</th>
+                                                <th>SKU Description</th>
+                                                <th>RSF Quantity</th>
+                                                <th>Weekly Uplift %</th>
+                                                <th>Final Order</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">30000001</td>
+                                                <td>SOOPER PKT</td>
+                                                <td>500</td>
+                                                <td><input type="number" id="txtPackageName" class="form-control" value="5"></td>
+                                                <td>525</td>
+
+                                            </tr>
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">30000526</td>
+                                                <td>Zeera Plus</td>
+                                                <td>200</td>
+                                                <td><input type="number" id="txtPackageName" class="form-control" value="8"></td>
+                                                <td>216</td>
+
+                                            </tr>
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">30004561</td>
+                                                <td>Glucose</td>
+                                                <td>600</td>
+                                                <td><input type="number" id="txtPackageName" class="form-control" value="10"></td>
+                                                <td>660</td>
+
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+            <div id="customer" class="tab-pane fade">
+                <div class="tab-content">
+
+
+
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+
+                            <div class="header">
+                                <h2><strong>Weekly Uplift</strong></h2>
+                                <br />
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+
+                                    <select class="form-control show-tick ms select2" id="dropDownCustomer" name="dropDownCustomer" data-placeholder="Select User">
+
+                                        <option id="dropDownCustomer" data-badge="">National</option>
+                                        <option id="dropDownCustomer" data-badge="">Region 1</option>
+                                        <option id="dropDownCustomer" data-badge="">Region 2</option>
+                                        <option id="dropDownCustomer" data-badge="">Region 3</option>
+                                        <option id="dropDownCustomer" data-badge="">Region 4</option>
+                                        <option id="dropDownCustomer" data-badge="">Region 5</option>
+                                        <option id="dropDownCustomer" data-badge="">Region 6</option>
+                                        <option id="dropDownCustomer" data-badge="">Region8</option>
+
+                                    </select>
+                                    <input type="text" id="txtdesignationDesc" class="form-control" placeholder="Search SKU Code">
+
+                                    @*<div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" id="txtdesignationDesc" class="form-control" placeholder="Search SKU Code">
+                                        </div>
+                                    </div>*@  
+
+                                </div>
+                            </div>
+
+                            <div class="body">
+                                <div class="table-responsive social_media_table">
+                                    <table class="table table-hover" id="listMonday">
+                                        <thead>
+                                            <tr>
+                                                <th>SKU Code</th>
+                                                <th>SKU Description</th>
+                                                <th>RSF Quantity</th>
+                                                <th>Weekly Uplift %</th>
+                                                <th>Final Order</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">30000001</td>
+                                                <td>SOOPER PKT</td>
+                                                <td>500</td>
+                                                <td><input type="number" id="txtPackageName" class="form-control" value="5"></td>
+                                                <td>525</td>
+
+                                            </tr>
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">30000526</td>
+                                                <td>Zeera Plus</td>
+                                                <td>200</td>
+                                                <td><input type="number" id="txtPackageName" class="form-control" value="8"></td>
+                                                <td>216</td>
+
+                                            </tr>
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">30004561</td>
+                                                <td>Glucose</td>
+                                                <td>600</td>
+                                                <td><input type="number" id="txtPackageName" class="form-control" value="10"></td>
+                                                <td>660</td>
+
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                                <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnRole" value="Apply Uplift" />
+                                @*<input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnRole" value="Regenerate Order" />*@
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+</section>
+

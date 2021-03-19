@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "package";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+
+<script src="~/scripts/jquery-3.4.1.min.js"></script>
+<script src="~/scripts/jquery.js"></script>
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/Package.js"></script>
+
+<section class="content">
+    <div class="container-fluid">
+
+        @*Form Starts*@
+        <div class="row clearfix">
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            Category Details
+                        </h2>
+
+                    </div>
+                    <div class="body">
+                        <form>
+                            <label for="email_address">Add Category</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="txtPackageName" name="PackageName" class="form-control" placeholder="Enter Package Name">
+                                </div>
+                            </div>
+                            <br>
+                            <input type="button" class="btn btn-primary m-t-15 waves-effect" id="BtnPackage" value="Add Package" />
+                           
+                                <input type="button" class="btn btn-primary m-t-15 waves-effect" id="redirect" value="Dashboard" />
+
+                         
+                        </form>
+                        <div>
+                            <div id="successAlert" class="alert alert-success collapse" role="alert">
+                                Details added successfully.
+                            </div>
+                            <div id="warningAlert" class="alert alert-danger collapse" role="alert">
+                                Details already exists.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            @*Form Ends*@
+
+            @*DataTable Starts*@
+
+
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            Category Details
+                        </h2>
+
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive social_media_table">
+                            <table id="packageList" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Category ID</th>
+                                        <th>Category Name</th>
+                                        <th>User name</th>
+                                        <th>Action</th>
+                                    </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    @*DataTable Ends*@
+    <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="largeModalLabel">Update Category</h4>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <label>Category Details</label>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input type="hidden" id="uptxtPackageID" name="Package_ID" class="form-control">
+                                <input type="text" id="uptxtPackageName" name="PackageName" class="form-control">
+                            </div>
+                        </div>
+                        <div>
+                            <div id="successAlertup" class="alert alert-success collapse" role="alert">
+                                Details Updated successfully.
+                            </div>
+                            <div id="warningAlertup" class="alert alert-secondary collapse" role="alert">
+                                Details already exists.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <input type="button" id="bttnUpdatePackage" class="btn btn-primary m-t-6 waves-effect" value="SAVE CHANGES" />
+                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</section>
+
+<script src="~/scripts/navigationBarScroll.js"></script>

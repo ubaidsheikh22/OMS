@@ -1,0 +1,327 @@
+﻿@model BusinessLayer.Models.SubstituteModel
+@{
+    ViewBag.Title = "Substitute Privileges";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+@*<script src="http://code.jquery.com/jquery-1.8.2.js"></script>*@
+<script src="~/scripts/jquery-3.4.1.min.js"></script>
+<script src="~/scripts/jquery.js"></script>
+<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+@*export tables*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/buttons.flash.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/buttons.print.min.js"></script>
+<link rel="stylesheet" type="text/css"
+      href="//cdn.datatables.net/tabletools/2.2.4/css/dataTables.tableTools.css" />
+
+
+
+
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<section class="content">
+    <div class="container-fluid">
+
+        @*Form Starts*@
+        <div class="row clearfix">
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            <u>Assign Substitute Privileges</u>
+                        </h2>
+                    </div>
+                    <div class="body">
+                        <form>
+                            <label>Select User</label>
+                            <div class="form-group">
+                                @Html.DropDownListFor(x => x.User_ID, new SelectList(ViewBag.Users, "Value", "Text"), new { @id = "AssignedFrom", @class = "form-control show-tick ms select2" })
+                            </div>
+                            <label>Select Substitute</label>
+                            <div class="form-group">
+                                @Html.DropDownListFor(x => x.User_ID, new SelectList(ViewBag.Users, "Value", "Text"), new { @id = "AssignedTo", @class = "form-control show-tick ms select2" })
+                            </div>
+                            <label>Start Date</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    @*<input type="text" readonly="readonly" id="StartDate" data-beatpicker="true" data-beatpicker-module="clear" name="StartDate" class="form-control datepicker">*@
+                                    @Html.TextBoxFor(m => m.EndDate, "{0:dd-MM-yyyy}", new { @id = "StartDate", @class = "form-control datepicker" })
+                                </div>
+                            </div>
+                            <label>End Date</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" readonly="readonly" data-date-format='yy-mm-dd' id="EndDate" data-beatpicker="true" data-beatpicker-module="clear" name="EndDate" class="form-control datepicker">
+                                </div>
+                            </div>
+                            <label>Reason</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="Reason" name="Reason" class="form-control" placeholder="Enter Reason">
+                                </div>
+                            </div>
+                            <br>
+                            <input type="button" class="btn btn-primary m-t-15 waves-effect" id="btnAddUser" value="ADD" />
+                            <input type="button" class="btn btn-primary m-t-15 waves-effect" id="redirect" value="Dashboard" />
+                        </form>
+                    </div>
+                </div>
+                <div>
+                    <div id="successAlert" class="alert alert-success collapse" role="alert">
+                        Substitute added successfully!
+                    </div>
+                    <div id="warningAlert" class="alert alert-warning collapse" role="alert">
+                        Couldn't create substitute. Either incorrect data is entered or substitute already exists!
+                    </div>
+                </div>
+            </div>
+
+
+            @*Form Ends*@
+
+            @*DataTable Starts*@
+
+
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            <u>Substitute Details</u>
+                        </h2>
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive social_media_table">
+                            <table id="UserList" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th></th>
+                                        <th>User Name</th>
+                                        <th>Substitute name</th>
+                                        <th>Reason</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    $("input.datepicker").datepicker();
+    $("#StartDate").datepicker({ dateFormat: "dd-mm-yy" });
+    $("#EndDate").datepicker({ dateFormat: "dd-mm-yy" });
+    $('#redirect').click(function () {
+
+        window.location.href = "/dashboard/dashboard";
+    });
+    $('#btnAddUser').click(function () {
+
+      
+        if ($('#AssignedFrom').val() == -1)
+            alert('Please select a user!');
+
+        else if ($('#AssignedTo').val() == -1)
+            alert('Please select a substitute user!');
+
+        else if ($('#AssignedFrom').val() == $('#AssignedTo').val())
+            alert('Substitute user invalid! Please select another user...');
+
+        else if ($('#StartDate').val() == '' || $('#EndDate').val() == '')
+            alert('Please select Start and End Dates!');
+
+        else if (new Date($('#StartDate').val()) > new Date($('#EndDate').val()))
+            alert('Start date cannot be greater than End date!');
+
+        else if ($("#Reason").val().length <= 0)
+            alert("Please enter Reason!");
+
+        else {
+            var AssignedFrom = $('#AssignedFrom').children("option:selected").val();
+            var AssignedTo = $('#AssignedTo').children("option:selected").val();
+            //var from = $("#StartDate").val().split("/");
+            //var StartDate = from[2] + '/' + from[0] + '/' + from[1]; //Modified By Adnan
+            //var to = $("#EndDate").val().split("/");
+            //var EndDate = to[1] + '/' + to[0] + '/' + to[2];
+
+            var from = new Date($("#StartDate").val());
+            var StartDate = from.toISOString();
+
+            var to = new Date($("#EndDate").val());
+            var EndDate = to.toISOString();
+
+            var Reason = $('#Reason').val();
+
+            var model = {
+                AssignedTo: AssignedTo,
+                AssignedFrom: AssignedFrom,
+                StartDate: StartDate,
+                EndDate: EndDate,
+                Reason: Reason,
+                Index: 1
+            }
+
+            $.ajax({
+                type: "post",
+                url: "CreateUpdateSubstitute",
+                data: model,
+                datatype: "json",
+                //traditional: true,
+                success: function (data) {
+                    if (data == 1) {
+                        $('#successAlert').show('fade');
+                        getSubstitutetoGrid();
+                        clearTextBoxes();
+                        setTimeout(function () {
+                            $('#successAlert').hide('fade');
+                        }, 5000);
+                    }
+                    else {
+                        $('#warningAlert').show('fade');
+                        setTimeout(function () {
+                            $('#warningAlert').hide('fade');
+                        }, 5000);
+                    }
+                }
+            });
+        }
+    });
+
+    function clearTextBoxes() {
+        $('#AssignedFrom option[value="-1"]').prop('selected', true);
+        $('#AssignedTo option[value="-1"]').prop('selected', true);
+        $("#StartDate").val('');
+        $("#EndDate").val('');
+        $('#Reason').val('');
+    }
+    function getSubstitutetoGrid() {
+        if ($.fn.DataTable.isDataTable('#UserList')) {
+            $('#UserList').DataTable().destroy();
+        }
+        var table = $("#UserList").DataTable({
+            "ajax": {
+                "url": "GetAllSubstitute",
+                "type": "POST",
+                "datatype": "json",
+                "processing": false,
+                "serverSide": false,
+                "filter": true,
+                "orderMulti": true,
+                "dataSrc": "",
+            },
+            "columnDefs": [
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                }],
+            "columns": [
+                { "data": "Id", "name": "Id", "autoWidth": true },
+                { "data": "AssignedFromName", "name": "AssignedFromName", "autoWidth": true },
+                { "data": "AssignedToName", "name": "AssignedToName", "autoWidth": true },
+                { "data": "Reason", "name": "Reason", "autoWidth": true },
+                { "data": "FromDate", "name": "StartDate", "autoWidth": true },
+                { "data": "ToDate", "name": "EndDate", "autoWidth": true },
+                {
+                    data: null, render: function (data, type, row) {
+                        return "<a href='#' onclick=EditById('" + row.Id + "'); class='btn btn-danger'; >Force Stop</a>";
+                    }
+                }
+
+            ],
+            "order": [[0, "desc"]],
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excel',
+                    autoFilter: true,
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5]
+                    }
+                },
+
+
+                {
+                    extend: 'csv',
+                    autoFilter: true,
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5]
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    autoFilter: true,
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5]
+                    }
+                },
+                {
+                    extend: 'print',
+                    autoFilter: true,
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5]
+                    }
+                },
+                {
+                    extend: 'copy',
+                    autoFilter: true,
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5]
+                    }
+                },
+
+            ]
+        });
+    }
+    $(document).ready(function () {
+        clearTextBoxes();
+        getSubstitutetoGrid();
+    });
+
+    function EditById(id) {
+      
+        var choice = confirm("Sure you want to stop substitute");
+        if (choice) { 
+        $.ajax({
+            type: "get",
+            url: "SetSubstitute_ForceStop",
+            data: "id=" + id,
+            datatype: "json",
+            //traditional: true,
+            success: function (data) {
+                if (data > 0) {
+
+                    
+                    $('#successAlert').text('Selected substitution has been stopped!');
+                    $('#successAlert').show('fade');
+                    getSubstitutetoGrid();
+                    clearTextBoxes();
+                    setTimeout(function () {
+                        $('#successAlert').hide('fade');
+                        $('#successAlert').text('Substitute added successfully!');
+                    }, 5000);
+                }
+                else {
+                    $('#warningAlert').show('fade');
+                    setTimeout(function () {
+                        $('#warningAlert').hide('fade');
+                    }, 5000);
+                }
+            }
+        });
+        }
+    }
+</script>
+
+<script src="~/scripts/navigationBarScroll.js"></script>

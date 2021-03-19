@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "ReviewOrders";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+
+<script src="~/scripts/jquery-3.4.1.min.js"></script>
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/ReviewOrders.js"></script>
+<section class="content">
+    <div class="container-fluid">
+        
+        <div class="row clearfix">
+
+
+
+            <div class="tab-content">
+
+                <div id="monday" class="tab-pane fade in active">
+
+
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+
+                            <div class="header">
+                                <h2><strong><U>Select Customer</U></strong></h2>
+                                <br />
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+
+                                    <select class="form-control show-tick ms select2" id="drpCustomer" data-placeholder="Select">
+                                        <option id="drpCustomer">Select Customer</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="body">
+                                <div class="table-responsive social_media_table">
+                                    <table class="table table-hover" id="AllApprovalRecords">
+                                        <thead>
+                                            <tr>
+                                                @*<th>Order Refrence Number</th>*@
+                                                <th>Material ID</th>
+                                                <th>Material Description</th>
+                                                <th>Sales Organization</th>
+                                                <th>Quantity</th>
+                                                <th>Quantity</th>
+                                                <th>Status</th>
+
+                                                @*<th>Order ID</th>
+                        <th>Material Description</th>
+                        <th>UOM</th>
+                        <th>sadf</th>*@
+                                                @*<th>Unit Price</th>
+                        <th>Order Quantity</th>*@
+                                            </tr>
+                                        </thead>
+
+
+                                    </table>
+                                </div>
+                                <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnADDApproval" value="Approve" />
+                                <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnReject" value="Reject" />
+                                <input type="button" class="btn btn-primary m-t-15 waves-effect" id="redirect" value="Dashboard" />
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+
+                        <div id="OperationDone" class="alert alert-danger collapse" role="alert">
+                            Operation Done
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+
+
+        </div>
+    </div>
+</section>
+
+

@@ -1,0 +1,508 @@
+﻿@{
+    ViewBag.Title = "packageFrequency";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+<script src="~/scripts/multiSelect.js"></script>
+<script src="~/scripts/jquery-3.4.1.min.js"></script>
+<script src="~/scripts/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.full.js"></script>
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+
+@*export tables*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/buttons.flash.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/buttons.print.min.js"></script>
+<link rel="stylesheet" type="text/css"
+      href="//cdn.datatables.net/tabletools/2.2.4/css/dataTables.tableTools.css" />
+
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/packageFrequency.js"></script>
+<link href="~/Content/select2.css" rel="stylesheet" />
+
+<style>
+    span.caret {
+        margin-left: 329px;
+    }
+
+    .open > .dropdown-menu {
+        display: contents;
+    }
+</style>
+
+
+
+<section class="content">
+    <div class="container-fluid">
+
+        @*Form Starts*@
+        <div class="row clearfix">
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            <u> Dispatch Frequency</u>
+                        </h2>
+
+                    </div>
+                    <div class="body">
+                        <form id="form">
+
+                            @*<label>Select Category</label>
+                                <div class="form-group">
+                                    <select class="btn-group bootstrap-select form-control show-tick" name="dropDownPackage" id="dropDownPackage" data-placeholder="Select Package">
+                                        <option id="dropDownPackage"></option>
+
+                                    </select>
+                                </div>*@
+
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpRegions" name="Distributor_ID" data-placeholder="Select">
+                                    <option id="drpRegions"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpArea" name="drpArea" data-placeholder="Select">
+                                    <option id="drpArea"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpTerritory" name="drpTerritory" data-placeholder="Select">
+                                    <option id="drpTerritory"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpTown" name="drpTown" data-placeholder="Select">
+                                    <option id="drpTown"></option>
+                                </select>
+                            </div>
+
+
+
+                            <label>Select Distributor</label>
+                            <div class="form-group">
+
+                                <select class="js-select2 btn-group form-control bootstrap-select" id="dropDownCustomer" name="dropDownCustomer" data-placeholder="Please Select a Distributor" multiple="multiple">
+
+                                    <option id="dropDownCustomer" data-badge=""></option>
+
+                                </select>
+                            </div>
+
+                            <label>Category Description</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="Package" name="Package" class="form-control" placeholder="Category Description" disabled="disabled">
+                                </div>
+                            </div>
+
+
+
+
+                            <label>Select Dispatch Frequency</label>
+                            <div class="form-group" id="divv">
+                                <button type="button" class="btn-group bootstrap-select form-control show-tick" data-toggle="dropdown">
+                                    Select Dispatch
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="multiselect-container dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li>
+                                        <a>
+                                            <input type="checkbox" id="chkMonday" class="filled-in chk-col-pinkn">
+                                            <label for="chkMonday">Monday</label>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <input type="checkbox" id="chkTuesday">
+                                            <label for="chkTuesday">Tuesday</label>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <input type="checkbox" id="chkWednesday">
+                                            <label for="chkWednesday">Wednesday</label>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a>
+                                            <input type="checkbox" id="chkThursday">
+                                            <label for="chkThursday">Thursday</label>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <input type="checkbox" id="chkFriday">
+                                            <label for="chkFriday">Friday</label>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <input type="checkbox" id="chkSaturday">
+                                            <label for="chkSaturday">Saturday</label>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <input type="checkbox" id="chkSunday">
+                                            <label for="chkSunday">Sunday</label>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 collapse" id="dvMondayFrequency">
+                                    <label>Monday</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="number" id="txtMondayFrequency" value="0" class="form-control" placeholder="Frequency">
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 collapse" id="dvTuesdayFrequency">
+                                    <label>Tuesday</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="number" id="txtTuesdayFrequency" value="0" class="form-control" placeholder="Frequency">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 collapse" id="dvWednesdayFrequency">
+                                    <label>Wednesday</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="number" id="txtWednesdayFrequency" value="0" class="form-control" placeholder="Frequency">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 collapse" id="dvThursdayFrequency">
+                                    <label>Thursday</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="number" id="txtThursdayFrequency" value="0" class="form-control" placeholder="Frequency">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 collapse" id="dvFridayFrequency">
+                                    <label>Friday</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="number" id="txtFridayFrequency" value="0" class="form-control" placeholder="Frequency">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 collapse collapse" id="dvSaturdayFrequency">
+                                    <label>Saturday</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="number" id="txtSaturdayFrequency" value="0" class="form-control" placeholder="Frequency">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 collapse" id="dvSundayFrequency">
+                                    <label>Sunday</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="number" id="txtSundayFrequency" value="0" class="form-control" placeholder="Frequency">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <br>
+                            <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnAddPackageFrequency" value="Add Frequency" />
+                            <input type="button" class="btn btn-primary m-t-15 waves-effect" id="redirect" value="Dashboard" />
+                        </form>
+
+
+
+
+
+
+
+                    </div>
+                </div>
+                <div>
+                    <div id="successAlert" class="alert alert-success collapse" role="alert">
+                        Details added successfully.
+                    </div>
+                    <div id="warningAlert" class="alert alert-danger collapse" role="alert">
+                        Details already exists.
+                    </div>
+                    <div id="frequencySumAlert" class="alert alert-warning collapse" role="alert">
+                        The sum of Frequencies should be equal to 100.
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+            </div>
+
+
+            @*Form Ends*@
+
+            @*DataTable Starts*@
+
+
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            <u>DETAILS</u>
+                        </h2>
+
+                    </div>
+
+                    <div class="body">
+                        <div class="table-responsive social_media_table">
+                            <table id="packageFrequencyList" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Package ID</th>
+                                        <th>Customer</th>
+                                        <th>Customer Name</th>
+                                        <th>Category</th>
+                                        <th>Category Name</th>
+                                        <th>Monday</th>
+                                        <th>Tuesday</th>
+                                        <th>Wednesday</th>
+                                        <th>Thursday</th>
+                                        <th>Friday</th>
+                                        <th>Saturday</th>
+                                        <th>Sunday</th>
+                                        <th>Action</th>
+                                </thead>
+                            </table>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*DataTable Ends*@
+
+
+
+    <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="largeModalLabel"></h4>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <label>SELECT PACKAGE</label>
+                        <div class="form-group">
+                            <input type="hidden" id="txtDayfrequencyIDUpdate" name="Day_frequency_ID" class="form-control">
+
+                            <div class="form-line">
+                                <input type="text" id="PackageUP" name="PackageUP" class="form-control" placeholder="Category Description" disabled="disabled">
+                            </div>
+                        </div>
+                        <input type="hidden" id="IMcode" name="IMcode" class="form-control">
+
+                        <label>SELECT CUSTOMERS</label>
+                        <div class="form-group">
+                            <div class="form-line">
+
+
+                                <input type="text" id="CustomerUpdate" name="CustomerUpdate" class="form-control" disabled>
+
+                            </div>
+                        </div>
+
+
+
+
+                        <label>SELECT DAYS</label>
+                        <div class="form-group">
+                            <button type="button" class="btn-group bootstrap-select form-control show-tick" data-toggle="dropdown">
+                                Select Days
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="multiselect-container dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li>
+                                    <a>
+                                        <input type="checkbox" id="chkMondayUpdate">
+                                        <label for="chkMondayUpdate">Monday</label>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <input type="checkbox" id="chkTuesdayUpdate">
+                                        <label for="chkTuesdayUpdate">Tuesday</label>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <input type="checkbox" id="chkWednesdayUpdate">
+                                        <label for="chkWednesdayUpdate">Wednesday</label>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a>
+                                        <input type="checkbox" id="chkThursdayUpdate">
+                                        <label for="chkThursdayUpdate">Thursday</label>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <input type="checkbox" id="chkFridayUpdate">
+                                        <label for="chkFridayUpdate">Friday</label>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <input type="checkbox" id="chkSaturdayUpdate">
+                                        <label for="chkSaturdayUpdate">Saturday</label>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <input type="checkbox" id="chkSundayUpdate">
+                                        <label for="chkSundayUpdate">Sunday</label>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 collapse" id="dvMondayFrequencyUpdate">
+                                <label>Monday</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="number" id="txtMondayFrequencyUpdate" value="0" class="form-control" placeholder="Frequency">
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 collapse" id="dvTuesdayFrequencyUpdate">
+                                <label>Tuesday</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="number" id="txtTuesdayFrequencyUpdate" value="0" class="form-control" placeholder="Frequency">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 collapse" id="dvWednesdayFrequencyUpdate">
+                                <label>Wednesday</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="number" id="txtWednesdayFrequencyUpdate" value="0" class="form-control" placeholder="Frequency">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 collapse" id="dvThursdayFrequencyUpdate">
+                                <label>Thursday</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="number" id="txtThursdayFrequencyUpdate" value="0" class="form-control" placeholder="Frequency">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 collapse" id="dvFridayFrequencyUpdate">
+                                <label>Friday</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="number" id="txtFridayFrequencyUpdate" value="0" class="form-control" placeholder="Frequency">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 collapse collapse" id="dvSaturdayFrequencyUpdate">
+                                <label>Saturday</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="number" id="txtSaturdayFrequencyUpdate" value="0" class="form-control" placeholder="Frequency">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 collapse" id="dvSundayFrequencyUpdate">
+                                <label>Sunday</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="number" id="txtSundayFrequencyUpdate" value="0" class="form-control" placeholder="Frequency">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div>
+                            <div id="successAlertUpdate" class="alert alert-success collapse" role="alert">
+                                Details Updated successfully.
+                            </div>
+                            <div id="warningAlertUpdate" class="alert alert-danger collapse" role="alert">
+                                Details already exists.
+                            </div>
+                            <div id="frequencySumAlertUpdate" class="alert alert-warning collapse" role="alert">
+                                The sum of Frequencies should be equal to 100.
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <input type="button" id="bttnUpdatePackageFrequency" class="btn btn-primary waves-effect" value="SAVE CHANGES" />
+                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+</section>
+
+<script src="~/scripts/navigationBarScroll.js"></script>

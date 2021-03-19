@@ -1,0 +1,296 @@
+﻿@{
+    ViewBag.Title = "secondarySales";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+
+<style>
+    /*.card .body {
+        font-size: 11px;
+        color: black;
+        padding: 20px;
+    }*/
+
+    .dataTables_wrapper .dataTables_filter input {
+        margin-left: 0.5em;
+        border: 1px solid;
+    }
+
+    /*.card .header {
+        color: #555;
+        padding: 60px;
+        position: relative;
+        border-bottom: 1px solid rgba(204, 204, 204, 0.35);
+        margin-top: -30px;
+    }*/
+
+    .select2-results .select2-highlighted {
+        background: rgba(204, 204, 204, 0.35) !important;
+        color: #fff;
+    }
+
+    .card {
+        background: #fff;
+        min-height: 50px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        position: relative;
+        margin-bottom: 30px;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        -ms-border-radius: 2px;
+        border-radius: 2px;
+        margin-top: -25px;
+    }
+
+    #cardd2 {
+        height: 164px;
+        background: #fff;
+        min-height: 50px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        position: relative;
+        margin-bottom: 30px;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        -ms-border-radius: 2px;
+        border-radius: 2px;
+        margin-top: 20px;
+    }
+
+    .card .body .col-xs-4, .card .body .col-sm-4, .card .body .col-md-4, .card .body .col-lg-4 {
+        margin-bottom: -32px;
+    }
+    /*.card .header {
+    color: #555;
+    padding: 20px;
+    position: relative;
+    border-bottom: 1px solid rgba(204, 204, 204, 0.35);
+    /*margin-top: -25px;*/
+    .row {
+        margin-right: -15px;
+        margin-left: -15px;
+        margin-top: -45px;
+    }
+</style>
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="~/scripts/jquery.multiselect.js"></script>
+
+@*<script src="~/scripts/jquery.js"></script>*@
+@*sameed*@
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.min.js"></script>*@
+<link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/scroller/2.0.1/js/dataTables.scroller.min.js"></script>
+
+
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/secondarySales.js"></script>
+@*sameed*@
+@*<link href="~/Content/select2.css" rel="stylesheet" />*@
+@*
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.css" rel="stylesheet" />*@
+<link href="~/Content/jquery.multiselect.css" rel="stylesheet" />
+
+
+
+@*<script src="~/scripts/multiSelect.js"></script>
+    <script src="~/scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/scripts/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.min.js"></script>
+    <link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+
+    <script src="~/JqueryFiles/GenericAjax.js"></script>
+    <script src="~/JqueryFiles/secondarySales.js"></script>
+    <link href="~/Content/select2.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.css" rel="stylesheet" />*@
+
+<script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+
+
+<div id="divLoader" style="display: none;width: 100%;height: 100%;position: absolute;z-index: 100000;opacity: 0.5;background-color: black;">
+    <img src="~/assets/images/4V0b.gif" alt="Loader" height="100px" width="100px" style="align-self: center;height: 100px;width: 100px;margin-left: 46%;margin-top: 15%;" />
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+
+
+        <div class="row clearfix">
+
+
+            @*DataTable Starts*@
+
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                <div class="card" id="cardd2">
+                    @*<div class="header">*@
+                    <label></label>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                <select class="form-control show-tick" id="drpCALDAY" name="drpCALDAY" data-placeholder="Select" multiple="multiple"></select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                <select class="form-control show-tick" id="drpComp" name="drpComp" data-placeholder="Select" multiple="multiple"></select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                <select class="form-control show-tick" id="drpSalesOrg" name="drpSalesOrg" data-placeholder="Select" multiple="multiple"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                <select class="form-control show-tick" id="drpDistr" name="drpDistr" data-placeholder="Select" multiple="multiple"></select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                <select class="form-control show-tick" id="drpDiv" name="drpDiv" data-placeholder="Select" multiple="multiple"></select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                <select class="form-control show-tick" id="drpCustomer" name="drpCustomer" data-placeholder="Select" multiple="multiple"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                <select class="form-control show-tick" id="drpMaterial" name="drpMaterial" data-placeholder="Select" multiple="multiple"></select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            Secondary Sales
+                        </h2>
+                        @*<center>
+            <div id="divLoader" style="display:none;">
+                <img src="~/assets/images/4V0b.gif" alt="Loader" height="100px" width="100px" />
+            </div>
+        </center>*@
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"></div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <a href=""><input type="button" class="form-control btn-info" value="UnFilter All" /></a>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <input type="button" class="form-control btn-info" id="redirect" value="Dashboard" />
+
+                        </div>
+                        @*<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+
+            <select class="js-select2 btn-group form-control bootstrap-select" id="dropDownCustomer" name="dropDownCustomer" data-placeholder="Select User" multiple="single">
+
+                <option id="dropDownCustomer" data-badge=""></option>
+
+            </select>
+
+
+        </div>*@
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive social_media_table">
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10"></div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                <input type="button" value="Export" id="btnn" class="form-control btn-info" width="200px" />
+                            </div>
+                            <table id="secondarySalesList" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <thead class="thead-dark">
+                                    <tr style="color:brown" class="noExl">
+                                        <th>Calendar Month</th>
+                                        <th>Company</th>
+                                        <th>Sales Organization</th>
+
+                                        <th>Division</th>
+                                        <th>Customer (Sold-To Party)</th>
+                                        <th>Customer Name</th>
+                                        <th>Customer Name2</th>
+                                        <th>RegionDescription</th>
+                                        <th>AreaDescription</th>
+                                        <th>TerritoryDescription</th>
+                                        <th>TownDescription</th>
+
+                                        <th>Material</th>
+                                        <th>Material Description</th>
+                                        <th>MatPricingGrpDescription</th>
+                                        <th>MaterialGroup1_Description</th>
+                                        <th>MaterialGroup2_Description</th>
+                                        <th>MaterialGroup3_Description</th>
+                                        <th>MaterialGroup4_Description</th>
+                                        <th>MaterialGroup5_Description</th>
+                                        <th>MaterialGroupdescription</th>
+
+
+                                        <th>UOM</th>
+                                        <th>Distribution Channel</th>
+                                        <th>Quantity</th>
+                                        @*<th>Action</th>*@
+
+
+                                    </tr>
+                                </thead>
+                                <tfoot>
+
+                                    @*<th></th>
+                                        <th></th>
+                                        <th></th>
+
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+
+
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>*@
+                                </tfoot>
+                            </table>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*DataTable Ends*@
+
+
+
+
+</section>
+
+
+<script src="~/scripts/navigationBarScroll.js"></script>

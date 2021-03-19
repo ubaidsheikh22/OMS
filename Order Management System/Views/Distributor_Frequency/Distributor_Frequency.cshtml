@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "OrderGeneratedNew";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+
+<script src="~/scripts/jquery-3.4.1.min.js"></script>
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/DistributorFrequency.js"></script>
+
+<section class="content">
+    <div class="container-fluid">
+
+        @*Form Starts*@
+        <div class="row clearfix">
+
+
+
+            <div class="tab-content">
+
+                <div id="monday" class="tab-pane fade in active">
+
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2><strong><u>Adjust Frequency</u></strong></h2>
+                                <br />
+                                <table id="DaysList" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Monday</th>
+                                            <th>Tuesday</th>
+                                            <th>Wednesday</th>
+                                            <th>Thursday</th>
+                                            <th>Friday</th>
+                                            <th>Saturday</th>
+                                            <th>Sunday</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @*<div class="row clearfix">*@
+                                            <tr role="row" class="odd">
+                                                <td><input type="text" id="txtMonday" /></td>
+                                                <td><input type="text" id="txtTuesday" /></td>
+                                                <td><input type="text" id="txtWednesday" /></td>
+                                                <td><input type="text" id="txtThursday" /></td>
+                                                <td><input type="text" id="txtFriday" /></td>
+                                                <td><input type="text" id="txtSaturday" /></td>
+                                                <td><input type="text" id="txtSunday" /></td>
+                                            </tr>
+                                        @*</div>*@
+                                       
+                                </table>
+                            </div>
+                         
+                            <div class="body">
+                                <form>
+
+
+                                    <div class="table-responsive social_media_table">
+                                        <table id="CustomerList" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th><input type="checkbox" id="select_all" /> SelectAll </th>
+                                                    <th>Customer</th>
+                                                    <th>Name</th>
+                                                    <th>Division</th>
+                                                    <th>Region Description</th>
+                                                    <th>Sales Organization</th>
+
+
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                    <br>
+                                    <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnCus" value="Apply" />
+                                    <input type="button" class="btn btn-primary m-t-15 waves-effect" id="redirect" value="Dashboard" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+</section>
+
+
+

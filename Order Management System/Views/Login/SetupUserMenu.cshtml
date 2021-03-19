@@ -1,0 +1,247 @@
+﻿
+@{
+    ViewBag.Title = "Setup User Menu";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+
+<style>
+    .card .body {
+        font-size: 11px;
+        color: black;
+        padding: 20px;
+    }
+
+    .dataTables_wrapper .dataTables_filter input {
+        margin-left: 0.5em;
+        border: 1px solid;
+    }
+
+    td.details-control {
+        background: url('../../assets/images/details_open.png') no-repeat center center;
+        cursor: pointer;
+    }
+
+    tr.shown td.details-control {
+        background: url('../../assets/images/details_close.png') no-repeat center center;
+    }
+</style>
+<script src="~/scripts/jquery-3.4.1.min.js"></script>
+<script src="~/scripts/jquery.js"></script>
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/SetupUserMenu.js"></script>
+<script src="~/scripts/jquery.multiselect.js"></script>
+<link href="~/Content/jquery.multiselect.css" rel="stylesheet" />
+<section class="content">
+    <div class="container-fluid">
+
+        @*Form Starts*@
+        <div class="row clearfix">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            <u>Setup User Menu</u>
+                        </h2>
+
+                    </div>
+                    <div class="body">
+                        <form id="formID">
+
+                            <label for="password">User Name</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2 my_select_box" id="txtUserName" name="UserName" data-placeholder="Select"></select>
+                            </div>
+                            <label>Setup Forms</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpSetupForms" name="drpSetupForms" data-placeholder="Select">
+                                    @*<option>Select a user first...</option>*@
+                                </select>
+                            </div>
+                            <label>Master Data Forms</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpMasterData" name="drpMasterData" data-placeholder="Select">
+                                    @*<option>Select a user first...</option>*@
+                                </select>
+                            </div>
+                            <label>Transaction Forms</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpTransactionForms" name="drpTransactionForms" data-placeholder="Select">
+                                    @*<option>Select a user first...</option>*@
+                                </select>
+                            </div>
+                            <label>Review Order Forms</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpRevieworder" name="drpRevieworder" data-placeholder="Select">
+                                    @*<option>Select a user first...</option>*@
+                                </select>
+                            </div>
+                            <label>Claim Forms</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpClaimForms" name="drpClaimForms" data-placeholder="Select">
+                                    @*<option>Select a user first...</option>*@
+                                </select>
+                            </div>
+                            <label>Summary</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpSummary" name="drpSummary" data-placeholder="Select">
+                                    @*<option>Select a user first...</option>*@
+                                </select>
+                            </div>
+
+                            <label>Reports</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpReports" name="drpReports" data-placeholder="Select">
+                                    @*<option>Select a user first...</option>*@
+                                </select>
+                            </div>
+
+                            <br>
+                            <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnReg" value="Register user" />
+                        </form>
+                        <div class="row">
+
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div id="successAlert" class="alert alert-success collapse" role="alert">
+                                    User Menu Sucessfully Registered
+                                </div>
+                                <div id="warningAlert" class="alert alert-danger collapse" role="alert">
+                                    User Already Exists
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            @*Form Ends
+
+                @*DataTable Starts*@
+
+
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            <u>User Menu Details</u>
+                        </h2>
+                        <center>
+                            <div id="divLoader" style="display:none;">
+                                <img src="~/assets/images/4V0b.gif" alt="Loader" height="100px" width="100px" />
+                            </div>
+                        </center>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10"></div>
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive social_media_table">
+                            <table id="UserMenuLists" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <thead class="thead-dark">
+                                    <tr style="color:brown">
+                                        <th></th>
+                                        <th></th>
+                                        <th>User Name</th>
+                                        @*<th>Setup Forms</th>
+                                            <th>Master Data Forms</th>
+                                            <th>Review order Forms</th>
+                                            <th>Transaction Forms</th>
+                                            <th>Claim Forms</th>*@
+                                        <th>Email</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*DataTable Ends*@
+
+
+
+
+</section>
+<div class="modal fade" id="UserMenuSetupModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="largeModalLabel"></h4>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <label><u>Edit User Menu Setup</u></label>
+                    <div class="form-group">
+                        <div class="form-line">
+                            <input type="hidden" id="txt_ID_Update" name="User_ID">
+
+                            <label>User Name</label>
+                            <div class="form-group">
+                                <input disabled class="form-control show-tick ms select2" id="txtUserName_Update" name="UserName_Update" />
+                                @*<select class="form-control show-tick ms select2" id="txtUserName_Update" name="UserName_Update" data-placeholder="Select"></select>*@
+                            </div>
+                            <label>Setup Forms</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpSetupForms_Update" name="drpSetupForms_Update" data-placeholder="Select"></select>
+                            </div>
+                            <label>Master Data Forms</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpMasterData_Update" name="drpMasterData_Update" data-placeholder="Select"></select>
+                            </div>
+                            <label>Transaction Forms</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpTransactionForms_Update" name="drpTransactionForms_Update" data-placeholder="Select"></select>
+                            </div>
+                            <label>Review Order Forms</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpRevieworder_Update" name="drpRevieworder_Update" data-placeholder="Select"></select>
+                            </div>
+                            <label>Claim Forms</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpClaimForms_Update" name="drpClaimForms_Update" data-placeholder="Select"></select>
+                            </div>
+                            <label>Summary</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpSummary_Update" name="drpSummary_Update" data-placeholder="Select"></select>
+                            </div>
+                            <label>Reports</label>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" id="drpReports_Update" name="drpReports_Update" data-placeholder="Select"></select>
+                            </div>
+                            @*<div>
+            <div id="successAlert" class="alert alert-success collapse" role="alert">
+                Details Updated successfully.
+            </div>
+            <div id="warningAlert" class="alert alert-secondary collapse" role="alert">
+                Details already exists.
+            </div>
+        </div>*@
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" id="bttnUpdateUserMenuSetup" class="btn btn-primary m-t-6 waves-effect" value="Update" />
+                            <button type="button" id="closeModel" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div id="UpdatesuccessAlert" class="alert alert-success collapse" role="alert">
+                                Updated Sucessfully
+                            </div>
+                            <div id="UpdatewarningAlert" class="alert alert-danger collapse" role="alert">
+                                Not Update
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="~/scripts/navigationBarScroll.js"></script>
+

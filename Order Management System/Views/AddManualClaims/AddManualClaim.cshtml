@@ -1,0 +1,141 @@
+﻿
+@{
+    ViewBag.Title = "AddManualClaim";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+
+
+<script src="~/scripts/jquery-3.4.1.min.js"></script>
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script src="~/scripts/jquery.multiselect.js"></script>
+<link href="~/Content/jquery.multiselect.css" rel="stylesheet" />
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/ClaimPortalManual.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<style>
+    span.caret {
+        margin-left: 329px;
+    }
+
+    .open > .dropdown-menu {
+        display: contents;
+    }
+</style>
+<div id="divLoader" style="display: none;width: 100%;height: 100%;position: absolute;z-index: 100000;opacity: 0.5;background-color: black;">
+    <img src="~/assets/images/4V0b.gif" alt="Loader" height="100px" width="100px" style="align-self: center;height: 100px;width: 100px;margin-left: 46%;margin-top: 15%;" />
+</div>
+
+
+<section class="content">
+    <div class="container-fluid">
+
+        @*Form Starts*@
+        <div class="row clearfix">
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            <u>Create Manual Claim</u>
+                        </h2>
+
+                    </div>
+                    <div class="body">
+                        <form denctype="multipart/form-data" method="post" id="manualclaim">
+                            <label>Material</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick" id="drpMaterial" name="Material" data-placeholder="Select Material"></select>
+                                </div>
+                            </div>
+                    
+                          
+                            <label>Claimed Quantity</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="txtclaimedQty" name="claimedquantity" class="form-control" onkeypress="return checkUplift(event)" placeholder="Enter Claimed Quanity" required>
+                                </div>
+                            </div>
+
+                            <label>Batch Code</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="txtBatchNumber" name="BatchNumber" class="form-control" placeholder="Enter Batch Number" required>
+                                </div>
+                            </div>
+                           
+                            <label>Select invoice</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="file" name="ResumeFile" id="Resume" multiple />
+
+                                </div>
+                            </div>
+                            <label>Enter Your Comment</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <textarea class="form-control" id="ClaimComment"></textarea>
+                                </div>
+                            </div>
+                            <br>
+                            <input type="button" class="btn btn-primary m-t-15 waves-effect"  id="bttnClaim" value="Create Claim" />
+                            <input type="button" class="btn btn-primary m-t-15 waves-effect" id="redirect" value="Dashboard" />
+                        </form>
+                    </div>
+
+                </div>
+                <div>
+                    <div id="OperationDone" class="alert alert-success collapse" role="alert">
+                        Operation Done
+                    </div>
+                    <div id="OperationUnsuccedful" class="alert alert-danger collapse" role="alert">
+                        Operation unsuccessful
+                    </div>
+                </div>
+            </div>
+
+
+            @*Form Ends*@
+
+            @*DataTable Starts*@
+
+
+            <!--<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            <u>Claims List</u>
+                        </h2>
+
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive social_media_table">
+                            <table id="ManualClaimList" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Order Ref</th>
+                                        <th>Material</th>
+                                        <th>Sales organization</th>
+                                        <th>Division</th>
+                                        <th>Day</th>
+                                        <th>Total Quantity</th>
+                                        <th>Recieved Quantity</th>
+                                        <th>Damaged Quantity</th>
+                                        <th>Expied Quantity</th>
+                                        <th>Short Quantity</th>-->
+                                        @*<th>Your Invoice</th>*@
+                                        <!--<th>Comment</th>-->
+                                        @*<th></th>*@
+                                    <!--</tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+    </div>
+</section>
+<script src="~/scripts/navigationBarScroll.js"></script>
+

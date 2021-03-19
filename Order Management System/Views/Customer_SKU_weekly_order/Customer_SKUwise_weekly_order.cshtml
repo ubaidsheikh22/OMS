@@ -1,0 +1,569 @@
+﻿@{
+    ViewBag.Title = "Customer_SKUwise_weekly_order";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/weekWiseOrder.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+<section class="content">
+    <div class="container-fluid">
+        <center>
+            <div id="divLoader" style="display:none;">
+                <img src="~/assets/images/4V0b.gif" alt="Loader" height="100px" width="100px" />
+            </div>
+        </center>
+        @*Form Starts*@
+
+        <div class="form-group">
+            <ul class="nav nav-tabs" id="getday">
+                <li id="MondayToggle"><a data-toggle="tab" href="#DivMonday" value="Monday">Monday</a></li>
+                <li id="TuesdayToggle"><a data-toggle="tab" href="#DivTuesday" value="Tuesday">Tuesday</a></li>
+                <li id="WednesdayToggle"><a data-toggle="tab" href="#DivWednesday" value="Wednesday">Wednesday</a></li>
+                <li id="ThursdayToggle"><a data-toggle="tab" href="#DivThursday" value="Thursday">Thursday</a></li>
+                <li id="FridayToggle"><a data-toggle="tab" href="#DivFriday" value="Friday">Friday</a></li>
+                <li id="SaturdayToggle"><a data-toggle="tab" href="#DivSaturday" value="Saturday">Saturday</a></li>
+                <li id="SundayToggle"><a data-toggle="tab" href="#DivSunday" value="Sunday">Sunday</a></li>
+                <li>@*<input type="button" class=" btn-primary waves-effect" id="redirect" value="Dashboard" />*@</li>
+            </ul>
+        </div>
+
+        <div class="tab-content">
+
+            <div id="DivMonday" class="tab-pane fade in " value="Monday">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div>
+                        <div id="successAlert" class="alert alert-success collapse" role="alert">
+                            Details added successfully.
+                        </div>
+                        <div id="warningAlert" class="a alert alert-warning collapse" role="alert">
+                            Details already exists.
+                        </div>
+                    </div>
+                    <div class="card">
+
+                        <div class="header">
+                            <h2><strong><u>Customer Acknowledgment</u></strong></h2>
+
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+
+                            <label for="ddl_BillingNo">Select Billing No:</label>
+                            <select id="ddl_BillingNoMonday" class="form-control ddl_BillingNo"></select>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                        <div class="body">
+                            <div class="table-responsive social_media_table">
+                                <table class="table table-bordered" id="Monday">
+                                    <thead>
+                                        <tr>
+                                            <th>Order Refrence</th>
+                                            <th>Material Codes</th>
+                                            <th>Material Description</th>
+                                            <th>Unit Price</th>
+                                            <th>Order Quantity</th>
+                                            <th>Received Quantity</th>
+                                            <th>Damaged</th>
+                                            <th>Expired</th>
+                                            <th>Short</th>
+                                            <th>Comment</th>
+                                            @*<th>Execss</th>
+        <th>wrong_dispatech</th>*@
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <input type="file" id="FileUpload7" multiple /><br /><input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnPending" value="Submit" />
+                            <input type="button" class="btn btn-primary m-t-15 waves-effect" id="redirect" value="Dashboard" />
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+
+            <div id="DivTuesday" class="tab-pane fade" value="Tuesday">
+
+
+
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div>
+                        <div id="successAlert" class="alert alert-success collapse" role="alert">
+                            Details added successfully.
+                        </div>
+                        <div id="warningAlert" class="a alert alert-warning collapse" role="alert">
+                            Details already exists.
+                        </div>
+                    </div>
+                    <div class="card">
+
+                        <div class="header">
+                            <h2><strong>Customer Acknowledgment</strong></h2>
+
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+
+                            <label for="ddl_BillingNo">Select Billing No:</label>
+                            <select id="ddl_BillingNoTuesday" class="form-control ddl_BillingNo"></select>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                        <div class="body">
+                            <div class="table-responsive social_media_table">
+                                <table class="table table-hover" id="Tuesday">
+                                    <thead>
+                                        <tr>
+                                            <th>Order Refrence</th>
+                                            <th>Material Codes</th>
+                                            <th>Material Description</th>
+                                            <th>Unit Price</th>
+                                            <th>Order Quantity</th>
+                                            <th>Received Quantity</th>
+
+                                            <th>Damaged</th>
+                                            <th>Expired</th>
+                                            <th>Short</th>
+                                            <th>Comment</th>
+                                            @*<th>Execss</th>
+        <th>wrong_dispatech</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            @*<th></th>
+        <th></th>*@
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <input type="file" id="FileUpload1" multiple /><br /><input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnPending" value="Submit" />
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div id="DivWednesday" class="tab-pane fade" value="Wednesday">
+
+
+
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div>
+                        <div id="successAlert" class="alert alert-success collapse" role="alert">
+                            Details added successfully.
+                        </div>
+                        <div id="warningAlert" class="a alert alert-warning collapse" role="alert">
+                            Details already exists.
+                        </div>
+                    </div>
+                    <div class="card">
+
+                        <div class="header">
+                            <h2><strong>Customer Acknowledgment</strong></h2>
+
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+
+                            <label for="ddl_BillingNo">Select Billing No:</label>
+                            <select id="ddl_BillingNoWednesday" class="form-control ddl_BillingNo"></select>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                        <div class="body">
+                            <div class="table-responsive social_media_table">
+                                <table class="table table-bordered" id="Wednesday">
+                                    <thead>
+                                        <tr>
+                                            <th>Order Refrence</th>
+                                            <th>Material Codes</th>
+                                            <th>Material Description</th>
+                                            <th>Unit Price</th>
+                                            <th>Order Quantity</th>
+                                            <th>Received Quantity</th>
+
+                                            <th>Damaged</th>
+                                            <th>Expired</th>
+                                            <th>Short</th>
+                                            <th>Comment</th>
+                                            @*<th>Execss</th>
+        <th>wrong_dispatech</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            @*<th></th>
+        <th></th>*@
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <input type="file" id="FileUpload2" multiple /><br /><input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnPending" value="Submit" />
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div id="DivThursday" class="tab-pane fade" value="Thursday">
+
+
+
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div>
+                        <div id="successAlert" class="alert alert-success collapse" role="alert">
+                            Details added successfully.
+                        </div>
+                        <div id="warningAlert" class="a alert alert-warning collapse" role="alert">
+                            Details already exists.
+                        </div>
+                    </div>
+                    <div class="card">
+
+                        <div class="header">
+                            <h2><strong>Customer Acknowledgment</strong></h2>
+
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+
+                            <label for="ddl_BillingNo">Select Billing No:</label>
+                            <select id="ddl_BillingNoThursday" class="form-control ddl_BillingNo"></select>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                        <div class="body">
+                            <div class="table-responsive social_media_table">
+                                <table class="table table-bordered" id="Thursday">
+                                    <thead>
+                                        <tr>
+                                            <th>Order Refrence</th>
+                                            <th>Material Codes</th>
+                                            <th>Material Description</th>
+                                            <th>Unit Price</th>
+                                            <th>Order Quantity</th>
+                                            <th>Received Quantity</th>
+
+                                            <th>Damaged</th>
+                                            <th>Expired</th>
+                                            <th>Short</th>
+                                            <th>Comment</th>
+                                            @*<th>Execss</th>
+        <th>wrong_dispatech</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            @*<th></th>
+        <th></th>*@
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <input type="file" id="FileUpload3" multiple /><br /><input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnPending" value="Submit" />
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+            <div id="DivFriday" class="tab-pane fade" value="Friday">
+
+
+
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div>
+                        <div id="successAlert" class="alert alert-success collapse" role="alert">
+                            Details added successfully.
+                        </div>
+                        <div id="warningAlert" class="a alert alert-warning collapse" role="alert">
+                            Details already exists.
+                        </div>
+                    </div>
+                    <div class="card">
+
+                        <div class="header">
+                            <h2><strong>Customer Acknowledgment</strong></h2>
+
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+
+                            <label for="ddl_BillingNo">Select Billing No:</label>
+                            <select id="ddl_BillingNoFriday" class="form-control ddl_BillingNo"></select>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                        <div class="body">
+                            <div class="table-responsive social_media_table">
+                                <table class="table table-bordered" id="Friday">
+                                    <thead>
+                                        <tr>
+                                            <th>Order Refrence</th>
+                                            <th>Material Codes</th>
+                                            <th>Material Description</th>
+                                            <th>Unit Price</th>
+                                            <th>Order Quantity</th>
+                                            <th>Received Quantity</th>
+
+                                            <th>Damaged</th>
+                                            <th>Expired</th>
+                                            <th>Short</th>
+                                            <th>Comment</th>
+                                            @*<th>Execss</th>
+        <th>wrong_dispatech</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            @*<th></th>
+        <th></th>*@
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <input type="file" id="FileUpload4" multiple /><br /><input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnPending" value="Submit" />
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div id="DivSaturday" class="tab-pane fade" value="Saturday">
+
+
+
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div>
+                        <div id="successAlert" class="alert alert-success collapse" role="alert">
+                            Details added successfully.
+                        </div>
+                        <div id="warningAlert" class="a alert alert-warning collapse" role="alert">
+                            Details already exists.
+                        </div>
+                    </div>
+                    <div class="card">
+
+                        <div class="header">
+                            <h2><strong>Customer Acknowledgment</strong></h2>
+
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+
+                            <label for="ddl_BillingNo">Select Billing No:</label>
+                            <select id="ddl_BillingNoSaturday" class="form-control ddl_BillingNo"></select>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                        <div class="body">
+                            <div class="table-responsive social_media_table">
+                                <table class="table table-bordered" id="Saturday">
+                                    <thead>
+                                        <tr>
+                                            <th>Order Refrence</th>
+                                            <th>Material Codes</th>
+                                            <th>Material Description</th>
+                                            <th>Unit Price</th>
+                                            <th>Order Quantity</th>
+                                            <th>Received Quantity</th>
+
+                                            <th>Damaged</th>
+                                            <th>Expired</th>
+                                            <th>Short</th>
+                                            <th>Comment</th>
+                                            @*<th>Execss</th>
+        <th>wrong_dispatech</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            @*<th></th>
+        <th></th>*@
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <input type="file" id="FileUpload5" multiple /><br /><input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnPending" value="Submit" />
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div id="DivSunday" class="tab-pane fade" value="Sunday">
+
+
+
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div>
+                        <div id="successAlert" class="alert alert-success collapse" role="alert">
+                            Details added successfully.
+                        </div>
+                        <div id="warningAlert" class="a alert alert-warning collapse" role="alert">
+                            Details already exists.
+                        </div>
+                    </div>
+                    <div class="card">
+
+                        <div class="header">
+                            <h2><strong>Customer Acknowledgment</strong></h2>
+
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+
+                            <label for="ddl_BillingNo">Select Billing No:</label>
+                            <select id="ddl_BillingNoSunday" class="form-control ddl_BillingNo"></select>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                        <div class="body">
+                            <div class="table-responsive social_media_table">
+                                <table class="table table-bordered" id="Sunday">
+                                    <thead>
+                                        <tr>
+                                            <th>Order Refrence</th>
+                                            <th>Material Codes</th>
+                                            <th>Material Description</th>
+                                            <th>Unit Price</th>
+                                            <th>Order Quantity</th>
+                                            <th>Received Quantity</th>
+
+                                            <th>Damaged</th>
+                                            <th>Expired</th>
+                                            <th>Short</th>
+                                            <th>Comment</th>
+                                            @*<th>Execss</th>
+        <th>wrong_dispatech</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            @*<th></th>
+        <th></th>*@
+                                        </tr>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <input type="file" id="FileUpload6" multiple /><br /><input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnPending" value="Submit" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<script>
+    //function getEventTarget(e) {
+    //    e = e || window.event;
+    //    return e.target || e.srcElement;
+    //}
+
+    //var ul = document.getElementById('test');
+    //ul.onclick = function (event) {
+    //    var target = getEventTarget(event);
+    //    alert(target.innerHTML);
+    //};
+
+</script>

@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "ChangeOrderSummary";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+
+
+<script src="~/scripts/jquery-3.4.1.min.js"></script>
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/ChangeOrderSummary.js"></script>
+<style type="text/css">
+    .grid {
+        border-spacing: 0px;
+        font-family: Arial;
+        font-size: 12px;
+    }
+
+        .grid th {
+            background-color: gray;
+            color: #ffffff;
+            padding: 2px 10px;
+        }
+
+        .grid tr:nth-child(even) {
+            /*background-color: #f5f5f5;*/
+            background-color: #b65e98;
+            /* font-size: inherit; */
+            font-weight: bold;
+        }
+
+        .grid tr:nth-child(odd) {
+            background-color: #ccc;
+        }
+
+        .grid td {
+            padding: 2px 10px;
+        }
+</style>
+
+<section class="content">
+    <div class="container-fluid">
+
+        @*Form Starts*@
+
+        <div class="row clearfix">
+
+
+
+            <div class="tab-content">
+
+                <div id="monday" class="tab-pane fade in active">
+
+
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+
+                            <div class="header">
+                               <div><h2><strong><u>View Change Order Summary</u></strong></h2></div> 
+                                           <div>
+                                               <input type="button" class="btn btn-primary m-t-15 waves-effect" id="redirect" value="Dashboard" /> 
+                                           </div>
+                                <br />
+                            </div>
+
+                            <div class="body">
+                                <center>
+                                    <div id="divLoader" style="display:none;">
+                                        <img src="~/assets/images/4V0b.gif" alt="Loader" height="100px" width="100px" />
+                                    </div>
+                                </center>
+                                <div class="table-responsive social_media_table">
+                                    <table class="table table-bordered" id="list">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>Customer</th>
+                                                <th>Unit Price</th>
+                                                <th>Suggested Quantity</th>
+                                                <th>Suggested Quantity Amount</th>
+                                                @*<th>Unit Price</th>*@
+                                                @*<thth>*@
+                                                <th>Firm Order</th>
+                                                <th>Firm Order Amount</th>
+                                                @*<th>Plus/Minus</th>*@
+                                                <th>Speacial Order</th>
+                                                <th>Speacial Order Amount</th>
+                                                <th>Total Payable</th>
+                                                @*<th>Special Order Quantity</th>*@
+                                                @*<th>Unit Price</th>*@
+                                                @*<th></th>*@
+
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="2" style="text-align:right">Totals</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                @*<th></th>*@
+                                                @*<th></th>*@
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+</section>
+

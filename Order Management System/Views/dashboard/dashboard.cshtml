@@ -1,0 +1,442 @@
+﻿@{
+    ViewBag.Title = "dashboard";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+<script src="~/scripts/jquery-3.4.1.min.js"></script>
+<script src="~/scripts/jquery.js"></script>
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/Dashboard.js"></script>
+
+
+
+<style>
+    tr#Regions {
+    background-color: bisque;
+}
+
+       tr#Entity     {
+       background-color: darkgray;
+    color: brown;   
+
+}
+       tr#Product_Type {
+    background-color: khaki;
+}
+</style>
+
+<h3>Welcome to in Dashboard</h3>
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+
+            @*<input type="text" value="" name="TotalOrder" id="totalquantity" class="form-control" />
+            <input type="text" value="" id="TotalQuantity" name="TotalQuantity" class="form-control" />
+            <input type="text" value="" id="TotalFirmOrder" name="TotalFirmOrder" class="form-control" />*@
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <h2>DASHBOARD </h2>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1"></div> 
+                               <div class="col-lg-3 col-md-3 col-sm-3">
+
+                        <h2><u style="color:crimson"><b>User Name: @User.Identity.Name</b></u></h2>
+                    </div>
+                    @*<div class="col-lg-4 col-md-4 col-sm-4">
+                        <h2><u style="color:crimson"><b>Region: @User.Identity.Name</b></u></h2>
+                    </div>*@
+                </div>
+        </div>
+
+          </br>
+            <!-- Widgets -->
+            <div class="row clearfix" id="Dash">
+            @if (Session["roleid"] != null && Session["roleid"].ToString() == "5" && Session["roleid"].ToString() == "4" && Session["roleid"].ToString() == "2")
+            {
+                @*<div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+
+                            <div class="table-responsive social_media_table">
+                                <table class="table table-bordered" id="Dashboardcsoorder">
+                                    <thead>
+                                        <tr id="">
+                                            <th>Order Detail</th>
+                                            <th>Suggested Order</th>
+                                            <th>Firm Order</th>                                          
+                                            <th>Special Order</th>                                         
+                                            <th>Pending Order</th>                                          
+                                            <th>In Transaction Order</th>
+                                          
+                                        </tr>
+
+                                    </thead>
+                               
+                                </table>
+                              
+                            </div>
+                        </div>
+
+                    </div>
+                </div>*@
+            }
+
+                    @*<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="info-box bg-danger hover-expand-effect">
+                    <div class="icon" style="background-color: #a34f84;">
+                        <i class="material-icons"> monetization_on</i>
+                    </div>
+                    <div class="content">
+                        <div class="text">Special Orders</div>
+                        <div id="totalquantity123" class="number count-to" data-from="" data-to="" data-speed="" data-fresh-interval="" name="TotalOrder"></div>
+                    </div>
+                </div>
+            </div>*@
+                    @*<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="info-box bg-danger hover-expand-effect">
+                <div class="icon" style="background-color: #a34f84;">
+                    <i class="material-icons"> monetization_on</i>
+                </div>
+                <div class="content">
+                    <div class="text">Suggested orders</div>
+                    @*<div class="number count-to" data-from="0" id="totalquantity" data-to="25" data-speed="1000" data-fresh-interval="20">*@
+                    @*<div id="totalSugessted" class="number count-to" data-from="" data-to="" data-speed="" data-fresh-interval="" name="SuggestedOrder"></div>
+
+                    </div>
+                </div>
+
+            </div>*@
+                    @*<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="info-box bg-danger hover-expand-effect">
+                    <div class="icon" style="background-color: #a34f84;">
+                        <i class="material-icons">monetization_on</i>
+                    </div>
+                    <div class="content">
+                        <div class="text">Firm Orders</div>
+                        <div id="TotalFirmOrder" class="number count-to" data-from="" data-to="" data-speed="" data-fresh-interval="" name="TotalFirmOrder"></div>
+                    </div>
+                </div>
+            </div>*@ 
+                </div>
+
+            @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            <u>User Details</u>
+                        </h2>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10"></div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <a href=""><input type="button" class="form-control" value="UnFilter All" id="Refresh" /></a>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive social_media_table">
+                            <table id="Dashboard" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <thead class="thead-dark">
+                                    <tr style="color:brown">
+                                        <th>total Order</th>
+                                        <th>Total Quantity</th>
+                                        <th>Total Firm Order</th>
+                                    </tr>
+                                    <tr>
+                                        <th>total Order</th>
+                                        <th>Total Quantity</th>
+                                        <th>Total Firm Order</th>
+                                       </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
+        </div>
+    <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="card">
+            <div class="body">
+
+                <div class="table-responsive social_media_table">
+                    <table class="table table-bordered" id="Regions">
+                        <thead>
+                            <tr id="Regions">
+                                <th>REGION</th>
+                                <th>NOS. OF ORDERS GENERATED</th>
+                                <th>ORDERS VALUE     PKR MN</th>
+                            </tr>
+                            
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-lg-6 col-md-6 col-sm-6">
+       
+        <div class="card">
+            <div class="body">
+                <div class="table-responsive social_media_table">
+                    <table class="table table-bordered" id="Product_Type">
+                        <thead>
+                            <tr id="Product_Type">
+                                <th>PRODUCT TYPE</th>
+                                @*<th>NOS. OF ORDERS GENERATED</th>*@
+                                <th>TOTAL QUANTITY IN CARTONS</th>
+                                <th>ORDERS VALUE     PKR MN</th>
+                            </tr>
+                        </thead>
+                 
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+            <div class="body">
+
+                <div class="table-responsive social_media_table">
+                    <table class="table table-bordered" id="Entity">
+                        <thead>
+                            <tr id="Entity">
+                                <th>Division</th>
+                                <th>NOS. OF ORDERS GENERATED</th>
+                                <th>ORDERS VALUE     PKR MN</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+        @*<div class="row clearfix">
+            <!-- Visitors -->
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="card">
+                    <div class="body breadcrumb-col-blue">
+                        <div class="sparkline" data-type="line" data-spot-Radius="4" data-highlight-Spot-Color="rgb(233, 30, 99)" data-highlight-Line-Color="#722853"
+                             data-min-Spot-Color="rgb(114,40,83)" data-max-Spot-Color="rgb(114,40,83)" data-spot-Color="rgb(114,40,83)"
+                             data-offset="90" data-width="100%" data-height="92px" data-line-Width="2" data-line-Color="rgba(114,40,83,0.7)"
+                             data-fill-Color="rgba(0, 188, 212, 0)">
+                            12,10,9,6,5,6,10,5,7,5,12,13,7,12,11
+                        </div>
+                        <ul class="dashboard-stat-list">
+                            <li>
+                                Total Orders
+                                <span class="pull-right"><b>...</b> <small></small></span>
+                            </li>
+                            <li>
+                                Pending Orders
+                                <span class="pull-right"><b>...</b> <small></small></span>
+                            </li>
+                            <li>
+                                Firm Orders
+                                <span class="pull-right"><b>...</b> <small></small></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Visitors -->
+            <!-- Latest Social Trends -->
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="card">
+                    <div class="body breadcrumb-col-blue">
+                        <div class="m-b--35 font-bold">Suggested Orders</div>
+                        <ul class="dashboard-stat-list">
+                            <li>
+                                Monday
+                                <span class="pull-right">
+                                    <i class="material-icons col-purple">trending_up</i>
+                                </span>
+                            </li>
+                            <li>
+                                Tuesday
+                                <span class="pull-right">
+                                    <i class="material-icons col-purple">trending_up</i>
+                                </span>
+                            </li>
+                            <li>Wednesday</li>
+                            <li>Thursday</li>
+                            <li>Friday</li>
+                            <li>
+                                Saturday
+                                <span class="pull-right">
+                                    <i class="material-icons col-purple">trending_up</i>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Latest Social Trends -->
+            <!-- Answered Tickets -->
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="card">
+                    <div class="body breadcrumb-col-blue">
+                        <div class="font-bold m-b--35">Firm Orders</div>
+                        <ul class="dashboard-stat-list">
+                            <li>
+                                Monday
+                                <span class="pull-right"><b>...</b> <small></small></span>
+                            </li>
+                            <li>
+                                Tuesday
+                                <span class="pull-right"><b>...</b> <small></small></span>
+                            </li>
+                            <li>
+                                Wednesday
+                                <span class="pull-right"><b>...</b> <small></small></span>
+                            </li>
+                            <li>
+                                Thursday
+                                <span class="pull-right"><b>...</b> <small></small></span>
+                            </li>
+                            <li>
+                                Friday
+                                <span class="pull-right"><b>...</b> <small></small></span>
+                            </li>
+                            <li>
+                                Saturday
+                                <span class="pull-right"><b>...</b> <small></small></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Answered Tickets -->
+        </div>
+        <div class="row clearfix">
+            <!-- Task Info -->
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Ordes Details</h2>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="material-icons">more_vert</i>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="javascript:void(0);">Action</a></li>
+                                    <li><a href="javascript:void(0);">Another action</a></li>
+                                    <li><a href="javascript:void(0);">Something else here</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-hover dashboard-task-infos">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Days</th>
+                                        <th>Status</th>
+                                        <th>Customer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Monday</td>
+                                        <td><span class="label bg-green">Deliverd</span></td>
+                                        <td>Premimer</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Tuesday</td>
+                                        <td><span class="label bg-green">Deliverd</span></td>
+                                        <td>Muller & Philips</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Wednesday</td>
+                                        <td><span class="label bg-orange">Awaiting Confirmation</span></td>
+                                        <td>Al Hanif traders</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Thursday</td>
+                                        <td><span class="label bg-orange">Awaiting Confirmation</span></td>
+                                        <td>Norani Traders</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Friday</td>
+                                        <td><span class="label bg-orange">Awaiting Confirmation</span></td>
+                                        <td>A.K Traders</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Saturday</td>
+                                        <td>
+                                            <span class="label bg-red">Pending</span>
+                                        </td>
+                                        <td>Rahim Brothers</td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Task Info -->
+            <!-- Browser Usage -->
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 collapse">
+                <div class="card">
+                    <div class="header">
+                        <h2>BROWSER USAGE</h2>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="material-icons">more_vert</i>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="javascript:void(0);">Action</a></li>
+                                    <li><a href="javascript:void(0);">Another action</a></li>
+                                    <li><a href="javascript:void(0);">Something else here</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        <div id="donut_chart" class="dashboard-donut-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Browser Usage -->
+        </div>*@
+    </div>
+</section>
+
+<script src="~/scripts/navigationBarScroll.js"></script>

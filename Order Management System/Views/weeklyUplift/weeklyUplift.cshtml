@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "weeklyUplift";
+    Layout = "~/Views/Shared/_LayoutNavBar.cshtml";
+}
+
+<script src="~/scripts/multiSelect.js"></script>
+<script src="~/scripts/jquery-3.4.1.min.js"></script>
+<script src="~/scripts/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.full.js"></script>
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+
+<script src="~/JqueryFiles/GenericAjax.js"></script>
+<script src="~/JqueryFiles/weeklyUplift.js"></script>
+<link href="~/Content/select2.css" rel="stylesheet" />
+
+<section class="content">
+    <div class="container-fluid">
+        @*Form Starts*@
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#SKU">SKU</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="SKU" class="tab-pane fade in active">
+                <div class="tab-content">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                            <center>
+                                <div id="divLoader" style="display:none;">
+                                    <img src="~/assets/images/4V0b.gif" alt="Loader" height="100px" width="100px" />
+                                </div>
+                            </center>
+                            <div>
+                                <div id="successAlert" class="alert alert-success collapse" role="alert">
+                                    Uplift Has been Applied.
+                                </div>
+                                <div id="warningAlert" class="alert alert-warning collapse" role="alert">
+                                    Uplift already Exists.
+                                </div>
+                            </div>
+
+                            <div class="header">
+                                <h2><strong><u>Weekly Uplift</u></strong></h2>
+                                <br />
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <select class="form-control show-tick" value="-1" id="drpRegion" name="Region" data-placeholder="Select Region"></select>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <select class="js-select2 btn-group form-control bootstrap-select" id="dropDownCustomer" name="dropDownCustomer" data-placeholder="Select Customer" multiple="multiple">
+                                        <option id="dropDownCustomer" data-badge=""></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="body">
+                                <div class="table-responsive social_media_table">
+                                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="MaterialList">
+                                        <thead>
+                                            <tr>
+                                                <th>Material</th>
+                                                <th>Description</th>
+                                                <th>Percentage</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <input type="button" class="btn btn-primary waves-effect" id="bttnUplift" value="Apply Uplift" />
+                                <input type="button" class="btn btn-primary waves-effect" id="redirect" value="Dashboard" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="customer" class="tab-pane fade">
+                <div class="tab-content">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="~/scripts/navigationBarScroll.js"></script>
