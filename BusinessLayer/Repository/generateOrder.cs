@@ -351,6 +351,71 @@ namespace BusinessLayer.Repository
         }
 
 
+        // start inserting all confirm order 
+        public string InsertallOrderInTable(List<generateOrderModal> orderlist)
+        {
+
+            //DataTable dtt = new DataTable();
+            //dtt.Columns.Add("Order_Ref");
+            //dtt.Columns.Add("CALDAY");
+            //dtt.Columns.Add("COMP_CODE");
+            //dtt.Columns.Add("DISTR_CHAN");
+            //dtt.Columns.Add("SALESORG");
+            //dtt.Columns.Add("CUSTOMER");
+            //dtt.Columns.Add("MATERIAL");
+            //dtt.Columns.Add("Order_Qty", typeof(int));
+            //dtt.Columns.Add("DIVISION");
+            //dtt.Columns.Add("Is_Generated");
+            //dtt.Columns.Add("weekNumber");
+            //dtt.Columns.Add("MaterialTotalValues");
+            //dtt.Columns.Add("RSFQTY");
+            //dtt.Columns.Add("SafetyStock");
+            //dtt.Columns.Add("DistributorClosingStock");
+            //dtt.Columns.Add("RegionDescription");
+            //dtt.Columns.Add("TownDescription");
+            //dtt.Columns.Add("TerritoryDescription");
+            //dtt.Columns.Add("AreaDescription");
+            //dtt.Columns.Add("blank1");
+            //dtt.Columns.Add("blank2");
+
+            //int i = 1000000;
+
+            //var date = DateTime.Now.ToString("yyyyddMM");
+
+            //foreach (var a in orderlist)
+            //{
+            //    if (a.Order_Qty != "0")
+            //        dtt.Rows.Add(a.Order_Ref, a.CALDAY, a.COMP_CODE, a.SALESORG, a.DISTR_CHAN, a.DIVISION, a.MATERIAL, a.CUSTOMER, a.Order_Qty, 1, a.weekNumber, a.MaterialTotalValues, "", "", "", "", "", "", "", "", "");
+            //}
+
+            conn = new Connection();
+            try
+            {
+                using (SqlConnection sqlcon = conn.GetDataBaseConnection())
+                {
+                    // Create a DataTable with the modified rows.  
+                    //DataTable addedCategories = CategoriesDataTable.GetChanges(DataRowState.Added);
+
+                    // Configure the SqlCommand and SqlParameter.  
+                    SqlCommand insertCommand = new SqlCommand("SP_InsertallConfirmOrders", sqlcon);
+                    insertCommand.CommandType = CommandType.StoredProcedure;
+                    insertCommand.Parameters.Add("@Message", SqlDbType.VarChar, 100);
+                    insertCommand.Parameters["@Message"].Direction = ParameterDirection.Output;
+                    insertCommand.ExecuteNonQuery();
+                    Message = (string)insertCommand.Parameters["@Message"].Value;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return Message;
+        }
+
+        // end inserting all confirm order 
+
+
         public IEnumerable<generateOrderModal> getCustomer(string region)
         {
             Connection con = new Connection();

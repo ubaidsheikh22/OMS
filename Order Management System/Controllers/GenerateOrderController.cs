@@ -184,6 +184,18 @@ namespace Order_Management_System.Controllers
             return Message;
         }
 
+        [HttpPost]
+        public string insertallConfirmOrder(List<generateOrderModal> dataToPost)
+        {
+            //DataTable dt = new DataTable();
+            generateOrder go = new generateOrder();
+            string Message = go.InsertallOrderInTable(dataToPost).ToString();
+
+            RoleController RC = new RoleController();
+            RC.InsertAuditingLog("General", "inserting all Confirm Orders", "insertallConfirmOrder", "insertallConfirmOrder", "", (int)Session["User_ID"]);
+            return Message;
+        }
+
         [HttpGet]
         public JsonResult Customer(string region)
         {

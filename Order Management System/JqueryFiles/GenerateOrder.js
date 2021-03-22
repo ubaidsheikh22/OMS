@@ -8,7 +8,6 @@ $(document).ready(function () {
         alert('This Process May Take A Few Minutes... Click "OK" to Continue...');
         $("#orderSpinner").show();
         saveData('GetAllGeneratedOrders');
-
     });
 
     $('#redirect').click(function () {
@@ -27,6 +26,17 @@ $(document).ready(function () {
 
     });
 
+
+    ///for all order confirmation /////
+    $('#bttnConfirmallOrder').click(function () {
+        alert('Confirming All Orders.... Click "OK" to Continue...');
+        $("#orderSpinner").show();
+        setTimeout(function () {
+            saveConfirmallData('insertallConfirmOrder');
+        }, 10);
+
+    });
+      ///for all order confirmation /////
 
 
     $('#drpCustomerName').change(function () { dataload(); });
@@ -509,6 +519,36 @@ function saveConfirmData(url) {
         if (row.find("input[type=checkbox]:checked").length == 0) {
             return;
         }
+        var OrderModel = {};
+        OrderModel.CALDAY = row.find("TD").eq(1).html();
+        OrderModel.Order_Ref = row.find("TD").eq(2).html();
+        OrderModel.SALESORG = row.find("TD").eq(3).html();
+        OrderModel.CUSTOMER = row.find("TD").eq(4).find("a").html();
+
+        OrderModel.MATERIAL = row.find("TD").eq(10).html();
+        OrderModel.Order_Qty = row.find("TD").eq(12).html();
+        OrderModel.MaterialTotalValues = row.find("TD").eq(13).html();
+
+        OrderModel.weekNumber = row.find("TD").eq(15).html();
+        OrderModel.DIVISION = row.find("TD").eq(16).html();
+        OrderModel.DISTR_CHAN = row.find("TD").eq(24).html();
+        OrderListModal.push(OrderModel);
+    });
+    var dataToPost = JSON.stringify(OrderListModal);
+    Common.Ajax('POST', url, dataToPost, 'json', successRoleCreateHandlerORder);
+}
+
+
+
+function saveConfirmallData(url) {
+    $('#OrderList').dataTable().fnDestroy();
+
+    var OrderListModal = new Array();
+    $("#OrderList TBODY TR").each(function () {
+        var row = $(this);
+        //if (row.find("input[type=checkbox]:checked").length == 0) {
+        //    return;
+        //}
         var OrderModel = {};
         OrderModel.CALDAY = row.find("TD").eq(1).html();
         OrderModel.Order_Ref = row.find("TD").eq(2).html();

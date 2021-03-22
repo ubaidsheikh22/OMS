@@ -109,17 +109,18 @@
 
 <section class="content">
     <div class="container-fluid">
-
+        
         @*Form Starts*@
         <ul class="nav nav-tabs">
             <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnGenerateOrder" value="Process Orders" />
             <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnConfirmOrder" value="Confirm Orders" />
+            <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnConfirmallOrder" value="Confirm All Orders" />
             @*<input type="button" class="btn btn-primary m-t-15 waves-effect" id="redirect" value="Dashboard" />*@
 
         </ul>
         @*<ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#customer">Customer</a></li>
-            @*<li><a data-toggle="tab" href="#SKU">SKU</a></li>*@
+        <li class="active"><a data-toggle="tab" href="#customer">Customer</a></li>
+        @*<li><a data-toggle="tab" href="#SKU">SKU</a></li>*@
         @*</ul>*@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card" id="cardd2">
@@ -211,35 +212,35 @@
 
 
                     @*<div class="col-lg-12 col-md-12 col-sm-12">
-                            <div class="card">
-                                <div class="header">
-                                    <h2><strong>Order Details</strong></h2>
-                                    <br />
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <select class="form-control show-tick ms select2" id="txtRoleIDUpdate" name="RoleId" data-placeholder="Select">
-                                            <option>Select Region</option>
-                                            <option>National</option>
-                                            <option>Region 1</option>
-                                            <option>Region 2</option>
-                                            <option>Region 3</option>
-                                            <option>Region 4</option>
-                                            <option>Region 5</option>
-                                            <option>Region 6</option>
-                                            <option>Region8  </option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <input type="text" id="txtUserFirstName" name="UserFirstName" class="form-control" placeholder="Search Customer">
-                                    </div>
+                        <div class="card">
+                            <div class="header">
+                                <h2><strong>Order Details</strong></h2>
+                                <br />
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <select class="form-control show-tick ms select2" id="txtRoleIDUpdate" name="RoleId" data-placeholder="Select">
+                                        <option>Select Region</option>
+                                        <option>National</option>
+                                        <option>Region 1</option>
+                                        <option>Region 2</option>
+                                        <option>Region 3</option>
+                                        <option>Region 4</option>
+                                        <option>Region 5</option>
+                                        <option>Region 6</option>
+                                        <option>Region8  </option>
+                                    </select>
                                 </div>
-                                <div class="body">
-                                    <div class="table-responsive social_media_table">
-                                        <table class="table table-hover" id="listMonday">
-                                           </table>
-                                    </div>
-                                     </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <input type="text" id="txtUserFirstName" name="UserFirstName" class="form-control" placeholder="Search Customer">
+                                </div>
                             </div>
-                        </div>*@
+                            <div class="body">
+                                <div class="table-responsive social_media_table">
+                                    <table class="table table-hover" id="listMonday">
+                                       </table>
+                                </div>
+                                 </div>
+                        </div>
+                    </div>*@
 
 
                     <div class="col-lg-12 col-md-12 col-sm-12">
@@ -336,53 +337,53 @@
 
 
             @*<div id="SKU" class="tab-pane fade">
-                <div class="tab-content">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <div class="card">
-                            <div class="header">
-                                <h2><strong>Order Details</strong></h2>
-                                <br />
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                    <select class="form-control show-tick ms select2" id="drpRegion" name="Region" data-placeholder="Select">
-                                        <option>Select Region</option>
-                                        <option value="">National</option>
-                                        <option value="01">Region 1</option>
-                                        <option value="02">Region 2</option>
-                                        <option value="03">Region 3</option>
-                                        <option value="04">Region 4</option>
-                                        <option value="05">Region 5</option>
-                                        <option value="06">Region 6</option>
-                                        <option value="07">Region 7</option>
-                                    </select>
-                                </div>
-                                <br />
+            <div class="tab-content">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2><strong>Order Details</strong></h2>
+                            <br />
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <select class="form-control show-tick ms select2" id="drpRegion" name="Region" data-placeholder="Select">
+                                    <option>Select Region</option>
+                                    <option value="">National</option>
+                                    <option value="01">Region 1</option>
+                                    <option value="02">Region 2</option>
+                                    <option value="03">Region 3</option>
+                                    <option value="04">Region 4</option>
+                                    <option value="05">Region 5</option>
+                                    <option value="06">Region 6</option>
+                                    <option value="07">Region 7</option>
+                                </select>
                             </div>
+                            <br />
                         </div>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <div class="card">
-                            <div class="body">
-                                <div class="table-responsive social_media_table">
-                                    <table class="table table-hover" id="listSKU">
-                                        <thead>
-                                            <tr>
-                                                <th>Customer</th>
-                                                <th>Order Ref</th>
-                                                <th>CAL Day</th>
-                                                <th>Comp Code</th>
-                                                <th>Sales Org</th>
-                                                <th>Distr CHAN</th>
-                                                <th>Division</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                                @*<input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnRole" value="Regenerate Order" />*@
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+                            <div class="table-responsive social_media_table">
+                                <table class="table table-hover" id="listSKU">
+                                    <thead>
+                                        <tr>
+                                            <th>Customer</th>
+                                            <th>Order Ref</th>
+                                            <th>CAL Day</th>
+                                            <th>Comp Code</th>
+                                            <th>Sales Org</th>
+                                            <th>Distr CHAN</th>
+                                            <th>Division</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            @*<input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnRole" value="Regenerate Order" />*@
             @*</div>
-                            </div>
                         </div>
                     </div>
-                </div>**@
+                </div>
+            </div>**@
 
 
 

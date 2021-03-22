@@ -9,10 +9,17 @@ $(document).ready(function () {
     $('#lb').text(monthNames[d.getMonth()]);
 
     Date.prototype.getWeek = function () {
-        var onejan = new Date(this.getFullYear(), 0, 1);
-        var today = new Date(this.getFullYear(), this.getMonth(), this.getDate());
-        var dayOfYear = ((today - onejan + 1) / 86400000);
-        return Math.ceil(dayOfYear / 7)
+        //var onejan = new Date(this.getFullYear(), 0, 1);
+        //var today = new Date(this.getFullYear(), this.getMonth(), this.getDate());
+        //var dayOfYear = ((today - onejan + 1) / 86400000);
+        //return Math.ceil(dayOfYear / 7)
+        //ubaid///
+        var date1 = new Date();
+        date1.getDate();
+        var oneJan = new Date(date1.getFullYear(), 0, 1);
+        var numberOfDays = Math.floor((date1 - oneJan) / (24 * 60 * 60 * 1000));
+        return Math.ceil((date1.getDay() + 4 + numberOfDays) / 7);
+        //ubaid//
     };
 
     jQuery(function () {
