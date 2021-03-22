@@ -18,31 +18,31 @@ $(document).ready(function () {
     $("#Resume").change(function () {
 
         // Get uploaded file extension
-        var extension = $(this).val().split('.').pop().toLowerCase();
+       // var extension = $(this).val().split('.').pop().toLowerCase();
         // Create array with the files extensions that we wish to upload
-        var validFileExtensions = ['jpg', 'png', 'jpeg'];
+       // var validFileExtensions = ['zip', 'png', 'jpeg'];
         //Check file extension in the array.if -1 that means the file extension is not in the list.
-        if ($.inArray(extension, validFileExtensions) == -1) {
-            alert("Sorry!! Upload only 'jpg', 'png', 'jpeg' file")
-            // Clear fileuload control selected file
-            $(this).replaceWith($(this).val('').clone(true));
-            //Disable Submit Button
-            $('#Apply').prop('disabled', true);
-        }
-        else {
-            // Check and restrict the file size to 128 KB.
-            if ($(this).get(0).files[0].size > (15000000)) {
-                alert("Sorry!! Max allowed file size is 128 kb");
-                // Clear fileuload control selected file
-                $(this).replaceWith($(this).val('').clone(true));
-                //Disable Submit Button
-                $('#Apply').prop('disabled', true);
-            }
-            else {
-                //Enable Submit Button
-                $('#Apply').prop('disabled', false);
-            }
-        }
+        //if ($.inArray(extension, validFileExtensions) == -1) {
+        //    alert("Sorry!! Upload only 'jpg', 'png', 'jpeg' file")
+        //    // Clear fileuload control selected file
+        //    $(this).replaceWith($(this).val('').clone(true));
+        //    //Disable Submit Button
+        //    $('#Apply').prop('disabled', true);
+        //}
+        //else {
+        //    // Check and restrict the file size to 128 KB.
+        //    if ($(this).get(0).files[0].size > (15000000000000000000)) {
+        //        alert("Sorry!! Max allowed file size is 128 kb");
+        //        // Clear fileuload control selected file
+        //        $(this).replaceWith($(this).val('').clone(true));
+        //        //Disable Submit Button
+        //        $('#Apply').prop('disabled', true);
+        //    }
+        //    else {
+        //        //Enable Submit Button
+        //        $('#Apply').prop('disabled', false);
+        //    }
+        //}
     });
 
 });
