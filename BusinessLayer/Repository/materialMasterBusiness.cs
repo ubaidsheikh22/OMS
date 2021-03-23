@@ -90,6 +90,39 @@ namespace BusinessLayer.Repository
             return materialMasterModelList;
 
         }
+        public IEnumerable<materialMasterModel> GetMaterialsForManualClaim(string material, string sales, string PGD, string group1, string group2, string group3, string group4, string group5, string Division)
+        {
+
+            Connection con = new Connection();
+            List<materialMasterModel> materialMasterModelList = new List<materialMasterModel>();
+            using (SqlConnection sqlcon = con.GetDataBaseConnection())
+            {
+                SqlCommand cmd = new SqlCommand("Get_Material_MATERIAL2", sqlcon);
+                cmd.Parameters.AddWithValue("@material", material == null || material == "null" ? "" : material);
+                cmd.Parameters.AddWithValue("@sales", sales == null || sales == "null" ? "" : sales);
+                cmd.Parameters.AddWithValue("@pgd", PGD == null || PGD == "null" ? "" : PGD);
+                cmd.Parameters.AddWithValue("@group1", group1 == null || group1 == "null" ? "" : group1);
+                cmd.Parameters.AddWithValue("@group2", group2 == null || group2 == "null" ? "" : group2);
+                cmd.Parameters.AddWithValue("@group3", group3 == null || group3 == "null" ? "" : group3);
+                cmd.Parameters.AddWithValue("@group4", group4 == null || group4 == "null" ? "" : group4);
+                cmd.Parameters.AddWithValue("@group5", group5 == null || group5 == "null" ? "" : group5);
+                cmd.Parameters.AddWithValue("@Division", Division == null || Division == "null" ? "" : Division);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader sdr = cmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    materialMasterModel materialMasterModel = new materialMasterModel();
+                    materialMasterModel.Material = Convert.ToInt32(sdr["Material"]);
+                    materialMasterModel.unitPrice = sdr["unitPrice"].ToString();
+                    materialMasterModel.Description = sdr["Description"].ToString();
+                    materialMasterModel.SalesOrganization = Convert.ToInt32(sdr["SalesOrganization"].ToString());
+                    materialMasterModel.Division = Convert.ToInt32(sdr["Division"].ToString());
+                    materialMasterModelList.Add(materialMasterModel);
+                }
+            }
+            return materialMasterModelList;
+
+        }
 
         public IEnumerable<materialMasterModel> GetSalesOrg(string material, string sales, string PGD, string group1, string group2, string group3, string group4, string group5, string Division)
         {

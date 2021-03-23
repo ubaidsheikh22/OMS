@@ -913,6 +913,7 @@ namespace BusinessLayer.Repository
                         cmd.Parameters.AddWithValue("@EndDate", dt);
                 }
                 sqlcon.Open();
+                cmd.CommandTimeout = 600;
                 SqlDataReader sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {

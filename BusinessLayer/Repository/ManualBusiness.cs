@@ -35,6 +35,8 @@ namespace BusinessLayer.Repository
                    
                     cmd.Parameters.AddWithValue("@salesOrganization", DatatoPost.salesOrganization);
                     cmd.Parameters.AddWithValue("@division", DatatoPost.division);
+                    cmd.Parameters.AddWithValue("@unitPrice", DatatoPost.unitPrice);
+                    cmd.Parameters.AddWithValue("@claimValue", DatatoPost.ClaimValue);
                    
                    
                     cmd.Parameters.Add("@Message", SqlDbType.VarChar, 100);

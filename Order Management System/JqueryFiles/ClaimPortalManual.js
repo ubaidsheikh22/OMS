@@ -45,6 +45,10 @@ $(document).ready(function () {
         //}
     });
 
+    $("#drpMaterial").change(function () {
+        $("#unitPriceShow").val($("#drpMaterial option:selected").attr("td-unitprice"));
+    });
+
 });
 
 function SavemanualClaim(url) {
@@ -87,6 +91,8 @@ function SavemanualClaim(url) {
                 //expired: $("#txtexpiredQuantity").val(),
                 ManualBatchNo: $("#txtBatchNumber").val(),
                 ClaimComment: $("#ClaimComment").val(),
+                ClaimValue: $("#claimValue").val(),
+                unitPrice: $("#unitPriceShow").val()
                 //orderQuantity: $("#txtorderQuantity").val(),
 
             }
@@ -159,7 +165,7 @@ function GetMaterials() {
         success: function (data) {
             var s1 = '<option value="-1">Select Material</option>';
             for (var i = 0; i < data.length; i++) {
-                s1 += '<option td-SalesOrganization="'+ data[i].SalesOrganization +'" td-Division = "'+ data[i].Division +'" value="' + data[i].Material + '">' + data[i].Material + ' | ' + data[i].Description + ' (' + data[i].SalesOrganization + ')</option>';
+                s1 += '<option td-SalesOrganization="' + data[i].SalesOrganization + '" td-Division = "' + data[i].Division + '" value="' + data[i].Material + '" td-UnitPrice="' + data[i].unitPrice + '">' + data[i].Material + ' | ' + data[i].Description + ' (' + data[i].SalesOrganization + ')</option>';
             }
             $("#drpMaterial").html(s1);
 
@@ -188,19 +194,13 @@ function checkUplift(e) {
     */
     var KeyID = (window.event) ? event.keyCode : e.keyCode;
 
-    if ((KeyID == 8) || (KeyID == 9) || (KeyID == 13) || (KeyID >= 48 && KeyID <= 57)) {
-
-        //var newChar = String.fromCharCode(e.keyCode);
-        //var oldVal = $(e.target).val();
+      //var newChar = String.fromCharCode(e.keyCode);
+        var oldVal = $("#txtclaimedQty").val();
         //var total = parseInt(oldVal + newChar)
         //if (isNaN(oldVal + newChar) && oldVal != '')
         //    return false;
         //else if (total < 0 || total > 100)
         //    return false;
-
+        $("#claimValue").val(oldVal * Number($("#unitPriceShow").val()));
         return true;
-    }
-    else {
-        return false;
-    }
 }

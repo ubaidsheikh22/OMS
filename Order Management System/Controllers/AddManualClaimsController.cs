@@ -132,7 +132,7 @@ namespace Order_Management_System.Controllers
             string SalesOrganization = Session["SalesOrg"].ToString();
             string Division = Session["Division"].ToString();
             materialMasterBusiness MMB = new materialMasterBusiness();
-            List<materialMasterModel> materialMasterModel = MMB.GetMaterials(null, SalesOrganization, null, null, null, null, null, null, Division).ToList();
+            List<materialMasterModel> materialMasterModel = MMB.GetMaterialsForManualClaim(null, SalesOrganization, null, null, null, null, null, null, Division).ToList();
             return Json(materialMasterModel, JsonRequestBehavior.AllowGet);
         }
 
