@@ -19,6 +19,7 @@ namespace BusinessLayer.Models
         public string CreatedDateString { get; set; }
         public string Misc { get; set; }
         public string IPAddress { get; set; }
+        public string Reference { get; set; }
     }
 
     public class AuditingLogDropModel

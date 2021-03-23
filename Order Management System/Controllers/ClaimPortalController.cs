@@ -41,7 +41,7 @@ namespace Order_Management_System.Controllers
                 string EmailBody = "Claim is generated </br></br> <b>Customer Code:</b> " + CustomerCode;
                 es.ClaimApproval(Recepient, EmailBody);
                 RoleController RC = new RoleController();
-                RC.InsertAuditingLog("Generating Claim Against Bill Number", "GeneratingClaimAgainstBillNumber", "GeneratingClaimAgainstBillNumber", "GeneratingClaimAgainstBillNumber", "", (int)Session["User_ID"]);
+                RC.InsertAuditingLog("Generating Claim Against Bill Number", "GeneratingClaimAgainstBillNumber", "GeneratingClaimAgainstBillNumber", "GeneratingClaimAgainstBillNumber", "", (int)Session["User_ID"], Message[3]);
             }
             return Json(Message[0]);
         }

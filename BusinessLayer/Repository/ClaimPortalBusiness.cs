@@ -127,6 +127,7 @@ namespace BusinessLayer.Repository
             //var tm = DateTime.Now.ToString();
             List<string> response = new List<string>();
             string Approve = "0";
+            string reference = "";
             conn = new Connection();
             try
             {
@@ -143,13 +144,12 @@ namespace BusinessLayer.Repository
                 foreach (var a in claim)
                 {
                     dt.Rows.Add(a.materialCode,a.materialDescription,a.orderQuantity,a.recievedQuantity,a.unitPrice, a.ClaimComment,a.Order_Ref);
+                    reference += a.Order_Ref;
                 }
                 pendingQuantities clm = new pendingQuantities();
                 foreach (var item in claim)
                 {
-
                     clm.Order_Ref = item.Order_Ref;
-                    
                     clm.Aproved = item.Aproved;
                     clm.day = item.day;
                     clm.ClaimComment = item.ClaimComment;
@@ -179,17 +179,15 @@ namespace BusinessLayer.Repository
                     response.Add((string)insertCommand.Parameters["@Message"].Value);
                     response.Add((string)insertCommand.Parameters["@FirstName"].Value);
                     response.Add((string)insertCommand.Parameters["@Email"].Value);
+                    response.Add(reference);
                     // Execute the command.  
                     //  Message = insertCommand.ExecuteNonQuery().ToString();
                 }
             }
             catch (Exception ex)
             {
-
                 throw;
             }
-
-
             return response;
         }
 

@@ -66,7 +66,7 @@ namespace Order_Management_System.Controllers
                 string EmailBody = "New Special Order is waiting for your approval. </br></br> <b>Customer Code:</b> " + customerCode;
                 es.SpecialOrderApproval(Recepient, EmailBody);
                 RoleController RC = new RoleController();
-                RC.InsertAuditingLog("Special Order Created", "SpecialOrderCreated", "SpecialOrderCreated", "SpecialOrderCreated", "", (int)Session["User_ID"]);
+                RC.InsertAuditingLog("Special Order Created", "SpecialOrderCreated", "SpecialOrderCreated", "SpecialOrderCreated", "", (int)Session["User_ID"], message[3]);
             }
             return Json(message[0]);
         }
@@ -77,7 +77,16 @@ namespace Order_Management_System.Controllers
             string CustomerCode = Session["Customer"].ToString();
             string SalesOrganization = Session["SalesOrg"].ToString();
             string Division = Session["Division"].ToString();
-             
+            if(!string.IsNullOrWhiteSpace(StartDate))
+            {
+                var temp = DateTime.ParseExact(StartDate, "dd-mm-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                StartDate = temp.ToString("yyyy-mm-dd");
+            }
+            if (!string.IsNullOrWhiteSpace(EndDate))
+            {
+                var temp = DateTime.ParseExact(EndDate, "dd-mm-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                EndDate = temp.ToString("yyyy-mm-dd");
+            }
 
             SpecialOrderApprovalBusiness DB = new SpecialOrderApprovalBusiness();
             List<specialOrderModel> ur = DB.getAllRefrenceCode(CustomerCode, SalesOrganization, Division, StartDate, EndDate).ToList();

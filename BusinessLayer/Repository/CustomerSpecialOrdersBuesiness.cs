@@ -86,11 +86,14 @@ namespace BusinessLayer.Repository
                     insertCommand.Parameters["@FirstName"].Direction = ParameterDirection.Output;
                     insertCommand.Parameters.Add("@Email", SqlDbType.VarChar, 200);
                     insertCommand.Parameters["@Email"].Direction = ParameterDirection.Output;
+                    insertCommand.Parameters.Add("@OrderId", SqlDbType.VarChar, 100);
+                    insertCommand.Parameters["@OrderId"].Direction = ParameterDirection.Output;
                     insertCommand.ExecuteNonQuery();
 
                     response.Add((string)insertCommand.Parameters["@Message"].Value);
                     response.Add((string)insertCommand.Parameters["@FirstName"].Value);
                     response.Add((string)insertCommand.Parameters["@Email"].Value);
+                    response.Add((string)insertCommand.Parameters["@OrderId"].Value);
                 }
             }
             catch (Exception ex)
