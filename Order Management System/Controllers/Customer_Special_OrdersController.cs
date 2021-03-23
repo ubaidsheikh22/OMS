@@ -47,17 +47,18 @@ namespace Order_Management_System.Controllers
             int packageID = Convert.ToInt32(Session["Package_ID"]);
             int customerCode = Convert.ToInt32(Session["Customer"]);
             string email = Session["UserEmail"].ToString();
-           
+
             CustomerSpecialOrdersBuesiness db = new CustomerSpecialOrdersBuesiness();
 
             List<string> message = db.addSpecialOrder(sp, customerCode, packageID);
 
-            string Recepient = email + "," +"syed.adnanahmed@live.com,bssit.11.6@gmail.com,usman.saleem@ebm.com.pk," ;
+            string Recepient = email + "," + "syed.adnanahmed@live.com,bssit.11.6@gmail.com,usman.saleem@ebm.com.pk,ubaidsheikh.iu@gmail.com,";
             Recepient += (new SpecialOrderApprovalBusiness()).GetWorkFlowEmails("", "0", customerCode.ToString());
-
 
             if (Recepient[Recepient.Length - 1] == ',')
                 Recepient = Recepient.Substring(0, Recepient.Length - 1);
+
+            Recepient = Recepient.Replace(",,", ",");
 
             if (message != null)
             {

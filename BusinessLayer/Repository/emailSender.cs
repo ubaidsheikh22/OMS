@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +13,9 @@ namespace BusinessLayer.Repository
 {
     public class emailSender
     {
-        private string smtpClient , emailFrom , email_CC;
+        private string smtpClient, emailFrom, email_CC;
         private int serverPort;
-        
+
         public string email(string Email, string subject, string link)
         {
             smtpClient = ConfigurationManager.AppSettings["SmtpClient"];
@@ -30,7 +31,7 @@ namespace BusinessLayer.Repository
 
                 mail.From = new MailAddress(emailFrom);
                 mail.To.Add(Email);
-                
+
                 if (email_CC != null)
                     mail.CC.Add(email_CC);
 
@@ -39,8 +40,8 @@ namespace BusinessLayer.Repository
                 mail.IsBodyHtml = true;
                 string htmlBody;
 
-                htmlBody = "<h2> " + subject + " </h2>" +                           
-                             "\n Click the link below to access your account " +                             
+                htmlBody = "<h2> " + subject + " </h2>" +
+                             "\n Click the link below to access your account " +
                              "<a href = " + link + "> login </a>";
 
 
@@ -56,7 +57,7 @@ namespace BusinessLayer.Repository
                 return ex.ToString();
             }
 
-            return "1" ;
+            return "1";
         }
 
         public string emailPOD(DataTable dt)
@@ -132,23 +133,25 @@ namespace BusinessLayer.Repository
             smtpClient = ConfigurationManager.AppSettings["SmtpClient"];
             emailFrom = ConfigurationManager.AppSettings["EmailFrom"];
             serverPort = Convert.ToInt32(ConfigurationManager.AppSettings["ServerPort"]);
+            string Password = ConfigurationManager.AppSettings["EmailPassword"];
+
             try
             {
+                //setting up mail server
                 MailMessage mail = new MailMessage();
                 SmtpClient SmtpServer = new SmtpClient(smtpClient);
+                SmtpServer.UseDefaultCredentials = false;
+                NetworkCredential basicAuthInfo = new NetworkCredential(emailFrom, Password);
+                SmtpServer.Credentials = basicAuthInfo;
+                SmtpServer.Port = serverPort;
+                //SmtpServer.EnableSsl = true;
 
                 mail.From = new MailAddress(emailFrom);
                 mail.To.Add(To_Email);
                 //mail.CC.Add(email_CC);
                 mail.Subject = "Special Order Alert - OMS";
-
                 mail.IsBodyHtml = true;
-
                 mail.Body = body;
-
-                SmtpServer.Port = serverPort;
-                SmtpServer.UseDefaultCredentials = true;
-                //SmtpServer.EnableSsl = true;
 
                 SmtpServer.Send(mail);
             }

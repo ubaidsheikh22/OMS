@@ -81,6 +81,7 @@ namespace Order_Management_System.Controllers
 
             if (Recepient[Recepient.Length - 1] == ',')
                 Recepient = Recepient.Substring(0, Recepient.Length - 1);
+            Recepient = Recepient.Replace(",,", ",");
 
             emailSender eSender = new emailSender();
             eSender.SpecialOrderApproval(Recepient, "A Special Order Approved. </br> <b>Order Reference:</b> " + refrenceCode.ToUpper());
@@ -101,12 +102,13 @@ namespace Order_Management_System.Controllers
             //string logemail = Session["UserEmail"].ToString();
             SpecialOrderApprovalBusiness db = new SpecialOrderApprovalBusiness();
             string Message = db.addSpecialOrderApproval(refrenceCode, -1,UserID);
-            emailSender email = new emailSender();
+            //emailSender email = new emailSender();
             string Recepient = "syed.adnanahmed@live.com,bssit.11.6@gmail.com,usman.saleem@ebm.com.pk,";
             Recepient += (new SpecialOrderApprovalBusiness()).GetDownwardFlowEmails(refrenceCode, Approve.ToString(), CustomerCode);
 
             if (Recepient[Recepient.Length - 1] == ',')
                 Recepient = Recepient.Substring(0, Recepient.Length - 1);
+            Recepient = Recepient.Replace(",,", ",");
 
             emailSender eSender = new emailSender();
             eSender.SpecialOrderApproval(Recepient, "A Special Order Rejected. </br> <b>Order Reference:</b> " + refrenceCode.ToUpper());
