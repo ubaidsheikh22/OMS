@@ -37,7 +37,10 @@
 
         $("#SpecialOrderReport").DataTable().destroy();
         var table = $("#SpecialOrderReport").DataTable({
-
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'pdf'
+            ],
             "ajax": {
                 "url": "GetSpecialOrderReport",
                 "type": "GET",
