@@ -214,6 +214,7 @@ namespace BusinessLayer.Repository
                     cmd.Parameters.AddWithValue("@LogType", model.LogType);
                     cmd.Parameters.AddWithValue("@LogName", model.LogName);
                     cmd.Parameters.AddWithValue("@LogScreen", model.LogScreen);
+                    cmd.Parameters.AddWithValue("@Reference", model.Reference);
                     cmd.Parameters.AddWithValue("@ActionPerformed", model.ActionPerformed);
                     cmd.Parameters.AddWithValue("@CreatedBy", model.CreatedBy);
                     cmd.Parameters.AddWithValue("@Misc", model.Misc);
@@ -222,7 +223,6 @@ namespace BusinessLayer.Repository
                     cmd.Parameters["@Message"].Direction = ParameterDirection.Output;
                     cmd.ExecuteNonQuery();
                     response = Convert.ToInt32(cmd.Parameters["@Message"].Value);
-
                     return response;
                 }
             }

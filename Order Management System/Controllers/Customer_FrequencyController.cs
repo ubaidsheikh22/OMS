@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+  
 namespace Order_Management_System.Controllers
 {
     public class Customer_FrequencyController : Controller
