@@ -135,6 +135,7 @@ namespace BusinessLayer.Repository
                     CustomerModel.CreatedDateString = Convert.ToDateTime(sdr["CreatedDate"]).ToString("dd-MMM-yyyy hh:mm:ss");
                     CustomerModel.Misc = sdr["Misc"].ToString();
                     CustomerModel.IPAddress = sdr["IPAddress"].ToString();
+                    CustomerModel.Reference = sdr["Reference"].ToString();
                     List.Add(CustomerModel);
                 }
                 sqlcon.Close();
