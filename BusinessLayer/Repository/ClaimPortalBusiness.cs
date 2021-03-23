@@ -144,7 +144,7 @@ namespace BusinessLayer.Repository
                 foreach (var a in claim)
                 {
                     dt.Rows.Add(a.materialCode,a.materialDescription,a.orderQuantity,a.recievedQuantity,a.unitPrice, a.ClaimComment,a.Order_Ref);
-                    reference += a.Order_Ref;
+                    reference += a.Order_Ref + ",";
                 }
                 pendingQuantities clm = new pendingQuantities();
                 foreach (var item in claim)
