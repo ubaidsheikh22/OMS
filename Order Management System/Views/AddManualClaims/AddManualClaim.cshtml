@@ -49,22 +49,27 @@
                                     <select class="form-control show-tick" id="drpMaterial" name="Material" data-placeholder="Select Material"></select>
                                 </div>
                             </div>
-                    
-                          
+                            <label>Unit Price</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="unitPriceShow" class="form-control" readonly="readonly" disabled>
+                                </div>
+                            </div>
+
                             <label>Claimed Quantity</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" id="txtclaimedQty" name="claimedquantity" class="form-control" onkeypress="return checkUplift(event)" placeholder="Enter Claimed Quanity" required>
+                                    <input type="text" id="txtclaimedQty" name="claimedquantity" class="form-control" onchange="return checkUplift(event)" placeholder="Enter Claimed Quanity" required>
                                 </div>
                             </div>
 
                             <label>Batch Code</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" id="txtBatchNumber" name="BatchNumber" class="form-control" placeholder="Enter Batch Number" required>
+                                    <input type="text" id="txtBatchNumber" name="BatchNumber" class="form-control" placeholder="Enter Batch Number" required />
                                 </div>
                             </div>
-                           
+
                             <label>Select invoice</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -72,6 +77,14 @@
 
                                 </div>
                             </div>
+
+                            <label>Claim Value</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="number" id="claimValue" class="form-control" readonly="readonly" disabled />
+                                </div>
+                            </div>
+
                             <label>Enter Your Comment</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -79,7 +92,7 @@
                                 </div>
                             </div>
                             <br>
-                            <input type="button" class="btn btn-primary m-t-15 waves-effect"  id="bttnClaim" value="Create Claim" />
+                            <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnClaim" value="Create Claim" />
                             <input type="button" class="btn btn-primary m-t-15 waves-effect" id="redirect" value="Dashboard" />
                         </form>
                     </div>
