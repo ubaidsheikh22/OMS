@@ -35,11 +35,14 @@
 
         $('#divLoader').fadeIn();
 
-      
+        
 
         $("#DayWiseShipmentReport").DataTable().destroy();
         var table = $("#DayWiseShipmentReport").DataTable({
-
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'csv', 'print',
+            ],
             "ajax": {
                 "url": "GetDayWiseShipmentReport",
                 "type": "GET",
