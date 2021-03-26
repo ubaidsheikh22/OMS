@@ -84,7 +84,7 @@ namespace BusinessLayer.Repository
                 Message = (string)cmd.Parameters["@message"].Value;
 
                 if (Message == null)
-                    Message = sdr.HasRows ? "Success" : "";
+                    Message = sdr.HasRows ? "Success" : ""; 
 
                 if (!Message.Contains("Success"))
                     return null;
