@@ -36,10 +36,10 @@
         $('#divLoader').fadeIn();
 
         $("#SpecialOrderReport").DataTable().destroy();
-        var table = $("#SpecialOrderReport").DataTable({
+        var table = $("#SpecialOrderReport").DataTable( {
             dom: 'Bfrtip',
             buttons: [
-                'excel', 'pdf'
+                'excel', 'csv','print',
             ],
             "ajax": {
                 "url": "GetSpecialOrderReport",
@@ -66,7 +66,8 @@
 
             ]
 
-        });
+        }
+        );
         $('#divLoader').fadeOut();
     });
 });
