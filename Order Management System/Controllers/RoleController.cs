@@ -165,7 +165,7 @@ namespace Order_Management_System.Controllers
             return Json(r, JsonRequestBehavior.AllowGet);
         }
 
-        public int InsertAuditingLog(string LogType = "", string LogName = "", string LogScreen = "", string ActionPerformed = "", string Misc = "", int UserId = 0)
+        public int InsertAuditingLog(string LogType = "", string LogName = "", string LogScreen = "", string ActionPerformed = "", string Misc = "", int UserId = 0, string specialOrderId="")
         {
             RoleBusiness RBb = new RoleBusiness();
             AuditingLogModel audit = new AuditingLogModel();
@@ -175,9 +175,9 @@ namespace Order_Management_System.Controllers
             audit.ActionPerformed = ActionPerformed;
             audit.Misc = Misc;
             audit.CreatedBy = UserId;
-            return RBb.InsertAuditingLog(audit);
+            return RBb.InsertAuditingLog(audit, specialOrderId);
         }
-        public int InsertAuditingLog(string LogType = "", string LogName = "", string LogScreen = "", string ActionPerformed = "", string Misc = "", int UserId = 0, string reference= "")
+        public int InsertAuditingLogWithRef(string LogType = "", string LogName = "", string LogScreen = "", string ActionPerformed = "", string Misc = "", int UserId = 0, string reference= "")
         {
             RoleBusiness RBb = new RoleBusiness();
             AuditingLogModel audit = new AuditingLogModel();

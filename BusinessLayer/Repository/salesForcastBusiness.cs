@@ -242,6 +242,7 @@ namespace BusinessLayer.Repository
             using (SqlConnection sqlcon = con.GetDataBaseConnection())
             {
                 SqlCommand cmd = new SqlCommand("SP_GetCustomer_SaleforeCast", sqlcon);
+                cmd.CommandTimeout = 300;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@CALDAY", CALDAY == null || CALDAY == "null" ? "" : CALDAY);
                 cmd.Parameters.AddWithValue("@COMP_CODE", company == null || company == "null" ? "" : company);
@@ -313,6 +314,7 @@ namespace BusinessLayer.Repository
             using (SqlConnection sqlcon = new SqlConnection(Conn))
             {
                 SqlCommand cmd = new SqlCommand("Get_ALLRSF", sqlcon);
+                cmd.CommandTimeout = 300;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@CALDAY", CALDAY == null || CALDAY == "null" ? "" : CALDAY);
                 cmd.Parameters.AddWithValue("@COMP_CODE", company == null || company == "null" ? "" : company);

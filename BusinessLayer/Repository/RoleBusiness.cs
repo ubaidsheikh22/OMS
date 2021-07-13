@@ -194,7 +194,7 @@ namespace BusinessLayer.Repository
             }
         }
 
-        public int InsertAuditingLog(AuditingLogModel model)
+        public int InsertAuditingLog(AuditingLogModel model, string specialOrderId = "")
         {
             try
             {
@@ -219,6 +219,7 @@ namespace BusinessLayer.Repository
                     cmd.Parameters.AddWithValue("@CreatedBy", model.CreatedBy);
                     cmd.Parameters.AddWithValue("@Misc", model.Misc);
                     cmd.Parameters.AddWithValue("@IPAddress", IPAddress);
+                    cmd.Parameters.AddWithValue("@SpecialOrderId", specialOrderId);
                     cmd.Parameters.Add("@Message", SqlDbType.Int);
                     cmd.Parameters["@Message"].Direction = ParameterDirection.Output;
                     cmd.ExecuteNonQuery();

@@ -1,10 +1,10 @@
-﻿var val = $('#drpRegion').val() == "-1" || null ? "" : $('#drpRegion').val();
+﻿//var val = $('#drpRegion').val() == "-1" || null ? "" : $('#drpRegion').val();
 $(document).ready(function () {
-
+    var regionalValue = $('#drpRegion').val() == "-1" || null ? "" : $('#drpRegion').val();
     getRegions();
 
     $('#bttnUplift').click(function () {
-        if (($('#drpRegion').val() == '-1') || ($('#drpRegion').val() == null) || ($('#drpRegion').val() == '') || ($('#drpRegion').val() == "null")){
+        if (($('#drpRegion').val() == '-1') || ($('#drpRegion').val() == null) || ($('#drpRegion').val() == '') || ($('#drpRegion').val() == "null")) {
             alert("Kindly Select the Region First");
             return false;
         }
@@ -14,7 +14,6 @@ $(document).ready(function () {
     });
 
     $('#redirect').click(function () {
-
         window.location.href = "/dashboard/dashboard";
     });
 
@@ -133,7 +132,8 @@ function getRegionHandler(response) {
 }
 
 function saveData(url) {
-
+    toogleSubmitRequest(true);
+    regionalValue = $('#drpRegion').val();
     var customers = $('#dropDownCustomer').val();
     var UpliftListModal = new Array();
 
@@ -145,7 +145,7 @@ function saveData(url) {
                 var row = $(this);
                 var UpliftModel = {};
                 UpliftModel.Customer = value;
-                UpliftModel.Region = $('#drpRegion').val();
+                UpliftModel.Region = regionalValue;
                 UpliftModel.Material = row.find("TD").eq(0).html();
                 UpliftModel.Percentage = row.find('#txtUpliftPercentage').val();
 
@@ -161,7 +161,7 @@ function saveData(url) {
             var row = $(this);
             var UpliftModel = {};
             UpliftModel.Customer = "";
-            UpliftModel.Region = $('#drpRegion').val();
+            UpliftModel.Region = regionalValue;
             UpliftModel.Material = row.find("TD").eq(0).html();
             UpliftModel.Percentage = row.find('#txtUpliftPercentage').val();
             if (UpliftModel.Percentage !== "") {
@@ -172,37 +172,35 @@ function saveData(url) {
     }
     var dataToPost = JSON.stringify(UpliftListModal);
     Common.Ajax('POST', url, dataToPost, 'json', successWeeklyUpliftCreateHandler);
- //window.location.reload();
+
+    //window.location.reload();
 }
 
 function successWeeklyUpliftCreateHandler(response) {
-
     if (response == '1') {
-
-        $('#drpRegion').val('-1');
-        $('#dropDownCustomer').val('');
+        //$('#drpRegion').val('-1');
+        //$('#dropDownCustomer').val('');
         //$('.form-control').val('');
         $('#successAlert').show('fade');
 
         setTimeout(function () {
             $('#successAlert').hide('fade');
-            
-        }, 6000);
-        $('#MaterialList').DataTable().ajax.refresh();
-       
 
+        }, 6000);
+        //$('#MaterialList').DataTable().ajax.refresh();
+        toogleSubmitRequest(false);
     }
-    
+
     if (response == '-1') {
         $('#warningAlert').show('fade');
 
         setTimeout(function () {
             $('#warningAlert').hide('fade');
         }, 6000);
-        $('#MaterialList').DataTable.ajax.reload();
+        //$('#MaterialList').DataTable.ajax.reload();
+        toogleSubmitRequest(false);
     }
 
-  
 }
 
 
@@ -230,5 +228,19 @@ function checkUplift(e) {
     }
     else {
         return false;
+    }
+}
+
+function toggleSubmitRequest(isInitiated) {
+    if (isInitiated) {
+        $("#divLoader").show();
+        $("#bttnUplift").attr('disabled', true);
+        $("#redirect").attr('disabled', true);
+    }
+    else {
+        $("#divLoader").hide();
+        $("#bttnUplift").removeAttr('disabled');
+        $("#redirect").removeAttr('disabled');
+        $("#drpRegion").val(regionalValue);
     }
 }

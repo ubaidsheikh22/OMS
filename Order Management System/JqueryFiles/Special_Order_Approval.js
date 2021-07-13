@@ -105,7 +105,7 @@ $(document).ready(function () {
 });
 
 function saveData(url) {
-
+    Common.toggleSubmitRequest(true);
     var DataToPost = '{"CustomerCode":"' + $("#drpCustomer").val() + '", "refrenceCode":"' + $("#drpRefrenceCode").val() + '","Aproved":"0"}';
 
     if ($("#drpRefrenceCode").val() == -1) {
@@ -117,6 +117,7 @@ function saveData(url) {
 }
 
 function RejectData(url) {
+    Common.toggleSubmitRequest(true);
 
     var roleCheck = $("#txtAproved").val();
     var DataToPost = '{"CustomerCode":"' + $("#drpCustomer").val() + '", "refrenceCode":"' + $("#drpRefrenceCode").val() + '","Aproved":"' + $("#txtAproved").val() + '"}';
@@ -152,20 +153,15 @@ function successSpApprovalCreateHandler(response) {
         }, 5000);
         $("#AllApprovalRecords").DataTable().clear().draw();
     }
-    if (response == '-1') {
+    else if (response == '-1') {
         $('#AlreadyApproved').show('fade');
-        setTimeout(function () {
-            $('#AlreadyApproved').hide('fade');
-        }, 5000);
-
-
         setTimeout(function () {
             $('#AlreadyApproved').hide('fade');
         }, 5000);
 
         $("#AllApprovalRecords").DataTable().clear().draw();
     }
-    if (response == '1') {
+    else if (response == '1') {
         $('#OperationDone').show('fade');
         ResetDropDowns();
         setTimeout(function () {
@@ -173,7 +169,7 @@ function successSpApprovalCreateHandler(response) {
         }, 5000);
         $("#AllApprovalRecords").DataTable().clear().draw();
     }
-    if (response == '-2') {
+    else if (response == '-2') {
         $('#RejectDone').show('fade');
         ResetDropDowns();
         setTimeout(function () {
@@ -181,13 +177,15 @@ function successSpApprovalCreateHandler(response) {
         }, 5000);
         $("#AllApprovalRecords").DataTable().clear().draw();
     }
-    if (response == '-3') {
+    else if (response == '-3') {
         $('#OperationUnsuccedful').show('fade');
         setTimeout(function () {
             $('#OperationUnsuccedful').hide('fade');
         }, 5000);
         $("#AllApprovalRecords").DataTable().clear().draw();
     }
+
+    Common.toggleSubmitRequest(false);
 }
 
 function ResetDropDowns() {

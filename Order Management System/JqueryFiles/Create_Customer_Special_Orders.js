@@ -154,6 +154,7 @@ function BindDropDownHandler(response) {
 
 
 function saveData(url) {
+    Common.toggleSubmitRequest(true);
     $('#GetAllMaterialRecords').dataTable().fnDestroy();
 
     var specialOrderList = new Array();
@@ -187,12 +188,12 @@ function saveData(url) {
 }
 
 function GetMaterials() {
+    Common.toggleSubmitRequest(true);
     _Material = $('#drpmaterial').val() == "-1" || null ? "" : $('#drpmaterial').val().toString();
     _SalesOrganization = $('#drpsalesOrg').val() == "-1" || null ? "" : $('#drpsalesOrg').val().toString();
     _Division = $('#drpDivision').val() == "-1" || null ? "" : $('#drpDivision').val().toString();
 
     $('#GetAllMaterialRecords').dataTable().fnDestroy();
-
 
     var table = $("#GetAllMaterialRecords").DataTable({
         "paging": false,
@@ -208,18 +209,16 @@ function GetMaterials() {
             "dataSrc": function (json) {
                 //Make your callback here.
                 jsonData = json;
+                Common.toggleSubmitRequest(false);
                 return json;
             },
-            beforeSend: function () {
-                setTimeout(function () {
-                    $("#divLoader").show();
-                }, 1);
-            },
             complete: function (data) {
-                $("#divLoader").hide();
+                Common.toggleSubmitRequest(false);
             },
+            always:  function () {
+                Common.toggleSubmitRequest(false);
+            }
         },
-
 
         "columns": [
             { "data": "Materialgroup1", "class": "Materialgroup1", "name": "Materialgroup1", "width": 100 },
@@ -252,10 +251,7 @@ function GetMaterials() {
                     return a + b;
                 }, 0)
             );
-
         },
-
-
     });
 }
 
@@ -276,19 +272,21 @@ function successSpecialOrderCreateHandler(response) {
     if (response == '1') {
         $('#txtReleDesc').val('');
 
-        $('#OperationDone').show('fade');
+        $('#successAlert').show('fade');
         setTimeout(function () {
-            $('#OperationDone').hide('fade');
+            $('#successAlert').hide('fade');
             //window.location.href = '/Customer_Special_Orders/Create_Customer_Special_Orders';
         }, 6000);
     }
     if (response == '-1') {
-        $('#').show('fade');
+        $('#errorAlert').show('fade');
 
         setTimeout(function () {
-            $('#').hide('fade');
+            $('#errorAlert').hide('fade');
         }, 6000);
     }
+
+    Common.toggleSubmitRequest(false);
 }
 
 function BindDropDownMATERIAL(url, material, sales, PGD, division) {
@@ -319,8 +317,7 @@ function BindDropDownMATERIALHandler(response) {
         selectAll: true
     });
     $("#drpmaterial").multiselect("reload");
-    $('#divLoader').hide();
-
+    Common.toggleSubmitRequest(false);
 }
 
 

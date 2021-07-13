@@ -7,8 +7,8 @@
 <script src="~/scripts/jquery-3.4.1.min.js"></script>
 <link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
 <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
-<script src="~/JqueryFiles/GenericAjax.js"></script>
-<script src="~/JqueryFiles/Special_Order_Approval.js"></script>
+<script src="~/JqueryFiles/GenericAjax.js?version=1.0.0.1"></script>
+<script src="~/JqueryFiles/Special_Order_Approval.js?version=1.0.0.1"></script>
 <div id="divLoader" style="display: none;width: 100%;height: 100%;position: absolute;z-index: 100000;opacity: 0.5;background-color: black;">
     <img src="~/assets/images/4V0b.gif" alt="Loader" height="100px" width="100px" style="align-self: center;height: 100px;width: 100px;margin-left: 46%;margin-top: 15%;" />
 </div>
@@ -21,6 +21,31 @@
                         <div class="card">
                             <div class="header">
                                 <h2><strong><u>Special Order Approval</u></strong></h2>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div id="OperationDone" class="alert alert-success collapse" role="alert">
+                                        Operation Done
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div id="AlreadyApproved" class="alert alert-danger collapse" role="alert">
+                                        Already Approved
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div id="RejectDone" class="alert alert-danger collapse" role="alert">
+                                        Order already Rejected
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div id="OperationUnsuccedful" class="alert alert-danger collapse" role="alert">
+                                        Operation unsuccessful
+                                    </div>
+                                </div>
                             </div>
                             <br />
                             <div class="row">
@@ -66,35 +91,11 @@
                                 </div>
 
                                 <input type="text" id="txtAproved" name="Aproved" value="" hidden />
-                                <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnADDApproval" value="Approve" />
-                                <input type="button" class="btn btn-primary m-t-15 waves-effect" id="bttnReject" value="Reject" />
-                                <input type="button" class="btn btn-primary m-t-15 waves-effect" id="redirect" value="Dashboard" />
+                                <input type="button" class="btn btn-primary m-t-15 waves-effect btn-submit" id="bttnADDApproval" value="Approve" />
+                                <input type="button" class="btn btn-primary m-t-15 waves-effect btn-submit" id="bttnReject" value="Reject" />
+                                <input type="button" class="btn btn-primary m-t-15 waves-effect btn-submit" id="redirect" value="Dashboard" />
                             </div>
 
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <div id="OperationDone" class="alert alert-success collapse" role="alert">
-                                Operation Done
-                            </div>
-                        </div>
-
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <div id="AlreadyApproved" class="alert alert-danger collapse" role="alert">
-                                Already Approved
-                            </div>
-                        </div>
-
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <div id="RejectDone" class="alert alert-danger collapse" role="alert">
-                                Order already Rejected
-                            </div>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <div id="OperationUnsuccedful" class="alert alert-danger collapse" role="alert">
-                                Operation unsuccessful
-                            </div>
                         </div>
                     </div>
                 </div>

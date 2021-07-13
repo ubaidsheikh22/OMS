@@ -163,8 +163,6 @@ namespace BusinessLayer.Repository
             return "1";
         }
 
-
-
         public string ClaimApproval(string To_Email, string body)
         {
             smtpClient = ConfigurationManager.AppSettings["SmtpClient"];

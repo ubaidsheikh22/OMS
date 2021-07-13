@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Models;
 using BusinessLayer.Repository;
+using Order_Management_System.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,12 +48,12 @@ namespace Order_Management_System.Controllers
             int packageID = Convert.ToInt32(Session["Package_ID"]);
             int customerCode = Convert.ToInt32(Session["Customer"]);
             string email = Session["UserEmail"].ToString();
+            string emailToMultipleRecepients = ConfigManager.EmailToMultipleRecepient;
 
             CustomerSpecialOrdersBuesiness db = new CustomerSpecialOrdersBuesiness();
-
             List<string> message = db.addSpecialOrder(sp, customerCode, packageID);
 
-            string Recepient = email + "," + "syed.adnanahmed@live.com,bssit.11.6@gmail.com,usman.saleem@ebm.com.pk,ubaidsheikh.iu@gmail.com,";
+            string Recepient = string.IsNullOrEmpty(email) ? email + "," + emailToMultipleRecepients : emailToMultipleRecepients; 
             Recepient += (new SpecialOrderApprovalBusiness()).GetWorkFlowEmails("", "0", customerCode.ToString());
 
             if (Recepient[Recepient.Length - 1] == ',')
@@ -67,7 +68,7 @@ namespace Order_Management_System.Controllers
                 string EmailBody = "New Special Order is waiting for your approval. </br></br> <b>Customer Code:</b> " + customerCode;
                 es.SpecialOrderApproval(Recepient, EmailBody);
                 RoleController RC = new RoleController();
-                RC.InsertAuditingLog("Special Order Created", "SpecialOrderCreated", "SpecialOrderCreated", "SpecialOrderCreated", "", (int)Session["User_ID"], message[3]);
+                RC.InsertAuditingLogWithRef("Special Order Created", "SpecialOrderCreated", "SpecialOrderCreated", "SpecialOrderCreated", "", (int)Session["User_ID"], message[3]);
             }
             return Json(message[0]);
         }

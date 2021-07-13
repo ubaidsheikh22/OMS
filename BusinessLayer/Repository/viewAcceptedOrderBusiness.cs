@@ -136,6 +136,7 @@ namespace BusinessLayer.Repository
                     CustomerModel.Misc = sdr["Misc"].ToString();
                     CustomerModel.IPAddress = sdr["IPAddress"].ToString();
                     CustomerModel.Reference = sdr["Reference"].ToString();
+                    CustomerModel.SpecialOrderId= sdr["SpecialOrderId"].ToString();
                     List.Add(CustomerModel);
                 }
                 sqlcon.Close();

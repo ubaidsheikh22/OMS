@@ -1,0 +1,31 @@
+CREATE PROCEDURE [dbo].[SP_InsertallConfirmOrders]  
+@Message varchar(50) output,  
+@salesorg varchar(10) = '',        
+@division varchar(10) = '',        
+@region varchar(MAX) = '',        
+@area varchar(MAX) = '',        
+@territory varchar(MAX) = '',        
+@town varchar(MAX) = '',        
+@plant varchar(MAX) = '',        
+@customer varchar(MAX) = ''    
+AS    
+BEGIN    
+insert into tbl_Order_Confirmed(Order_Ref,CALDAY,CompanyCode,SalesOrganization,DistributionChannel,Division,Material,Customer,Quantity,Is_Generated,weekNumber,UnitPrice,CreatedAt)     
+  
+ select O.Order_Ref,O.CALDAY,O.CompanyCode,O.SalesOrganization,O.DistributionChannel,O.Division,O.Material,O.Customer,O.Quantity,O.Is_Generated,O.weekNumber,O.UnitPrice,O.CreationDate       
+ from tbl_Order O        
+inner join tbl_Customer1 C on C.Customer = O.Customer and C.SalesOrganization = O.SalesOrganization      
+        
+-- Modified By Adnan (To Show Material Description on all items)        
+ --left join tbl_Material M on M.Material = O.Material and M.SalesOrganization = O.SalesOrganization and M.Division = O.Division        
+left join tbl_Material M on M.Material = O.Material and M.SalesOrganization = O.SalesOrganization and (O.Division = 0 or M.Division = O.Division)      
+        
+LEFT JOIN tbl_Order_Confirmed oc on oc.Material = O.Material and oc.CALDAY = O.CALDAY and oc.Customer = O.Customer        
+where         
+--(@UserDivision is null or O.Division in (select * from dbo.FN_ListToTable(',', @UserDivision))) and      
+--(@UserSalesOrg is null or O.SalesOrganization in (select * from dbo.FN_ListToTable(',', @UserSalesOrg))) and      
+O.Customer IS NOT NULL  AND oc.Customer IS NULL        
+ order by O.Order_ID desc        
+ set @Message = 1   
+    
+END    

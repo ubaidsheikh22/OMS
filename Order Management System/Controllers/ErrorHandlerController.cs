@@ -11,6 +11,9 @@ namespace Order_Management_System.Controllers
         // GET: ErrorHandler
         public ActionResult ErrorHandler()
         {
+            if (Session["user"] == null || string.IsNullOrEmpty(Convert.ToString(Session["user"])))
+                return RedirectToAction("Login", "Login", new { area = "" });
+
             return View();
         }
     }

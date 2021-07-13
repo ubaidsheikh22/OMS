@@ -6,6 +6,7 @@ using System.Web.SessionState;
 using System.Web.Mvc;
 using BusinessLayer.Models;
 using BusinessLayer.Repository;
+using Order_Management_System.Helpers;
 
 namespace Order_Management_System.Controllers
 {
@@ -76,7 +77,7 @@ namespace Order_Management_System.Controllers
             SpecialOrderApprovalBusiness db = new SpecialOrderApprovalBusiness();
             string Message = db.addSpecialOrderApproval(refrenceCode, Approve,UserID);
             emailSender email = new emailSender();
-            string Recepient = "syed.adnanahmed@live.com,bssit.11.6@gmail.com,usman.saleem@ebm.com.pk,";
+            string Recepient = ConfigManager.EmailToMultipleRecepient;
             Recepient += (new SpecialOrderApprovalBusiness()).GetWorkFlowEmails(refrenceCode, Approve.ToString(), CustomerCode);
 
             if (Recepient[Recepient.Length - 1] == ',')
@@ -86,8 +87,7 @@ namespace Order_Management_System.Controllers
             emailSender eSender = new emailSender();
             eSender.SpecialOrderApproval(Recepient, "A Special Order Approved. </br> <b>Order Reference:</b> " + refrenceCode.ToUpper());
             RoleController RC = new RoleController();
-            RC.InsertAuditingLog("Special Order Approved", "Special Order Appoved", "SpecialOrderApproved", "SpecialOrderApproved", "", (int)Session["User_ID"]);
-
+            RC.InsertAuditingLogWithRef("Special Order Approved", "Special Order Appoved", "SpecialOrderApproved", "SpecialOrderApproved", "", (int)Session["User_ID"], refrenceCode);
 
             //email.email(Recepient, "A Special Order is waiting for your approval. </br> <b>Order Reference:</b> " + refrenceCode.ToUpper(), "http://oms.ebmgroup.com.pk:1002/");
             return Json(Message);
@@ -103,7 +103,7 @@ namespace Order_Management_System.Controllers
             SpecialOrderApprovalBusiness db = new SpecialOrderApprovalBusiness();
             string Message = db.addSpecialOrderApproval(refrenceCode, -1,UserID);
             //emailSender email = new emailSender();
-            string Recepient = "syed.adnanahmed@live.com,bssit.11.6@gmail.com,usman.saleem@ebm.com.pk,";
+            string Recepient = ConfigManager.EmailToMultipleRecepient;
             Recepient += (new SpecialOrderApprovalBusiness()).GetDownwardFlowEmails(refrenceCode, Approve.ToString(), CustomerCode);
 
             if (Recepient[Recepient.Length - 1] == ',')
@@ -113,9 +113,8 @@ namespace Order_Management_System.Controllers
             emailSender eSender = new emailSender();
             eSender.SpecialOrderApproval(Recepient, "A Special Order Rejected. </br> <b>Order Reference:</b> " + refrenceCode.ToUpper());
             RoleController RC = new RoleController();
-            RC.InsertAuditingLog("Special Order Rejected", "Special Order Rejected", "SpecialOrderRejected", "SpecialOrderRejected", "", (int)Session["User_ID"]);
+            RC.InsertAuditingLogWithRef("Special Order Rejected", "Special Order Rejected", "SpecialOrderRejected", "SpecialOrderRejected", "", (int)Session["User_ID"], refrenceCode);
             return Json(Message);
-         
         }
     }
 }

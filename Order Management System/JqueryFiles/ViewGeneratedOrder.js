@@ -275,10 +275,6 @@ $(document).ready(function () {
 
     //BindDropDownCustomer('Customer', '');
 
-
-    dataload();
-
-
     BindDropDownNAme('/customer/GetCustomerName', '', '', '', '', '', '', '', '', '');
     BindDropDownsalesorg('/customer/GetSalesOrg', '', '', '', '', '', '', '', '', '');
     BindDropDowndivision('/customer/GetDivision', '', '', '', '', '', '', '', '', '');
@@ -305,9 +301,6 @@ $(document).ready(function () {
 
         //$("#GetAllMaterialRecords").DataTable();
     });
-
-
-
 });
 var table = null;
 

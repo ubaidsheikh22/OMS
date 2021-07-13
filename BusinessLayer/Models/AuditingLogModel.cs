@@ -20,6 +20,7 @@ namespace BusinessLayer.Models
         public string Misc { get; set; }
         public string IPAddress { get; set; }
         public string Reference { get; set; }
+        public string SpecialOrderId { get; set; }
     }
 
     public class AuditingLogDropModel

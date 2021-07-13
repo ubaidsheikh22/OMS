@@ -12,8 +12,8 @@
 <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="~/JqueryFiles/GenericAjax.js"></script>
-<script src="~/JqueryFiles/Create_Customer_Special_Orders.js"></script>
+<script src="~/JqueryFiles/GenericAjax.js?version=1.0.0.1"></script>
+<script src="~/JqueryFiles/Create_Customer_Special_Orders.js?version=1.0.0.1"></script>
 <style>
     th#total {
         float: right;
@@ -42,6 +42,14 @@
                                 <h2><strong><U>Special Order</U></strong></h2>
                             </div>
                             <br />
+                            <div>
+                                <div id="successAlert" class="alert alert-success collapse" role="alert">
+                                    Special Order has been created successfully.
+                                </div>
+                                <div id="dangerAlert" class="alert alert-danger collapse" role="alert">
+                                    Cannot create special order. Something went wrong.
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-lg-offset-1 col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                     <div class="form-group">
@@ -60,7 +68,7 @@
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                     <div class="form-group">
-                                        <input type="button" class="btn btn-primary waves-effect" id="btnGetMaterials" value="Get Materials" />
+                                        <input type="button" class="btn btn-primary waves-effect btn-submit" id="btnGetMaterials" value="Get Materials" />
                                     </div>
                                 </div>
                             </div>
@@ -119,10 +127,17 @@
                                             </table>
 
                                         </div>
-                                        <input type="button" class="btn btn-primary waves-effect" id="bttnSubmit" value="Submit" />
-                                        <input type="button" class="btn btn-primary waves-effect" id="redirect" value="Dashboard" />
-                                        <br /><br />
                                     </div>
+
+                                </div>
+                            </div>
+
+                            <br />
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12" style="margin: 0 0 10px 10px;">
+                                    <input type="button" class="btn btn-primary waves-effect btn-submit" id="bttnSubmit" value="Submit" />
+                                    <input type="button" class="btn btn-primary waves-effect btn-submit" id="redirect" value="Dashboard" />
                                 </div>
                             </div>
                         </div>

@@ -22,6 +22,7 @@ namespace BusinessLayer.Repository
             using (SqlConnection sqlcon = new SqlConnection(Conn))
             {
                 SqlCommand cmd = new SqlCommand("Get_ALLENDSTOCK", sqlcon);
+                cmd.CommandTimeout = 300;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Material", Material == "null" || Material == "0000000000" || Material == null ? "" : Material);
                 cmd.Parameters.AddWithValue("@salesOrg", salesOrg == "null" || salesOrg == null ? "" : salesOrg);

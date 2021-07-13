@@ -37,10 +37,10 @@ Common = {
     },
 
     AjaxFailureCallback: function (err, type, httpStatus) {
-        
+
         var failureMessage = 'Error occurred in ajax call' + err.status + " - " + err.responseText + " - " + httpStatus;
         console.log(failureMessage);
-        return httpStatus+" "+err.status;
+        return httpStatus + " " + err.status;
     },
 
     ShowSuccessSavedMessage: function (messageText) {
@@ -55,5 +55,16 @@ Common = {
 
         $.blockUI({ message: messageText });
         setTimeout($.unblockUI, 1500);
+    },
+
+    toggleSubmitRequest: function (isInitiated) {
+        if (isInitiated) {
+            $("#divLoader").show();
+            $(".btn-submit").attr('disabled', true);
+        }
+        else {
+            $("#divLoader").hide();
+            $(".btn-submit").removeAttr('disabled');
+        }
     }
 }
